@@ -1,0 +1,50 @@
+# Empire: Total War - warscape humanoid skeleton
+# Recovered from animations/aaa_warscapeframe/_default_standing_anim_warscapeframe.anim
+# via etwng/anim/anim2json_etw (needs -rpathname on modern Ruby).
+#
+# These indices are what .variant_weighted_mesh vertex influences refer to.
+# Validated semantically: teeth weight to Jaw, boots to ToeBase, crossbelt
+# to Spine/Shoulder - so the mapping is right, not merely in range.
+#
+# index  name                    parent
+0      Hips                     -
+1      Weapon1                  -
+2      Weapon2                  -
+3      Weapon3                  -
+4      LeftUpLeg                Hips
+5      RightUpLeg               Hips
+6      Spine                    Hips
+7      Tail                     Hips
+8      LeftLeg                  LeftUpLeg
+9      RightLeg                 RightUpLeg
+10     Spine1                   Spine
+11     LeftFoot                 LeftLeg
+12     RightFoot                RightLeg
+13     Spine2                   Spine1
+14     LeftShoulder             Spine2
+15     LeftToeBase              LeftFoot
+16     Neck                     Spine2
+17     RightShoulder            Spine2
+18     RightToeBase             RightFoot
+19     Head                     Neck
+20     LeftArm                  LeftShoulder
+21     RightArm                 RightShoulder
+22     Brow                     Head
+23     Eyes                     Head
+24     Jaw                      Head
+25     LeftForearm              LeftArm
+26     RightForearm             RightArm
+27     LeftForearmRoll          LeftForearm
+28     RightForearmRoll         RightForearm
+29     LeftHand                 LeftForearmRoll
+30     RightHand                RightForearmRoll
+31     LeftHandIndex1           LeftHand
+32     LeftHandMiddle1          LeftHand
+33     LeftHandThumb1           LeftHand
+34     RightHandIndex1          RightHand
+35     RightHandMiddle1         RightHand
+36     RightHandThumb1          RightHand
+37     LeftHandIndex2           LeftHandIndex1
+38     LeftHandMiddle2          LeftHandMiddle1
+39     RightHandIndex2          RightHandIndex1
+40     RightHandMiddle2         RightHandMiddle1

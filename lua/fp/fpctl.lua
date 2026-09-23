@@ -1,0 +1,114 @@
+-- First/third-person control layer.
+--
+-- SAFETY: this is OPT-IN (FPCTLON must be set true) and gated behind a dead-man
+-- modifier (hold LEFT ALT). Previously it was armed by default and bound to raw
+-- W/A/S/D/Q/E/R, so ordinary play issued Current_Selection_* orders - including
+-- with nothing selected - and the game crashed in the selection-card UI
+-- (FUN_00631D20 "SelectCardList", null read at 0x00631E73). Orders now only go
+-- out while the modifier is held.
+--
+-- Orders are REAL engine orders on the CURRENT SELECTION, so the unit genuinely
+-- marches and animates. Empire has no per-soldier command in the Lua API and no
+-- reload command, so R maps to hold-fire (the closest real behaviour).
+FPFN = {
+  fwd    = ESE_WrapFn("s:5F6E40"),
+  back   = ESE_WrapFn("s:5F6DD0"),
+  halt   = ESE_WrapFn("s:5F52B0"),
+  run    = ESE_WrapFn("s:5F7050"),
+  walk   = ESE_WrapFn("s:5F7180"),
+  tleft  = ESE_WrapFn("s:5F7070"),
+  tright = ESE_WrapFn("s:5F70F0"),
+  fire   = ESE_WrapFn("s:5F7D50"),
+  melee  = ESE_WrapFn("s:5F6900"),
+  cancel = ESE_WrapFn("s:5F5DF0"),
+}
+FPKEY = { W="11", A="1E", S="1F", D="20", Q="10", E="12", R="13",
+          SPACE="39", LSHIFT="2A", LCTRL="1D", F="21", LALT="38" }
+FPMOD      = FPMOD      or "38"    -- dead-man modifier (LALT); set to false to disable gating
+FPSENS     = FPSENS     or 0.15
+FPFOV      = FPFOV      or 1.222
+FPFOVAIM   = FPFOVAIM   or 0.55
+FPTURNRATE = FPTURNRATE or 6
+FPPREV     = {}
+FPTCD      = 0
+FPAIM      = false
+FPORDERS   = 0
+-- Team gate. unit+0x160 is the ARMY object: identical across every unit of a
+-- side and different between sides (verified: 1269 entities mine, 1146 enemy).
+-- FPARMY is recorded from a man known to be the player's.
+FPBLOCKED = 0
+function FPFRIENDLY()
+  local aa,P = FPAA,FPP
+  if not FPARMY then return false end
+  local e = P(aa(FPD, FPI*4)); if not e then return false end
+  local u = P(aa(e, 0x1EC)); if not u or u == "00000000" then return false end
+  return P(aa(u, 0x160)) == FPARMY, u
+end
+if FPCTLON == nil then FPCTLON = false end
+
+local function down(k) return ESE_Input(k) == "1" end
+local function edge(name, isdown)
+  local was = FPPREV[name]
+  FPPREV[name] = isdown
+  return isdown and not was
+end
+
+function FPCTL()
+  if not FPCTLON then return end
+  local aa = FPAA
+  -- Same generation check as the camera follower. A FOV write to the cached
+  -- camera is the same null read once the manager has been rebuilt.
+  if FPFRESH and not FPFRESH() then return end
+  if not FPCAM then return end
+  local s = ESE_Input()
+  local mb, dx, dy = 0, 0, 0
+  if s and s ~= "" then
+    local a,b,c = s:match("^(-?%d+) (-?%d+) (-?%d+)")
+    mb, dx, dy = tonumber(a) or 0, tonumber(b) or 0, tonumber(c) or 0
+  end
+  -- Mouse look only moves the camera, so it is safe without the modifier.
+  if dx ~= 0 or dy ~= 0 then
+    FPAUTO = false
+    FPYAW = FPYAW + dx * FPSENS
+    while FPYAW > 360 do FPYAW = FPYAW - 360 end
+    while FPYAW < 0   do FPYAW = FPYAW + 360 end
+    FPPITCH = FPPITCH - dy * FPSENS
+    if FPPITCH > 85 then FPPITCH = 85 elseif FPPITCH < -85 then FPPITCH = -85 end
+  end
+  local lmb = (math.floor(mb) % 2) == 1
+  local rmb = (math.floor(mb / 2) % 2) == 1
+  if rmb ~= FPAIM then
+    FPAIM = rmb
+    ESE_WriteFloat(aa(FPCAM, 0x24), FPAIM and FPFOVAIM or FPFOV)
+  end
+  if edge("f", down(FPKEY.F)) then
+    if (FPFWD or 0) < 0 then FPFWD = 1.6 FPEYEH = FPEYEH3 or FPEYEH
+    else FPEYEH3 = FPEYEH FPFWD = -6.0 FPEYEH = (FPEYEH or 1.8) + 1.5 end
+  end
+
+  -- ---- everything below issues REAL orders: modifier required
+  -- Orders reach the CURRENT SELECTION, so refuse to send any while hooked to
+  -- a unit that is not the player's - commanding from inside an enemy unit
+  -- would silently order whatever the player happened to have selected.
+  if not FPFRIENDLY() then FPBLOCKED = FPBLOCKED + 1 return end
+  if FPMOD and not down(FPMOD) then
+    FPPREV.w, FPPREV.s, FPPREV.space, FPPREV.lmb = nil, nil, nil, nil
+    return
+  end
+  local function order(fn, ...) FPORDERS = FPORDERS + 1 fn(...) end
+  if edge("lmb", lmb) then order(FPFN.fire, true) end
+  if edge("r", down(FPKEY.R)) then order(FPFN.fire, false) end
+  if edge("w", down(FPKEY.W)) then order(FPFN.fwd)  end
+  if edge("s", down(FPKEY.S)) then order(FPFN.back) end
+  if edge("space", down(FPKEY.SPACE)) then order(FPFN.halt) end
+  if edge("shift", down(FPKEY.LSHIFT)) then order(FPFN.run)  end
+  if edge("ctrl",  down(FPKEY.LCTRL))  then order(FPFN.walk) end
+  if edge("e", down(FPKEY.E)) then order(FPFN.melee, true) end
+  if edge("q", down(FPKEY.Q)) then order(FPFN.cancel) end
+  FPTCD = FPTCD - 1
+  if FPTCD <= 0 then
+    if down(FPKEY.A) then order(FPFN.tleft, false, 1)  FPTCD = FPTURNRATE
+    elseif down(FPKEY.D) then order(FPFN.tright, false, 1) FPTCD = FPTURNRATE end
+  end
+end
+return "control layer loaded (OPT-IN: set FPCTLON=true; hold LALT to issue orders)"

@@ -1,0 +1,5284 @@
+{
+  "format": "empire.warscape_pose/2",
+  "note": "per-skeleton reference poses recovered from shipped mesh geometry (vwm_pose_global.rb), not from .anim",
+  "match": 0.001,
+  "fit_ok": 0.001,
+  "unmatched_meshes": [
+    {
+      "name": "east_campaign_admiralship_weighted_model.variant_weighted_mesh",
+      "why": "too few confident bone pairs (1)"
+    },
+    {
+      "name": "east_campaign_ship_weighted_model.variant_weighted_mesh",
+      "why": "too few confident bone pairs (1)"
+    },
+    {
+      "name": "euro_equipment.variant_weighted_mesh",
+      "why": "too few confident bone pairs (0)"
+    },
+    {
+      "name": "euro_artillery_lod2.variant_weighted_mesh",
+      "why": "inconsistently skinned - its own influences disagree by 0.004448"
+    },
+    {
+      "name": "prussia_garde_du_corp_lod4.variant_weighted_mesh",
+      "why": "inconsistently skinned - its own influences disagree by 0.087813"
+    },
+    {
+      "name": "iroquois_elite_lod4.variant_weighted_mesh",
+      "why": "inconsistently skinned - its own influences disagree by 0.012415"
+    },
+    {
+      "name": "plains_mounted_braves_lod4.variant_weighted_mesh",
+      "why": "inconsistently skinned - its own influences disagree by 0.012415"
+    },
+    {
+      "name": "euro_line_infantry_lod1.variant_weighted_mesh",
+      "why": "inconsistently skinned - its own influences disagree by 0.140582"
+    }
+  ],
+  "families": [
+    {
+      "id": 0,
+      "meshes": 795,
+      "members": [
+        "african_slaver_musketeers_lod1.variant_weighted_mesh",
+        "african_slaver_musketeers_lod2.variant_weighted_mesh",
+        "african_slaver_musketeers_lod3.variant_weighted_mesh",
+        "african_slaver_musketeers_lod4.variant_weighted_mesh",
+        "african_tribal_lod1.variant_weighted_mesh",
+        "african_tribal_lod2.variant_weighted_mesh",
+        "african_tribal_lod3.variant_weighted_mesh",
+        "african_tribal_lod4.variant_weighted_mesh",
+        "armed_citizenry_africa_lod1.variant_weighted_mesh",
+        "armed_citizenry_africa_lod2.variant_weighted_mesh",
+        "armed_citizenry_africa_lod3.variant_weighted_mesh",
+        "armed_citizenry_africa_lod4.variant_weighted_mesh",
+        "armed_citizenry_europe_lod1.variant_weighted_mesh",
+        "armed_citizenry_europe_lod2.variant_weighted_mesh",
+        "armed_citizenry_europe_lod3.variant_weighted_mesh",
+        "armed_citizenry_europe_lod4.variant_weighted_mesh",
+        "barbary_pirates_lod1.variant_weighted_mesh",
+        "barbary_pirates_lod2.variant_weighted_mesh",
+        "barbary_pirates_lod3.variant_weighted_mesh",
+        "barbary_pirates_lod4.variant_weighted_mesh",
+        "bashi_bazouks_lod1.variant_weighted_mesh",
+        "bashi_bazouks_lod2.variant_weighted_mesh",
+        "bashi_bazouks_lod3.variant_weighted_mesh",
+        "bashi_bazouks_lod4.variant_weighted_mesh",
+        "campaign_euro_admiral_lod1.variant_weighted_mesh",
+        "campaign_euro_admiral_lod2.variant_weighted_mesh",
+        "campaign_euro_admiral_lod3.variant_weighted_mesh",
+        "campaign_euro_admiral_lod4.variant_weighted_mesh",
+        "campaign_euro_catholic_priest_lod1.variant_weighted_mesh",
+        "campaign_euro_catholic_priest_lod2.variant_weighted_mesh",
+        "campaign_euro_colonel_lod1.variant_weighted_mesh",
+        "campaign_euro_colonel_lod2.variant_weighted_mesh",
+        "campaign_euro_colonel_lod3.variant_weighted_mesh",
+        "campaign_euro_colonel_lod4.variant_weighted_mesh",
+        "campaign_euro_commodore_lod1.variant_weighted_mesh",
+        "campaign_euro_commodore_lod2.variant_weighted_mesh",
+        "campaign_euro_commodore_lod3.variant_weighted_mesh",
+        "campaign_euro_commodore_lod4.variant_weighted_mesh",
+        "campaign_euro_general_lod1.variant_weighted_mesh",
+        "campaign_euro_general_lod2.variant_weighted_mesh",
+        "campaign_euro_gentleman_lod1.variant_weighted_mesh",
+        "campaign_euro_gentleman_lod2.variant_weighted_mesh",
+        "campaign_euro_orthodox_missionary_lod1.variant_weighted_mesh",
+        "campaign_euro_orthodox_missionary_lod2.variant_weighted_mesh",
+        "campaign_euro_protestant_missionary_lod1.variant_weighted_mesh",
+        "campaign_euro_protestant_missionary_lod2.variant_weighted_mesh",
+        "campaign_euro_rake_lod1.variant_weighted_mesh",
+        "campaign_euro_rake_lod2.variant_weighted_mesh",
+        "campaign_indian_brahmin_lod1.variant_weighted_mesh",
+        "campaign_indian_brahmin_lod2.variant_weighted_mesh",
+        "campaign_indian_colonel_lod1.variant_weighted_mesh",
+        "campaign_indian_colonel_lod2.variant_weighted_mesh",
+        "campaign_indian_general_lod1.variant_weighted_mesh",
+        "campaign_indian_general_lod2.variant_weighted_mesh",
+        "campaign_indian_scholar_lod1.variant_weighted_mesh",
+        "campaign_indian_scholar_lod2.variant_weighted_mesh",
+        "campaign_indian_thuggee_lod1.variant_weighted_mesh",
+        "campaign_indian_thuggee_lod2.variant_weighted_mesh",
+        "campaign_maratha_confederacy_lod1.variant_weighted_mesh",
+        "campaign_maratha_confederacy_lod2.variant_weighted_mesh",
+        "campaign_native_american_scout_lod1.variant_weighted_mesh",
+        "campaign_native_american_scout_lod2.variant_weighted_mesh",
+        "campaign_native_american_shaman_lod1.variant_weighted_mesh",
+        "campaign_native_american_shaman_lod2.variant_weighted_mesh",
+        "campaign_native_american_spy_lod1.variant_weighted_mesh",
+        "campaign_native_american_spy_lod2.variant_weighted_mesh",
+        "campaign_native_general_lod1.variant_weighted_mesh",
+        "campaign_native_general_lod2.variant_weighted_mesh",
+        "campaign_ottoman_admiral_lod1.variant_weighted_mesh",
+        "campaign_ottoman_admiral_lod2.variant_weighted_mesh",
+        "campaign_ottoman_assassin_lod1.variant_weighted_mesh",
+        "campaign_ottoman_assassin_lod2.variant_weighted_mesh",
+        "campaign_ottoman_colonel_lod1.variant_weighted_mesh",
+        "campaign_ottoman_colonel_lod2.variant_weighted_mesh",
+        "campaign_ottoman_colonel_lod3.variant_weighted_mesh",
+        "campaign_ottoman_colonel_lod4.variant_weighted_mesh",
+        "campaign_ottoman_commodore_lod1.variant_weighted_mesh",
+        "campaign_ottoman_commodore_lod2.variant_weighted_mesh",
+        "campaign_ottoman_general_lod1.variant_weighted_mesh",
+        "campaign_ottoman_general_lod2.variant_weighted_mesh",
+        "campaign_ottoman_imam_lod1.variant_weighted_mesh",
+        "campaign_ottoman_imam_lod2.variant_weighted_mesh",
+        "campaign_ottoman_scholar_lod1.variant_weighted_mesh",
+        "campaign_ottoman_scholar_lod2.variant_weighted_mesh",
+        "campaign_washington_lod1.variant_weighted_mesh",
+        "campaign_washington_lod2.variant_weighted_mesh",
+        "campaign_washington_young_lod1.variant_weighted_mesh",
+        "campaign_washington_young_lod2.variant_weighted_mesh",
+        "cherokee_archer_lod1.variant_weighted_mesh",
+        "cherokee_archer_lod2.variant_weighted_mesh",
+        "cherokee_archer_lod3.variant_weighted_mesh",
+        "cherokee_braves_lod1.variant_weighted_mesh",
+        "cherokee_braves_lod2.variant_weighted_mesh",
+        "cherokee_braves_lod3.variant_weighted_mesh",
+        "cherokee_elite_lod1.variant_weighted_mesh",
+        "cherokee_elite_lod2.variant_weighted_mesh",
+        "cherokee_elite_lod3.variant_weighted_mesh",
+        "cherokee_medicineman_lod1.variant_weighted_mesh",
+        "cherokee_medicineman_lod2.variant_weighted_mesh",
+        "cherokee_medicineman_lod3.variant_weighted_mesh",
+        "cherokee_mounted_braves_lod1.variant_weighted_mesh",
+        "cherokee_mounted_braves_lod2.variant_weighted_mesh",
+        "cherokee_mounted_braves_lod3.variant_weighted_mesh",
+        "cherokee_mounted_braves_lod4.variant_weighted_mesh",
+        "cossack_cavalry_lod1.variant_weighted_mesh",
+        "cossack_cavalry_lod2.variant_weighted_mesh",
+        "cossack_cavalry_lod3.variant_weighted_mesh",
+        "cossack_cavalry_lod4.variant_weighted_mesh",
+        "cossack_hetman_lod1.variant_weighted_mesh",
+        "cossack_hetman_lod2.variant_weighted_mesh",
+        "cossack_hetman_lod3.variant_weighted_mesh",
+        "cossack_hetman_lod4.variant_weighted_mesh",
+        "cossack_infantry_lod1.variant_weighted_mesh",
+        "cossack_infantry_lod2.variant_weighted_mesh",
+        "cossack_infantry_lod3.variant_weighted_mesh",
+        "cossack_infantry_lod4.variant_weighted_mesh",
+        "croatian_grenzers_lod1.variant_weighted_mesh",
+        "croatian_grenzers_lod2.variant_weighted_mesh",
+        "croatian_grenzers_lod3.variant_weighted_mesh",
+        "croatian_grenzers_lod4.variant_weighted_mesh",
+        "dahomey_amazons_lod1.variant_weighted_mesh",
+        "dahomey_amazons_lod2.variant_weighted_mesh",
+        "dahomey_amazons_lod3.variant_weighted_mesh",
+        "dahomey_amazons_lod4.variant_weighted_mesh",
+        "deaths_head_hussar_lod1.variant_weighted_mesh",
+        "deaths_head_hussar_lod2.variant_weighted_mesh",
+        "deaths_head_hussar_lod3.variant_weighted_mesh",
+        "deaths_head_hussar_lod4.variant_weighted_mesh",
+        "east_armed_citizenry_india_lod1.variant_weighted_mesh",
+        "east_armed_citizenry_india_lod2.variant_weighted_mesh",
+        "east_armed_citizenry_india_lod3.variant_weighted_mesh",
+        "east_armed_citizenry_india_lod4.variant_weighted_mesh",
+        "east_armed_citizenry_middle_east_lod1.variant_weighted_mesh",
+        "east_armed_citizenry_middle_east_lod2.variant_weighted_mesh",
+        "east_armed_citizenry_middle_east_lod3.variant_weighted_mesh",
+        "east_armed_citizenry_middle_east_lod4.variant_weighted_mesh",
+        "east_armed_peasantry_bhumiya_lod1.variant_weighted_mesh",
+        "east_armed_peasantry_bhumiya_lod2.variant_weighted_mesh",
+        "east_armed_peasantry_bhumiya_lod3.variant_weighted_mesh",
+        "east_armed_peasantry_bhumiya_lod4.variant_weighted_mesh",
+        "east_armed_peasantry_tufangis_lod1.variant_weighted_mesh",
+        "east_armed_peasantry_tufangis_lod2.variant_weighted_mesh",
+        "east_armed_peasantry_tufangis_lod3.variant_weighted_mesh",
+        "east_armed_peasantry_tufangis_lod4.variant_weighted_mesh",
+        "east_artillerymen_lod1.variant_weighted_mesh",
+        "east_artillerymen_lod2.variant_weighted_mesh",
+        "east_artillerymen_lod3.variant_weighted_mesh",
+        "east_artillerymen_lod4.variant_weighted_mesh",
+        "east_azzars_lod1.variant_weighted_mesh",
+        "east_azzars_lod2.variant_weighted_mesh",
+        "east_azzars_lod3.variant_weighted_mesh",
+        "east_azzars_lod4.variant_weighted_mesh",
+        "east_desert_nomads_black_lod1.variant_weighted_mesh",
+        "east_desert_nomads_black_lod2.variant_weighted_mesh",
+        "east_desert_nomads_black_lod3.variant_weighted_mesh",
+        "east_desert_nomads_black_lod4.variant_weighted_mesh",
+        "east_desert_nomads_lod1.variant_weighted_mesh",
+        "east_desert_nomads_lod2.variant_weighted_mesh",
+        "east_desert_nomads_lod3.variant_weighted_mesh",
+        "east_desert_nomads_lod4.variant_weighted_mesh",
+        "east_ethnic_hillmen_musketeers_afghan_lod1.variant_weighted_mesh",
+        "east_ethnic_hillmen_musketeers_afghan_lod2.variant_weighted_mesh",
+        "east_ethnic_hillmen_musketeers_afghan_lod3.variant_weighted_mesh",
+        "east_ethnic_hillmen_musketeers_afghan_lod4.variant_weighted_mesh",
+        "east_ethnic_hillmen_musketeers_lod1.variant_weighted_mesh",
+        "east_ethnic_hillmen_musketeers_lod2.variant_weighted_mesh",
+        "east_ethnic_hillmen_musketeers_lod3.variant_weighted_mesh",
+        "east_ethnic_hillmen_musketeers_lod4.variant_weighted_mesh",
+        "east_ethnic_musketmen_bargir_lod1.variant_weighted_mesh",
+        "east_ethnic_musketmen_bargir_lod2.variant_weighted_mesh",
+        "east_ethnic_musketmen_bargir_lod3.variant_weighted_mesh",
+        "east_ethnic_musketmen_bargir_lod4.variant_weighted_mesh",
+        "east_ethnic_musketmen_fellahin_lod1.variant_weighted_mesh",
+        "east_ethnic_musketmen_fellahin_lod2.variant_weighted_mesh",
+        "east_ethnic_musketmen_fellahin_lod3.variant_weighted_mesh",
+        "east_ethnic_musketmen_fellahin_lod4.variant_weighted_mesh",
+        "east_ethnic_musketmen_lod1.variant_weighted_mesh",
+        "east_ethnic_musketmen_lod2.variant_weighted_mesh",
+        "east_ethnic_musketmen_lod3.variant_weighted_mesh",
+        "east_ethnic_musketmen_lod4.variant_weighted_mesh",
+        "east_ethnic_musketmen_mughal_musketeers_lod1.variant_weighted_mesh",
+        "east_ethnic_musketmen_mughal_musketeers_lod2.variant_weighted_mesh",
+        "east_ethnic_musketmen_mughal_musketeers_lod3.variant_weighted_mesh",
+        "east_ethnic_musketmen_mughal_musketeers_lod4.variant_weighted_mesh",
+        "east_ethnic_peasants_firelocks_lod1.variant_weighted_mesh",
+        "east_ethnic_peasants_firelocks_lod2.variant_weighted_mesh",
+        "east_ethnic_peasants_firelocks_lod3.variant_weighted_mesh",
+        "east_ethnic_peasants_firelocks_lod4.variant_weighted_mesh",
+        "east_ethnic_peasants_fodder_lod1.variant_weighted_mesh",
+        "east_ethnic_peasants_fodder_lod2.variant_weighted_mesh",
+        "east_ethnic_peasants_fodder_lod3.variant_weighted_mesh",
+        "east_ethnic_peasants_fodder_lod4.variant_weighted_mesh",
+        "east_ethnic_swordsmen_hindu_warriors_lod1.variant_weighted_mesh",
+        "east_ethnic_swordsmen_hindu_warriors_lod2.variant_weighted_mesh",
+        "east_ethnic_swordsmen_hindu_warriors_lod3.variant_weighted_mesh",
+        "east_ethnic_swordsmen_hindu_warriors_lod4.variant_weighted_mesh",
+        "east_ethnic_swordsmen_lod1.variant_weighted_mesh",
+        "east_ethnic_swordsmen_lod2.variant_weighted_mesh",
+        "east_ethnic_swordsmen_lod3.variant_weighted_mesh",
+        "east_ethnic_swordsmen_lod4.variant_weighted_mesh",
+        "east_ethnic_warriors_dervish_lod1.variant_weighted_mesh",
+        "east_ethnic_warriors_dervish_lod2.variant_weighted_mesh",
+        "east_ethnic_warriors_dervish_lod3.variant_weighted_mesh",
+        "east_ethnic_warriors_dervish_lod4.variant_weighted_mesh",
+        "east_guard_cavalry_ahadis_lod1.variant_weighted_mesh",
+        "east_guard_cavalry_ahadis_lod2.variant_weighted_mesh",
+        "east_guard_cavalry_ahadis_lod3.variant_weighted_mesh",
+        "east_guard_cavalry_ahadis_lod4.variant_weighted_mesh",
+        "east_indian_admiral_lod1.variant_weighted_mesh",
+        "east_indian_admiral_lod2.variant_weighted_mesh",
+        "east_indian_admiral_lod3.variant_weighted_mesh",
+        "east_indian_admiral_lod4.variant_weighted_mesh",
+        "east_indian_artilleryman_lod1.variant_weighted_mesh",
+        "east_indian_artilleryman_lod2.variant_weighted_mesh",
+        "east_indian_artilleryman_lod3.variant_weighted_mesh",
+        "east_indian_artilleryman_lod4.variant_weighted_mesh",
+        "east_indian_colonel_lod1.variant_weighted_mesh",
+        "east_indian_colonel_lod2.variant_weighted_mesh",
+        "east_indian_colonel_lod3.variant_weighted_mesh",
+        "east_indian_colonel_lod4.variant_weighted_mesh",
+        "east_indian_general_lod1.variant_weighted_mesh",
+        "east_indian_general_lod2.variant_weighted_mesh",
+        "east_indian_general_lod3.variant_weighted_mesh",
+        "east_indian_general_lod4.variant_weighted_mesh",
+        "east_indian_infantry_lod1.variant_weighted_mesh",
+        "east_indian_infantry_lod2.variant_weighted_mesh",
+        "east_indian_infantry_lod3.variant_weighted_mesh",
+        "east_indian_infantry_lod4.variant_weighted_mesh",
+        "east_islamic_swordsmen_lod1.variant_weighted_mesh",
+        "east_islamic_swordsmen_lod2.variant_weighted_mesh",
+        "east_islamic_swordsmen_lod3.variant_weighted_mesh",
+        "east_islamic_swordsmen_lod4.variant_weighted_mesh",
+        "east_lancers_lod1.variant_weighted_mesh",
+        "east_lancers_lod2.variant_weighted_mesh",
+        "east_lancers_lod3.variant_weighted_mesh",
+        "east_lancers_lod4.variant_weighted_mesh",
+        "east_lancers_silladar_lod1.variant_weighted_mesh",
+        "east_lancers_silladar_lod2.variant_weighted_mesh",
+        "east_lancers_silladar_lod3.variant_weighted_mesh",
+        "east_lancers_silladar_lod4.variant_weighted_mesh",
+        "east_landless_rabble_bhumiya_lod1.variant_weighted_mesh",
+        "east_landless_rabble_bhumiya_lod2.variant_weighted_mesh",
+        "east_landless_rabble_bhumiya_lod3.variant_weighted_mesh",
+        "east_landless_rabble_bhumiya_lod4.variant_weighted_mesh",
+        "east_qizilbashi_light_cavalry_lod1.variant_weighted_mesh",
+        "east_qizilbashi_light_cavalry_lod2.variant_weighted_mesh",
+        "east_qizilbashi_light_cavalry_lod3.variant_weighted_mesh",
+        "east_qizilbashi_light_cavalry_lod4.variant_weighted_mesh",
+        "east_sikh_infantry_musketeers_lod1.variant_weighted_mesh",
+        "east_sikh_infantry_musketeers_lod2.variant_weighted_mesh",
+        "east_sikh_warriors_lod1.variant_weighted_mesh",
+        "east_sikh_warriors_lod2.variant_weighted_mesh",
+        "east_sipahi_lod1.variant_weighted_mesh",
+        "east_sipahi_lod2.variant_weighted_mesh",
+        "east_sipahi_lod3.variant_weighted_mesh",
+        "east_sipahi_lod4.variant_weighted_mesh",
+        "east_war_elephant_musketry_howdah_lod1.variant_weighted_mesh",
+        "east_war_elephant_musketry_howdah_lod2.variant_weighted_mesh",
+        "east_war_elephant_musketry_howdah_lod3.variant_weighted_mesh",
+        "east_war_elephant_musketry_howdah_lod4.variant_weighted_mesh",
+        "east_zamindari_lod1.variant_weighted_mesh",
+        "east_zamindari_lod2.variant_weighted_mesh",
+        "east_zamindari_lod3.variant_weighted_mesh",
+        "east_zamindari_lod4.variant_weighted_mesh",
+        "eastern_musician1_lod1.variant_weighted_mesh",
+        "eastern_musician1_lod2.variant_weighted_mesh",
+        "eastern_musician1_lod3.variant_weighted_mesh",
+        "eastern_musician1_lod4.variant_weighted_mesh",
+        "eastern_musician2_lod1.variant_weighted_mesh",
+        "eastern_musician2_lod2.variant_weighted_mesh",
+        "eastern_musician2_lod3.variant_weighted_mesh",
+        "eastern_musician2_lod4.variant_weighted_mesh",
+        "eastern_officer1_lod1.variant_weighted_mesh",
+        "eastern_officer1_lod2.variant_weighted_mesh",
+        "eastern_officer1_lod3.variant_weighted_mesh",
+        "eastern_officer1_lod4.variant_weighted_mesh",
+        "eastern_officer2_lod1.variant_weighted_mesh",
+        "eastern_officer2_lod2.variant_weighted_mesh",
+        "eastern_officer2_lod3.variant_weighted_mesh",
+        "episodic_armoured_lod1.variant_weighted_mesh",
+        "episodic_armoured_lod2.variant_weighted_mesh",
+        "episodic_armoured_lod3.variant_weighted_mesh",
+        "episodic_armoured_lod4.variant_weighted_mesh",
+        "episodic_euro_american_lod1.variant_weighted_mesh",
+        "episodic_euro_american_lod2.variant_weighted_mesh",
+        "episodic_guncrew_lod1.variant_weighted_mesh",
+        "episodic_guncrew_lod2.variant_weighted_mesh",
+        "episodic_guncrew_lod3.variant_weighted_mesh",
+        "episodic_guncrew_lod4.variant_weighted_mesh",
+        "episodic_john_smith_lod1.variant_weighted_mesh",
+        "episodic_john_smith_lod2.variant_weighted_mesh",
+        "episodic_militia_lod1.variant_weighted_mesh",
+        "episodic_militia_lod2.variant_weighted_mesh",
+        "episodic_militia_lod3.variant_weighted_mesh",
+        "episodic_militia_lod4.variant_weighted_mesh",
+        "episodic_musketman_lod1.variant_weighted_mesh",
+        "episodic_musketman_lod2.variant_weighted_mesh",
+        "episodic_musketman_lod3.variant_weighted_mesh",
+        "episodic_musketman_lod4.variant_weighted_mesh",
+        "episodic_officer_lod1.variant_weighted_mesh",
+        "episodic_officer_lod2.variant_weighted_mesh",
+        "episodic_officer_lod3.variant_weighted_mesh",
+        "episodic_officer_lod4.variant_weighted_mesh",
+        "episodic_washington_lod1.variant_weighted_mesh",
+        "episodic_washington_lod2.variant_weighted_mesh",
+        "episodic_washington_lod3.variant_weighted_mesh",
+        "episodic_washington_lod4.variant_weighted_mesh",
+        "episodic_washington_young_lod1.variant_weighted_mesh",
+        "episodic_washington_young_lod2.variant_weighted_mesh",
+        "episodic_washington_young_lod3.variant_weighted_mesh",
+        "episodic_washington_young_lod4.variant_weighted_mesh",
+        "euro_admiral_lod1.variant_weighted_mesh",
+        "euro_admiral_lod2.variant_weighted_mesh",
+        "euro_admiral_lod3.variant_weighted_mesh",
+        "euro_admiral_lod4.variant_weighted_mesh",
+        "euro_african_infantry_lod1.variant_weighted_mesh",
+        "euro_african_infantry_lod2.variant_weighted_mesh",
+        "euro_african_infantry_lod3.variant_weighted_mesh",
+        "euro_african_infantry_lod4.variant_weighted_mesh",
+        "euro_american_rangers_lod1.variant_weighted_mesh",
+        "euro_american_rangers_lod2.variant_weighted_mesh",
+        "euro_american_rangers_lod4.variant_weighted_mesh",
+        "euro_artillery_lod1.variant_weighted_mesh",
+        "euro_artillery_lod4.variant_weighted_mesh",
+        "euro_bicorne_lod1.variant_weighted_mesh",
+        "euro_bicorne_lod2.variant_weighted_mesh",
+        "euro_bicorne_lod3.variant_weighted_mesh",
+        "euro_bicorne_lod4.variant_weighted_mesh",
+        "euro_carabiniers_lod1.variant_weighted_mesh",
+        "euro_carabiniers_lod2.variant_weighted_mesh",
+        "euro_carabiniers_lod4.variant_weighted_mesh",
+        "euro_colonel_lod1.variant_weighted_mesh",
+        "euro_colonel_lod2.variant_weighted_mesh",
+        "euro_colonel_lod3.variant_weighted_mesh",
+        "euro_colonel_lod4.variant_weighted_mesh",
+        "euro_commodore_lod1.variant_weighted_mesh",
+        "euro_commodore_lod2.variant_weighted_mesh",
+        "euro_commodore_lod3.variant_weighted_mesh",
+        "euro_commodore_lod4.variant_weighted_mesh",
+        "euro_company_cavalry_lod1.variant_weighted_mesh",
+        "euro_company_cavalry_lod2.variant_weighted_mesh",
+        "euro_company_cavalry_lod3.variant_weighted_mesh",
+        "euro_company_cavalry_lod4.variant_weighted_mesh",
+        "euro_company_infantry_lod1.variant_weighted_mesh",
+        "euro_company_infantry_lod2.variant_weighted_mesh",
+        "euro_company_infantry_lod3.variant_weighted_mesh",
+        "euro_company_infantry_lod4.variant_weighted_mesh",
+        "euro_cuirassiers_lod1.variant_weighted_mesh",
+        "euro_cuirassiers_lod2.variant_weighted_mesh",
+        "euro_cuirassiers_lod3.variant_weighted_mesh",
+        "euro_cuirassiers_lod4.variant_weighted_mesh",
+        "euro_dragoons_lod1.variant_weighted_mesh",
+        "euro_dragoons_lod2.variant_weighted_mesh",
+        "euro_dragoons_lod3.variant_weighted_mesh",
+        "euro_dragoons_lod4.variant_weighted_mesh",
+        "euro_elite_artillery_lod1.variant_weighted_mesh",
+        "euro_elite_artillery_lod2.variant_weighted_mesh",
+        "euro_elite_artillery_lod3.variant_weighted_mesh",
+        "euro_elite_artillery_lod4.variant_weighted_mesh",
+        "euro_elite_light_infantry_lod1.variant_weighted_mesh",
+        "euro_elite_light_infantry_lod2.variant_weighted_mesh",
+        "euro_elite_light_infantry_lod3.variant_weighted_mesh",
+        "euro_elite_light_infantry_lod4.variant_weighted_mesh",
+        "euro_elite_light_infantry_windbuchse_jaegers_lod1.variant_weighted_mesh",
+        "euro_elite_light_infantry_windbuchse_jaegers_lod2.variant_weighted_mesh",
+        "euro_elite_light_infantry_windbuchse_jaegers_lod3.variant_weighted_mesh",
+        "euro_elite_light_infantry_windbuchse_jaegers_lod4.variant_weighted_mesh",
+        "euro_expat_infantry_lod1.variant_weighted_mesh",
+        "euro_expat_infantry_lod2.variant_weighted_mesh",
+        "euro_expat_infantry_lod3.variant_weighted_mesh",
+        "euro_expat_infantry_lod4.variant_weighted_mesh",
+        "euro_foot_artillery_lod1.variant_weighted_mesh",
+        "euro_foot_artillery_lod2.variant_weighted_mesh",
+        "euro_foot_artillery_lod3.variant_weighted_mesh",
+        "euro_foot_artillery_lod4.variant_weighted_mesh",
+        "euro_garrison_artillery_lod1.variant_weighted_mesh",
+        "euro_garrison_artillery_lod2.variant_weighted_mesh",
+        "euro_garrison_artillery_lod3.variant_weighted_mesh",
+        "euro_garrison_artillery_lod4.variant_weighted_mesh",
+        "euro_general_and_staff_officers_lod1.variant_weighted_mesh",
+        "euro_general_and_staff_officers_lod2.variant_weighted_mesh",
+        "euro_general_and_staff_officers_lod4.variant_weighted_mesh",
+        "euro_grenadiers_bearskin_lod1.variant_weighted_mesh",
+        "euro_grenadiers_bearskin_lod2.variant_weighted_mesh",
+        "euro_grenadiers_bearskin_lod3.variant_weighted_mesh",
+        "euro_grenadiers_bearskin_lod4.variant_weighted_mesh",
+        "euro_grenadiers_lod1.variant_weighted_mesh",
+        "euro_grenadiers_lod2.variant_weighted_mesh",
+        "euro_grenadiers_lod3.variant_weighted_mesh",
+        "euro_grenadiers_lod4.variant_weighted_mesh",
+        "euro_guerillas_lod1.variant_weighted_mesh",
+        "euro_guerillas_lod2.variant_weighted_mesh",
+        "euro_guerillas_lod4.variant_weighted_mesh",
+        "euro_heavy_cavalry_lod1.variant_weighted_mesh",
+        "euro_heavy_cavalry_lod2.variant_weighted_mesh",
+        "euro_heavy_cavalry_lod4.variant_weighted_mesh",
+        "euro_highlander_regular_lod1.variant_weighted_mesh",
+        "euro_highlander_regular_lod2.variant_weighted_mesh",
+        "euro_highlander_regular_lod3.variant_weighted_mesh",
+        "euro_highlanders_lod1.variant_weighted_mesh",
+        "euro_highlanders_lod2.variant_weighted_mesh",
+        "euro_highlanders_lod3.variant_weighted_mesh",
+        "euro_horse_artillery_lod1.variant_weighted_mesh",
+        "euro_horse_artillery_lod2.variant_weighted_mesh",
+        "euro_horse_artillery_lod3.variant_weighted_mesh",
+        "euro_horse_artillery_lod4.variant_weighted_mesh",
+        "euro_hungarian_hussars_lod1.variant_weighted_mesh",
+        "euro_hungarian_hussars_lod2.variant_weighted_mesh",
+        "euro_hungarian_hussars_lod3.variant_weighted_mesh",
+        "euro_hungarian_hussars_lod4.variant_weighted_mesh",
+        "euro_hussars_lod1.variant_weighted_mesh",
+        "euro_hussars_lod2.variant_weighted_mesh",
+        "euro_hussars_lod3.variant_weighted_mesh",
+        "euro_hussars_lod4.variant_weighted_mesh",
+        "euro_jaeger_lod1.variant_weighted_mesh",
+        "euro_jaeger_lod2.variant_weighted_mesh",
+        "euro_jaeger_lod3.variant_weighted_mesh",
+        "euro_jaeger_lod4.variant_weighted_mesh",
+        "euro_lancers_lod1.variant_weighted_mesh",
+        "euro_lancers_lod2.variant_weighted_mesh",
+        "euro_lancers_lod3.variant_weighted_mesh",
+        "euro_lancers_lod4.variant_weighted_mesh",
+        "euro_late_riflemen_lod1.variant_weighted_mesh",
+        "euro_late_riflemen_lod2.variant_weighted_mesh",
+        "euro_late_riflemen_lod3.variant_weighted_mesh",
+        "euro_late_riflemen_lod4.variant_weighted_mesh",
+        "euro_light_cavalry_lod1.variant_weighted_mesh",
+        "euro_light_cavalry_lod2.variant_weighted_mesh",
+        "euro_light_cavalry_lod3.variant_weighted_mesh",
+        "euro_light_cavalry_lod4.variant_weighted_mesh",
+        "euro_light_dragoons_lod1.variant_weighted_mesh",
+        "euro_light_dragoons_lod2.variant_weighted_mesh",
+        "euro_light_dragoons_lod3.variant_weighted_mesh",
+        "euro_light_dragoons_lod4.variant_weighted_mesh",
+        "euro_light_infantry_lod1.variant_weighted_mesh",
+        "euro_light_infantry_lod2.variant_weighted_mesh",
+        "euro_light_infantry_lod3.variant_weighted_mesh",
+        "euro_light_infantry_lod4.variant_weighted_mesh",
+        "euro_line_infantry_lod3.variant_weighted_mesh",
+        "euro_long_rifleman_lod1.variant_weighted_mesh",
+        "euro_long_rifleman_lod2.variant_weighted_mesh",
+        "euro_long_rifleman_lod3.variant_weighted_mesh",
+        "euro_long_rifleman_lod4.variant_weighted_mesh",
+        "euro_marines_lod1.variant_weighted_mesh",
+        "euro_marines_lod2.variant_weighted_mesh",
+        "euro_marines_lod3.variant_weighted_mesh",
+        "euro_marines_lod4.variant_weighted_mesh",
+        "euro_militia_infantry_lod1.variant_weighted_mesh",
+        "euro_militia_infantry_lod2.variant_weighted_mesh",
+        "euro_militia_infantry_lod4.variant_weighted_mesh",
+        "euro_minutemen_lod1.variant_weighted_mesh",
+        "euro_minutemen_lod2.variant_weighted_mesh",
+        "euro_minutemen_lod4.variant_weighted_mesh",
+        "euro_musician1_lod1.variant_weighted_mesh",
+        "euro_musician1_lod2.variant_weighted_mesh",
+        "euro_musician1_lod3.variant_weighted_mesh",
+        "euro_musician1_lod4.variant_weighted_mesh",
+        "euro_musician2_lod1.variant_weighted_mesh",
+        "euro_musician2_lod2.variant_weighted_mesh",
+        "euro_musician2_lod3.variant_weighted_mesh",
+        "euro_musician2_lod4.variant_weighted_mesh",
+        "euro_native_company_cavalry_lod1.variant_weighted_mesh",
+        "euro_native_company_cavalry_lod2.variant_weighted_mesh",
+        "euro_native_company_cavalry_lod3.variant_weighted_mesh",
+        "euro_native_company_cavalry_lod4.variant_weighted_mesh",
+        "euro_officer1_lod1.variant_weighted_mesh",
+        "euro_officer1_lod2.variant_weighted_mesh",
+        "euro_officer1_lod3.variant_weighted_mesh",
+        "euro_officer1_lod4.variant_weighted_mesh",
+        "euro_officer2_lod1.variant_weighted_mesh",
+        "euro_officer2_lod2.variant_weighted_mesh",
+        "euro_officer2_lod3.variant_weighted_mesh",
+        "euro_officer2_lod4.variant_weighted_mesh",
+        "euro_officer_bicorne_lod1.variant_weighted_mesh",
+        "euro_officer_bicorne_lod2.variant_weighted_mesh",
+        "euro_officer_bicorne_lod3.variant_weighted_mesh",
+        "euro_officer_bicorne_lod4.variant_weighted_mesh",
+        "euro_officer_mid_lod1.variant_weighted_mesh",
+        "euro_officer_mid_lod2.variant_weighted_mesh",
+        "euro_officer_mid_lod3.variant_weighted_mesh",
+        "euro_officer_mid_lod4.variant_weighted_mesh",
+        "euro_pikeman_lod1.variant_weighted_mesh",
+        "euro_pikeman_lod2.variant_weighted_mesh",
+        "euro_pikeman_lod3.variant_weighted_mesh",
+        "euro_pikeman_lod4.variant_weighted_mesh",
+        "euro_polish_winged_hussars_lod1.variant_weighted_mesh",
+        "euro_polish_winged_hussars_lod2.variant_weighted_mesh",
+        "euro_polish_winged_hussars_lod3.variant_weighted_mesh",
+        "euro_polish_winged_hussars_lod4.variant_weighted_mesh",
+        "euro_provincial_cavalry_lod1.variant_weighted_mesh",
+        "euro_provincial_cavalry_lod2.variant_weighted_mesh",
+        "euro_provincial_cavalry_lod4.variant_weighted_mesh",
+        "euro_prussia_jaeger_lod1.variant_weighted_mesh",
+        "euro_prussia_jaeger_lod2.variant_weighted_mesh",
+        "euro_prussia_jaeger_lod3.variant_weighted_mesh",
+        "euro_prussia_jaeger_lod4.variant_weighted_mesh",
+        "euro_rangers_frontiersmen_lod1.variant_weighted_mesh",
+        "euro_rangers_frontiersmen_lod2.variant_weighted_mesh",
+        "euro_rangers_frontiersmen_lod3.variant_weighted_mesh",
+        "euro_rangers_frontiersmen_lod4.variant_weighted_mesh",
+        "euro_regiment_of_horse_lod1.variant_weighted_mesh",
+        "euro_regiment_of_horse_lod2.variant_weighted_mesh",
+        "euro_regiment_of_horse_lod3.variant_weighted_mesh",
+        "euro_regiment_of_horse_lod4.variant_weighted_mesh",
+        "euro_republican_conscript_infantry_lod1.variant_weighted_mesh",
+        "euro_republican_conscript_infantry_lod2.variant_weighted_mesh",
+        "euro_republican_conscript_infantry_lod3.variant_weighted_mesh",
+        "euro_republican_conscript_infantry_lod4.variant_weighted_mesh",
+        "euro_republican_guard_lod1.variant_weighted_mesh",
+        "euro_republican_guard_lod2.variant_weighted_mesh",
+        "euro_republican_guard_lod4.variant_weighted_mesh",
+        "euro_sepoys_lod1.variant_weighted_mesh",
+        "euro_sepoys_lod2.variant_weighted_mesh",
+        "euro_sepoys_lod3.variant_weighted_mesh",
+        "euro_sepoys_lod4.variant_weighted_mesh",
+        "euro_superior_line_infantry_lod1.variant_weighted_mesh",
+        "euro_superior_line_infantry_lod2.variant_weighted_mesh",
+        "euro_superior_line_infantry_lod3.variant_weighted_mesh",
+        "euro_superior_line_infantry_lod4.variant_weighted_mesh",
+        "ghoorkas_lod1.variant_weighted_mesh",
+        "ghoorkas_lod2.variant_weighted_mesh",
+        "ghoorkas_lod3.variant_weighted_mesh",
+        "ghoorkas_lod4.variant_weighted_mesh",
+        "guard_infantry_lod1.variant_weighted_mesh",
+        "guard_infantry_lod2.variant_weighted_mesh",
+        "guard_infantry_lod3.variant_weighted_mesh",
+        "guard_infantry_lod4.variant_weighted_mesh",
+        "highland_clansmen_lod1.variant_weighted_mesh",
+        "highland_clansmen_lod2.variant_weighted_mesh",
+        "highland_clansmen_lod3.variant_weighted_mesh",
+        "highland_clansmen_lod4.variant_weighted_mesh",
+        "horse_grenadier_guards_lod1.variant_weighted_mesh",
+        "horse_grenadier_guards_lod2.variant_weighted_mesh",
+        "horse_grenadier_guards_lod3.variant_weighted_mesh",
+        "horse_grenadier_guards_lod4.variant_weighted_mesh",
+        "household_cavalry_lod1.variant_weighted_mesh",
+        "household_cavalry_lod2.variant_weighted_mesh",
+        "household_cavalry_lod4.variant_weighted_mesh",
+        "huron_archer_lod1.variant_weighted_mesh",
+        "huron_archer_lod2.variant_weighted_mesh",
+        "huron_archer_lod3.variant_weighted_mesh",
+        "huron_archer_lod4.variant_weighted_mesh",
+        "huron_braves_lod1.variant_weighted_mesh",
+        "huron_braves_lod2.variant_weighted_mesh",
+        "huron_braves_lod3.variant_weighted_mesh",
+        "huron_braves_lod4.variant_weighted_mesh",
+        "huron_elite_lod1.variant_weighted_mesh",
+        "huron_elite_lod2.variant_weighted_mesh",
+        "huron_elite_lod3.variant_weighted_mesh",
+        "huron_elite_lod4.variant_weighted_mesh",
+        "huron_medicineman_lod1.variant_weighted_mesh",
+        "huron_medicineman_lod2.variant_weighted_mesh",
+        "huron_medicineman_lod3.variant_weighted_mesh",
+        "huron_medicineman_lod4.variant_weighted_mesh",
+        "huron_petun_wolf_warriors_lod1.variant_weighted_mesh",
+        "huron_petun_wolf_warriors_lod2.variant_weighted_mesh",
+        "huron_petun_wolf_warriors_lod3.variant_weighted_mesh",
+        "huron_petun_wolf_warriors_lod4.variant_weighted_mesh",
+        "iroquois_archer_lod1.variant_weighted_mesh",
+        "iroquois_archer_lod2.variant_weighted_mesh",
+        "iroquois_archer_lod3.variant_weighted_mesh",
+        "iroquois_braves_lod1.variant_weighted_mesh",
+        "iroquois_braves_lod2.variant_weighted_mesh",
+        "iroquois_braves_lod3.variant_weighted_mesh",
+        "iroquois_braves_lod4.variant_weighted_mesh",
+        "iroquois_elite_lod1.variant_weighted_mesh",
+        "iroquois_elite_lod2.variant_weighted_mesh",
+        "iroquois_elite_lod3.variant_weighted_mesh",
+        "iroquois_medicineman_lod1.variant_weighted_mesh",
+        "iroquois_medicineman_lod2.variant_weighted_mesh",
+        "iroquois_medicineman_lod3.variant_weighted_mesh",
+        "iroquois_mounted_braves_lod1.variant_weighted_mesh",
+        "iroquois_mounted_braves_lod2.variant_weighted_mesh",
+        "iroquois_mounted_braves_lod3.variant_weighted_mesh",
+        "iroquois_mounted_braves_lod4.variant_weighted_mesh",
+        "life_guards_lod1.variant_weighted_mesh",
+        "life_guards_lod2.variant_weighted_mesh",
+        "life_guards_lod4.variant_weighted_mesh",
+        "mameluks_lod1.variant_weighted_mesh",
+        "mameluks_lod2.variant_weighted_mesh",
+        "mameluks_lod3.variant_weighted_mesh",
+        "mameluks_lod4.variant_weighted_mesh",
+        "native_american_archers_lod2.variant_weighted_mesh",
+        "native_american_archers_lod3.variant_weighted_mesh",
+        "native_american_archers_lod4.variant_weighted_mesh",
+        "native_american_braves_lod2.variant_weighted_mesh",
+        "native_american_braves_lod3.variant_weighted_mesh",
+        "native_american_braves_lod4.variant_weighted_mesh",
+        "native_american_chief_lod2.variant_weighted_mesh",
+        "native_american_chief_lod3.variant_weighted_mesh",
+        "native_american_chief_lod4.variant_weighted_mesh",
+        "native_american_colonel_lod2.variant_weighted_mesh",
+        "native_american_colonel_lod3.variant_weighted_mesh",
+        "native_american_colonel_lod4.variant_weighted_mesh",
+        "native_american_elite_lod2.variant_weighted_mesh",
+        "native_american_elite_lod3.variant_weighted_mesh",
+        "native_american_elite_lod4.variant_weighted_mesh",
+        "native_american_general_lod2.variant_weighted_mesh",
+        "native_american_general_lod3.variant_weighted_mesh",
+        "native_american_general_lod4.variant_weighted_mesh",
+        "native_american_medicineman_lod2.variant_weighted_mesh",
+        "native_american_medicineman_lod3.variant_weighted_mesh",
+        "native_american_medicineman_lod4.variant_weighted_mesh",
+        "native_american_mounted_braves_lod2.variant_weighted_mesh",
+        "native_american_mounted_braves_lod3.variant_weighted_mesh",
+        "native_american_mounted_braves_lod4.variant_weighted_mesh",
+        "native_american_musketeer_lod2.variant_weighted_mesh",
+        "native_american_musketeer_lod3.variant_weighted_mesh",
+        "native_american_musketeer_lod4.variant_weighted_mesh",
+        "netherlands_holland_guards_lod1.variant_weighted_mesh",
+        "netherlands_holland_guards_lod2.variant_weighted_mesh",
+        "netherlands_holland_guards_lod3.variant_weighted_mesh",
+        "netherlands_holland_guards_lod4.variant_weighted_mesh",
+        "netherlands_horse_guards_lod1.variant_weighted_mesh",
+        "netherlands_horse_guards_lod2.variant_weighted_mesh",
+        "netherlands_horse_guards_lod3.variant_weighted_mesh",
+        "netherlands_horse_guards_lod4.variant_weighted_mesh",
+        "norwegian_ski_troops_lod1.variant_weighted_mesh",
+        "norwegian_ski_troops_lod2.variant_weighted_mesh",
+        "norwegian_ski_troops_lod3.variant_weighted_mesh",
+        "norwegian_ski_troops_lod4.variant_weighted_mesh",
+        "ottoman_admiral_lod1.variant_weighted_mesh",
+        "ottoman_admiral_lod2.variant_weighted_mesh",
+        "ottoman_admiral_lod3.variant_weighted_mesh",
+        "ottoman_admiral_lod4.variant_weighted_mesh",
+        "ottoman_beylick_grenadiers_lod1.variant_weighted_mesh",
+        "ottoman_beylick_grenadiers_lod2.variant_weighted_mesh",
+        "ottoman_beylick_grenadiers_lod3.variant_weighted_mesh",
+        "ottoman_beylick_grenadiers_lod4.variant_weighted_mesh",
+        "ottoman_beylick_janissaries_lod1.variant_weighted_mesh",
+        "ottoman_beylick_janissaries_lod2.variant_weighted_mesh",
+        "ottoman_beylick_janissaries_lod3.variant_weighted_mesh",
+        "ottoman_beylick_janissaries_lod4.variant_weighted_mesh",
+        "ottoman_cemaat_grenadiers_lod1.variant_weighted_mesh",
+        "ottoman_cemaat_grenadiers_lod2.variant_weighted_mesh",
+        "ottoman_cemaat_grenadiers_lod3.variant_weighted_mesh",
+        "ottoman_cemaat_janissaries_lod1.variant_weighted_mesh",
+        "ottoman_cemaat_janissaries_lod2.variant_weighted_mesh",
+        "ottoman_cemaat_janissaries_lod3.variant_weighted_mesh",
+        "ottoman_colonel_lod1.variant_weighted_mesh",
+        "ottoman_colonel_lod2.variant_weighted_mesh",
+        "ottoman_colonel_lod3.variant_weighted_mesh",
+        "ottoman_colonel_lod4.variant_weighted_mesh",
+        "ottoman_commodore_lod1.variant_weighted_mesh",
+        "ottoman_commodore_lod2.variant_weighted_mesh",
+        "ottoman_commodore_lod3.variant_weighted_mesh",
+        "ottoman_commodore_lod4.variant_weighted_mesh",
+        "ottoman_deli_scout_lod1.variant_weighted_mesh",
+        "ottoman_deli_scout_lod2.variant_weighted_mesh",
+        "ottoman_deli_scout_lod3.variant_weighted_mesh",
+        "ottoman_deli_scout_lod4.variant_weighted_mesh",
+        "ottoman_general_lod1.variant_weighted_mesh",
+        "ottoman_general_lod2.variant_weighted_mesh",
+        "ottoman_general_lod3.variant_weighted_mesh",
+        "ottoman_general_lod4.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_infantry_lod1.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_infantry_lod2.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_infantry_lod3.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_infantry_lod4.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_light_infantry_lod1.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_light_infantry_lod2.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_light_infantry_lod3.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_light_infantry_lod4.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_lod1.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_lod2.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_lod3.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_lod4.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_rifles_lod1.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_rifles_lod2.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_rifles_lod3.variant_weighted_mesh",
+        "ottoman_nizam_y_cedid_rifles_lod4.variant_weighted_mesh",
+        "ottoman_sekban_grenadiers_lod1.variant_weighted_mesh",
+        "ottoman_sekban_grenadiers_lod2.variant_weighted_mesh",
+        "ottoman_sekban_grenadiers_lod3.variant_weighted_mesh",
+        "ottoman_sekban_grenadiers_lod4.variant_weighted_mesh",
+        "ottoman_sekban_janissaries_lod1.variant_weighted_mesh",
+        "ottoman_sekban_janissaries_lod2.variant_weighted_mesh",
+        "ottoman_sekban_janissaries_lod3.variant_weighted_mesh",
+        "ottoman_sekban_janissaries_lod4.variant_weighted_mesh",
+        "pandours_lod1.variant_weighted_mesh",
+        "pandours_lod2.variant_weighted_mesh",
+        "pandours_lod3.variant_weighted_mesh",
+        "pandours_lod4.variant_weighted_mesh",
+        "peublo_archer_lod1.variant_weighted_mesh",
+        "peublo_archer_lod2.variant_weighted_mesh",
+        "peublo_archer_lod3.variant_weighted_mesh",
+        "plains_archer_lod1.variant_weighted_mesh",
+        "plains_archer_lod2.variant_weighted_mesh",
+        "plains_archer_lod3.variant_weighted_mesh",
+        "plains_archer_lod4.variant_weighted_mesh",
+        "plains_braves_lod1.variant_weighted_mesh",
+        "plains_braves_lod2.variant_weighted_mesh",
+        "plains_braves_lod3.variant_weighted_mesh",
+        "plains_braves_lod4.variant_weighted_mesh",
+        "plains_elite_lod1.variant_weighted_mesh",
+        "plains_elite_lod2.variant_weighted_mesh",
+        "plains_elite_lod3.variant_weighted_mesh",
+        "plains_elite_lod4.variant_weighted_mesh",
+        "plains_medicineman_lod1.variant_weighted_mesh",
+        "plains_medicineman_lod2.variant_weighted_mesh",
+        "plains_medicineman_lod3.variant_weighted_mesh",
+        "plains_medicineman_lod4.variant_weighted_mesh",
+        "plains_mounted_braves_lod1.variant_weighted_mesh",
+        "plains_mounted_braves_lod2.variant_weighted_mesh",
+        "plains_mounted_braves_lod3.variant_weighted_mesh",
+        "prussia_garde_du_corp_lod1.variant_weighted_mesh",
+        "prussia_garde_du_corp_lod2.variant_weighted_mesh",
+        "prussia_garde_du_corp_lod3.variant_weighted_mesh",
+        "prussia_grenadiers_lod1.variant_weighted_mesh",
+        "prussia_grenadiers_lod2.variant_weighted_mesh",
+        "prussia_grenadiers_lod3.variant_weighted_mesh",
+        "prussia_grenadiers_lod4.variant_weighted_mesh",
+        "prussia_leib_grenadiers_lod1.variant_weighted_mesh",
+        "prussia_leib_grenadiers_lod2.variant_weighted_mesh",
+        "prussia_leib_grenadiers_lod3.variant_weighted_mesh",
+        "prussia_leib_grenadiers_lod4.variant_weighted_mesh",
+        "pueblo_archer_lod1.variant_weighted_mesh",
+        "pueblo_archer_lod2.variant_weighted_mesh",
+        "pueblo_archer_lod3.variant_weighted_mesh",
+        "pueblo_braves_lod1.variant_weighted_mesh",
+        "pueblo_braves_lod2.variant_weighted_mesh",
+        "pueblo_braves_lod3.variant_weighted_mesh",
+        "pueblo_elite_lod1.variant_weighted_mesh",
+        "pueblo_elite_lod2.variant_weighted_mesh",
+        "pueblo_elite_lod3.variant_weighted_mesh",
+        "pueblo_medicineman_lod1.variant_weighted_mesh",
+        "pueblo_medicineman_lod2.variant_weighted_mesh",
+        "pueblo_medicineman_lod3.variant_weighted_mesh",
+        "pueblo_medicineman_lod4.variant_weighted_mesh",
+        "pueblo_mounted_braves_lod1.variant_weighted_mesh",
+        "pueblo_mounted_braves_lod2.variant_weighted_mesh",
+        "pueblo_mounted_braves_lod3.variant_weighted_mesh",
+        "riskers_of_souls_lod1.variant_weighted_mesh",
+        "riskers_of_souls_lod2.variant_weighted_mesh",
+        "riskers_of_souls_lod3.variant_weighted_mesh",
+        "riskers_of_souls_lod4.variant_weighted_mesh",
+        "rogers_rangers_lod1.variant_weighted_mesh",
+        "rogers_rangers_lod2.variant_weighted_mesh",
+        "rogers_rangers_lod3.variant_weighted_mesh",
+        "rogers_rangers_lod4.variant_weighted_mesh",
+        "russia_grenadiers_lod1.variant_weighted_mesh",
+        "russia_grenadiers_lod2.variant_weighted_mesh",
+        "russia_grenadiers_lod3.variant_weighted_mesh",
+        "russia_grenadiers_lod4.variant_weighted_mesh",
+        "siberian_hunters_lod1.variant_weighted_mesh",
+        "siberian_hunters_lod2.variant_weighted_mesh",
+        "siberian_hunters_lod3.variant_weighted_mesh",
+        "siberian_hunters_lod4.variant_weighted_mesh",
+        "spain_grenadiers_lod1.variant_weighted_mesh",
+        "spain_grenadiers_lod2.variant_weighted_mesh",
+        "spain_grenadiers_lod3.variant_weighted_mesh",
+        "spain_grenadiers_lod4.variant_weighted_mesh",
+        "spain_guardias_de_corps_lod1.variant_weighted_mesh",
+        "spain_guardias_de_corps_lod2.variant_weighted_mesh",
+        "spain_guardias_de_corps_lod3.variant_weighted_mesh",
+        "spain_guardias_de_corps_lod4.variant_weighted_mesh",
+        "spain_guardias_de_infanteria_lod1.variant_weighted_mesh",
+        "spain_guardias_de_infanteria_lod2.variant_weighted_mesh",
+        "spain_guardias_de_infanteria_lod3.variant_weighted_mesh",
+        "spain_guardias_de_infanteria_lod4.variant_weighted_mesh",
+        "spanish_guerrila_lod1.variant_weighted_mesh",
+        "spanish_guerrila_lod2.variant_weighted_mesh",
+        "spanish_guerrila_lod3.variant_weighted_mesh",
+        "spanish_guerrila_lod4.variant_weighted_mesh",
+        "steppe_cavalry_lod1.variant_weighted_mesh",
+        "steppe_cavalry_lod2.variant_weighted_mesh",
+        "steppe_cavalry_lod3.variant_weighted_mesh",
+        "steppe_cavalry_lod4.variant_weighted_mesh",
+        "streltsy_foot_lod1.variant_weighted_mesh",
+        "streltsy_foot_lod2.variant_weighted_mesh",
+        "streltsy_foot_lod3.variant_weighted_mesh",
+        "streltsy_foot_lod4.variant_weighted_mesh",
+        "streltsy_horse_lod1.variant_weighted_mesh",
+        "streltsy_horse_lod2.variant_weighted_mesh",
+        "streltsy_horse_lod3.variant_weighted_mesh",
+        "streltsy_horse_lod4.variant_weighted_mesh",
+        "stretlsy_cavalry_lod1.variant_weighted_mesh",
+        "stretlsy_cavalry_lod2.variant_weighted_mesh",
+        "stretlsy_cavalry_lod4.variant_weighted_mesh",
+        "stretlsy_infantry_lod1.variant_weighted_mesh",
+        "stretlsy_infantry_lod2.variant_weighted_mesh",
+        "stretlsy_infantry_lod3.variant_weighted_mesh",
+        "stretlsy_infantry_lod4.variant_weighted_mesh",
+        "sweden_livgarde_till_hast_lod1.variant_weighted_mesh",
+        "sweden_livgarde_till_hast_lod2.variant_weighted_mesh",
+        "sweden_livgarde_till_hast_lod3.variant_weighted_mesh",
+        "sweden_livgarde_till_hast_lod4.variant_weighted_mesh",
+        "sweden_svea_livgarde_lod1.variant_weighted_mesh",
+        "sweden_svea_livgarde_lod2.variant_weighted_mesh",
+        "sweden_svea_livgarde_lod3.variant_weighted_mesh",
+        "sweden_svea_livgarde_lod4.variant_weighted_mesh",
+        "wild_geese_lod1.variant_weighted_mesh",
+        "wild_geese_lod2.variant_weighted_mesh",
+        "wild_geese_lod3.variant_weighted_mesh",
+        "wild_geese_lod4.variant_weighted_mesh"
+      ],
+      "seeded_by": "horse_grenadier_guards_lod1.variant_weighted_mesh",
+      "root": 0,
+      "max_vertex_disagreement": 6.834779707441201e-07,
+      "fits": true,
+      "unplaced": [
+        1,
+        2,
+        3
+      ],
+      "bones": {
+        "0": {
+          "r": [
+            1.0,
+            0,
+            0,
+            0,
+            1.0,
+            0,
+            0,
+            0,
+            1.0
+          ],
+          "t": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "4": {
+          "r": [
+            -0.9636778401688194,
+            2.6268288732970943e-06,
+            -0.2670674453404223,
+            3.3036580297789994e-07,
+            -0.9999999999391379,
+            -1.102790747497424e-05,
+            -0.26706744535313676,
+            -1.0715580007896563e-05,
+            0.9636778401092999
+          ],
+          "t": [
+            -0.03113613137302154,
+            0.11308542555356207,
+            -0.0069813078344381704
+          ]
+        },
+        "5": {
+          "r": [
+            -0.9636779316929656,
+            -2.694948914907402e-06,
+            -0.26706711508664965,
+            -1.1025608058374553e-07,
+            -0.9999999999449871,
+            1.048875023755383e-05,
+            -0.26706711510022385,
+            1.0137222908344814e-05,
+            0.9636779316396537
+          ],
+          "t": [
+            -0.03113535612336249,
+            -0.11308541439074202,
+            -0.0069844366724529094
+          ]
+        },
+        "6": {
+          "r": [
+            0.954298550582878,
+            4.2579809101556865e-09,
+            -0.29885494199597606,
+            -6.548611166793054e-08,
+            0.9999999999999788,
+            -1.9486149418828622e-07,
+            0.2988549419959691,
+            2.0552688935929148e-07,
+            0.9542985505828582
+          ],
+          "t": [
+            0.1216340047089007,
+            -1.8671004290913337e-08,
+            -8.661514359908917e-09
+          ]
+        },
+        "7": {
+          "r": [
+            -0.922668143509378,
+            1.4869447537766528e-07,
+            -0.38559499082967424,
+            -1.5220690150191664e-07,
+            -0.9999999999999885,
+            -2.1416294837328695e-08,
+            -0.3855949908296727,
+            3.8930085847965354e-08,
+            0.9226681435093897
+          ],
+          "t": [
+            0.053119889143521504,
+            3.863158770656128e-08,
+            -0.08702304389828754
+          ]
+        },
+        "8": {
+          "r": [
+            -0.9419909120067089,
+            1.3150072981615005e-07,
+            -0.3356383793560446,
+            7.116583741951555e-07,
+            -0.9999999999968927,
+            -2.3891083388174064e-06,
+            -0.33563837935531615,
+            -2.4893782061866558e-06,
+            0.9419909120036879
+          ],
+          "t": [
+            -0.47310554491026435,
+            0.11308560398217393,
+            -0.12946589314944412
+          ]
+        },
+        "9": {
+          "r": [
+            -0.9419909812888858,
+            -3.5135270868578806e-07,
+            -0.33563818491089353,
+            -4.3067295231131456e-07,
+            -0.9999999999973639,
+            2.2555322370100117e-06,
+            -0.3356381849108008,
+            2.2692413134823493e-06,
+            0.941990981286251
+          ],
+          "t": [
+            -0.47310484015053167,
+            -0.11308547060736861,
+            -0.12946890010229248
+          ]
+        },
+        "10": {
+          "r": [
+            0.977582383349263,
+            6.272890951120047e-08,
+            -0.2105532801102151,
+            -3.953860782113239e-07,
+            0.9999999999987395,
+            -1.5378224222095671e-06,
+            0.21055328010985325,
+            1.5865979442197808e-06,
+            0.9775823833480555
+          ],
+          "t": [
+            0.25476253209258937,
+            -4.0422925673411214e-08,
+            0.04169149297463513
+          ]
+        },
+        "11": {
+          "r": [
+            -0.5809504798838048,
+            -0.016373112251449117,
+            0.8137742077001329,
+            0.057948745897454336,
+            -0.9980925668626123,
+            0.02128780924646363,
+            0.8118734401196337,
+            0.059524357777325246,
+            0.5807911570087031
+          ],
+          "t": [
+            -0.9455505870012919,
+            0.11308606347425595,
+            -0.2978018735417112
+          ]
+        },
+        "12": {
+          "r": [
+            -0.580950145973159,
+            0.01637262838699304,
+            0.81377445581283,
+            -0.05794921723176809,
+            -0.9980925202879866,
+            -0.021288709857585457,
+            0.8118736454128759,
+            -0.05952527181690575,
+            0.5807907763550766
+          ],
+          "t": [
+            -0.9455496951219011,
+            -0.11308566624707758,
+            -0.2978048007767989
+          ]
+        },
+        "13": {
+          "r": [
+            0.9547284292295686,
+            4.989020948031886e-07,
+            -0.297478783143591,
+            -8.746186939689871e-07,
+            0.9999999999989793,
+            -1.1298998655595582e-06,
+            0.2974787831427237,
+            1.3389280285255878e-06,
+            0.9547284292290303
+          ],
+          "t": [
+            0.3644733572239548,
+            -6.736839418264307e-08,
+            0.06532118917295146
+          ]
+        },
+        "14": {
+          "r": [
+            -0.10429867883414853,
+            -0.9585824899813936,
+            -0.2650309330899369,
+            0.9923509013782199,
+            -0.11800080609985945,
+            0.036269798643194656,
+            -0.06604145764052784,
+            -0.2592207932648437,
+            0.9635575261559942
+          ],
+          "t": [
+            0.5149388904807972,
+            0.028044974574579933,
+            0.12565184524529094
+          ]
+        },
+        "15": {
+          "r": [
+            -0.5809504519558543,
+            -0.016373087800745832,
+            0.8137742281297423,
+            0.05794872923550613,
+            -0.9980925674981701,
+            0.02128782480434306,
+            0.8118734612932471,
+            0.05952435384596358,
+            0.5807911278135558
+          ],
+          "t": [
+            -1.019591065207241,
+            0.12047127082348477,
+            -0.19433081340625008
+          ]
+        },
+        "16": {
+          "r": [
+            0.9321934506621445,
+            -9.081437785683647e-09,
+            -0.36196045439053715,
+            -4.039784723391069e-07,
+            0.9999999999993507,
+            -1.0654962974577824e-06,
+            0.36196045439031177,
+            1.1394729013695964e-06,
+            0.9321934506615359
+          ],
+          "t": [
+            0.5562127276120312,
+            1.825020012000042e-08,
+            0.12506460515937695
+          ]
+        },
+        "17": {
+          "r": [
+            -0.10429864770770327,
+            0.958582641782661,
+            -0.2650303962931771,
+            -0.9923507170613655,
+            -0.11800149205428644,
+            -0.036272609786951224,
+            -0.06604427631626102,
+            0.259219919654984,
+            0.9635575679843551
+          ],
+          "t": [
+            0.5149389660723966,
+            -0.028045205983216772,
+            0.12565171734068314
+          ]
+        },
+        "18": {
+          "r": [
+            -0.580950173901171,
+            0.0163726528376821,
+            0.8137744353832067,
+            -0.0579492338936292,
+            -0.9980925196524395,
+            -0.02128869429970364,
+            0.8118736242392297,
+            -0.059525275748218816,
+            0.5807908055502926
+          ],
+          "t": [
+            -1.0195901487448848,
+            -0.12047094382898998,
+            -0.19433369217535507
+          ]
+        },
+        "19": {
+          "r": [
+            0.8393351150400418,
+            1.623032221594674e-07,
+            -0.5436143528832678,
+            -7.456306198305294e-07,
+            0.9999999999993585,
+            -8.526830416833007e-07,
+            0.5436143528827806,
+            1.1210223256766842e-06,
+            0.8393351150396243
+          ],
+          "t": [
+            0.6397066883405553,
+            -7.040821063324543e-09,
+            0.1574842015924845
+          ]
+        },
+        "20": {
+          "r": [
+            0.035566845342693366,
+            -0.9641450252799322,
+            -0.2629816908842282,
+            0.9916144287560075,
+            0.0013326218782786657,
+            0.12922479948456617,
+            -0.12424099241098219,
+            -0.2653725576371608,
+            0.9561075156371515
+          ],
+          "t": [
+            0.4961498265479727,
+            0.20681387293973463,
+            0.11375470110880771
+          ]
+        },
+        "21": {
+          "r": [
+            0.03556677674287777,
+            0.9641451471827287,
+            -0.2629812532408284,
+            -0.9916141313306707,
+            0.0013319745005643526,
+            -0.1292270884499465,
+            -0.12424338589012593,
+            0.26537211799268656,
+            0.9561073266399714
+          ],
+          "t": [
+            0.4961498474372002,
+            -0.2068140573730732,
+            0.11375404845238148
+          ]
+        },
+        "22": {
+          "r": [
+            -0.3469601223411919,
+            0.9378798822370497,
+            -5.7007389503945326e-08,
+            -9.329812417702556e-07,
+            -2.8436466275702893e-07,
+            0.9999999999995245,
+            0.9378798822365875,
+            0.3469601223410801,
+            9.736875353469194e-07
+          ],
+          "t": [
+            0.7263253541423422,
+            -1.1072315728008488e-07,
+            0.24194025528443608
+          ]
+        },
+        "23": {
+          "r": [
+            -0.26520508789066494,
+            0.9641920251469074,
+            -1.0187699325457767e-07,
+            -1.1302270551714617e-06,
+            -2.0521324299042734e-07,
+            0.9999999999993404,
+            0.9641920251462505,
+            0.26520508789060515,
+            1.1441795092818236e-06
+          ],
+          "t": [
+            0.7263253226093,
+            -1.1155254673342373e-07,
+            0.24194023182968225
+          ]
+        },
+        "24": {
+          "r": [
+            -0.6180459726836723,
+            0.7861419564233313,
+            6.248688093933012e-07,
+            -7.099536643712167e-07,
+            -1.3530034922857635e-06,
+            0.9999999999988327,
+            0.786141956423259,
+            0.6180459726825074,
+            1.3943427220172387e-06
+          ],
+          "t": [
+            0.6764818613285428,
+            -8.418214453485592e-08,
+            0.2189081129562151
+          ]
+        },
+        "25": {
+          "r": [
+            -0.05662973166330372,
+            -0.9625790466595147,
+            -0.2650182114946109,
+            0.9981230988758393,
+            -0.048385895347445744,
+            -0.037537775931955675,
+            0.023309933123754845,
+            -0.26664655269379717,
+            0.9635124612345606
+          ],
+          "t": [
+            0.5069774920241588,
+            0.5086901068566463,
+            0.0759320548651576
+          ]
+        },
+        "26": {
+          "r": [
+            -0.056629867442120375,
+            0.9625790899161637,
+            -0.2650180253674417,
+            -0.998123141800395,
+            -0.04838661252126153,
+            0.03753571008022952,
+            0.023307765143779996,
+            0.26664626639967703,
+            0.9635125929115379
+          ],
+          "t": [
+            0.5069774763702619,
+            -0.5086903404354076,
+            0.07593071785350902
+          ]
+        },
+        "27": {
+          "r": [
+            -0.07338619426924667,
+            -0.9614049021283099,
+            -0.2651699090287804,
+            0.9972982689964192,
+            -0.07161342272634869,
+            -0.016360939525702355,
+            -0.003260237326150446,
+            -0.2656541583508009,
+            0.9640628812497166
+          ],
+          "t": [
+            0.4991247963037443,
+            0.6470953863208899,
+            0.07916429205196389
+          ]
+        },
+        "28": {
+          "r": [
+            -0.07338609372960919,
+            0.9614050445459702,
+            -0.2651694205006867,
+            -0.9972982696866975,
+            -0.07161388055625928,
+            0.016358893348691003,
+            -0.0032622886182876454,
+            0.26565351951975896,
+            0.9640630503446006
+          ],
+          "t": [
+            0.499124923966957,
+            -0.6470953901032774,
+            0.0791626910723864
+          ]
+        },
+        "29": {
+          "r": [
+            -0.0847708359636631,
+            -0.9620806951281085,
+            -0.25925786667300504,
+            0.977133714328997,
+            -0.029348031160546618,
+            -0.21059059188059231,
+            0.19499643507418388,
+            -0.27118154275100537,
+            0.9425693402501192
+          ],
+          "t": [
+            0.4905129210861343,
+            0.7641260974174653,
+            0.07878154717197258
+          ]
+        },
+        "30": {
+          "r": [
+            -0.0847701138622428,
+            0.9620808213255039,
+            -0.25925763447471695,
+            -0.9771341383072686,
+            -0.029347907581734174,
+            0.21058864184729081,
+            0.19499462441384083,
+            0.27118110840952336,
+            0.9425698397951674
+          ],
+          "t": [
+            0.4905138252824686,
+            -0.7641259256400396,
+            0.07878000593598557
+          ]
+        },
+        "31": {
+          "r": [
+            -0.19909957011485205,
+            -0.9434114907899922,
+            -0.26520580729970056,
+            0.9784482093707279,
+            -0.206492376502855,
+            -5.0417901667765275e-06,
+            -0.05475822092889568,
+            -0.25949115108536486,
+            0.9641918272569495
+          ],
+          "t": [
+            0.4807316455557575,
+            0.8768729291316828,
+            0.10128126054043585
+          ]
+        },
+        "32": {
+          "r": [
+            -0.10449416831853299,
+            -0.9585944595510125,
+            -0.26491060927324356,
+            0.9915159541135851,
+            -0.12112088731354119,
+            0.047178844778225246,
+            -0.07731158726637,
+            -0.2577331813610411,
+            0.9631181265555496
+          ],
+          "t": [
+            0.4907874859753366,
+            0.8654660617638559,
+            0.060038868384210894
+          ]
+        },
+        "33": {
+          "r": [
+            -0.31963432436262607,
+            -0.9172571472095263,
+            -0.2376409572912235,
+            0.8756626992283936,
+            -0.19013007184933914,
+            -0.4439204804451011,
+            0.36200654119682973,
+            -0.34998554494665424,
+            0.8639799664686107
+          ],
+          "t": [
+            0.46245872099721985,
+            0.8437983180161548,
+            0.12183493875401517
+          ]
+        },
+        "34": {
+          "r": [
+            -0.1990988789331049,
+            0.9434119067378243,
+            -0.2652048465486315,
+            -0.9784482227920008,
+            -0.2064923129547354,
+            2.404030899766374e-06,
+            -0.0547604941792576,
+            0.2594896894211909,
+            0.9641920915260285
+          ],
+          "t": [
+            0.48073255683454746,
+            -0.8768732003556452,
+            0.10127953256110483
+          ]
+        },
+        "35": {
+          "r": [
+            -0.1044936809502406,
+            0.9585948329388101,
+            -0.26490945038726654,
+            -0.9915158439279634,
+            -0.1211208987751361,
+            -0.04718113097120884,
+            -0.0773136590861432,
+            0.2577317872186465,
+            0.9631183333193246
+          ],
+          "t": [
+            0.4907885049216749,
+            -0.8654657028126064,
+            0.060037131284970506
+          ]
+        },
+        "36": {
+          "r": [
+            -0.3196337538454178,
+            0.9172572193560532,
+            -0.23764144617866603,
+            -0.8756635094866421,
+            -0.19012995962193288,
+            0.44391893022003515,
+            0.3620050849866956,
+            0.34998541682956363,
+            0.8639806285157161
+          ],
+          "t": [
+            0.46245956152313944,
+            -0.8437981616483069,
+            0.12183320470068326
+          ]
+        },
+        "37": {
+          "r": [
+            -0.2593432519023034,
+            -0.9286641319303943,
+            -0.2651867412950847,
+            0.962188113420131,
+            -0.27212278246704785,
+            0.011967692150166926,
+            -0.08327732035643211,
+            -0.2520557901107596,
+            0.964122796424757
+          ],
+          "t": [
+            0.4715496639514472,
+            0.9219971074494986,
+            0.09875597765224257
+          ]
+        },
+        "38": {
+          "r": [
+            -0.3358462847711812,
+            -0.9038984931427521,
+            -0.2649052417368483,
+            0.9316887566472436,
+            -0.36012432784564535,
+            0.04760807947015134,
+            -0.1384316934177608,
+            -0.23082023868799992,
+            0.963098480774166
+          ],
+          "t": [
+            0.48576236988147414,
+            0.9131474883262563,
+            0.0563209847985463
+          ]
+        },
+        "39": {
+          "r": [
+            -0.25934247017630585,
+            0.9286646046523491,
+            -0.2651858503554589,
+            -0.9621881754392029,
+            -0.2721224666336405,
+            -0.011969887142400746,
+            -0.08327903822589781,
+            0.25205438940657077,
+            0.9641230142326499
+          ],
+          "t": [
+            0.4715504823943839,
+            -0.9219969944301392,
+            0.09875408546432145
+          ]
+        },
+        "40": {
+          "r": [
+            -0.3358455188905172,
+            0.903899125314589,
+            -0.2649040556440762,
+            -0.9316887275497743,
+            -0.36012403323797715,
+            -0.047610877340116695,
+            -0.13843374732283392,
+            0.23081822272067984,
+            0.9630986687054575
+          ],
+          "t": [
+            0.4857633604738611,
+            -0.913147144545135,
+            0.05631911924904042
+          ]
+        }
+      }
+    },
+    {
+      "id": 1,
+      "meshes": 136,
+      "members": [
+        "horse_a_artillery_lod1.variant_weighted_mesh",
+        "horse_a_artillery_lod2.variant_weighted_mesh",
+        "horse_a_artillery_lod3.variant_weighted_mesh",
+        "horse_a_artillery_lod4.variant_weighted_mesh",
+        "horse_a_base_lod1.variant_weighted_mesh",
+        "horse_a_base_lod2.variant_weighted_mesh",
+        "horse_a_base_lod3.variant_weighted_mesh",
+        "horse_a_base_lod4.variant_weighted_mesh",
+        "horse_a_cavalry_lod1.variant_weighted_mesh",
+        "horse_a_cavalry_lod2.variant_weighted_mesh",
+        "horse_a_cavalry_lod3.variant_weighted_mesh",
+        "horse_a_cavalry_lod4.variant_weighted_mesh",
+        "horse_a_eastern_lod1.variant_weighted_mesh",
+        "horse_a_eastern_lod2.variant_weighted_mesh",
+        "horse_a_eastern_lod3.variant_weighted_mesh",
+        "horse_a_eastern_lod4.variant_weighted_mesh",
+        "horse_artillery_lod1.variant_weighted_mesh",
+        "horse_artillery_lod2.variant_weighted_mesh",
+        "horse_artillery_lod3.variant_weighted_mesh",
+        "horse_artillery_lod4.variant_weighted_mesh",
+        "horse_b_artillery_lod1.variant_weighted_mesh",
+        "horse_b_artillery_lod2.variant_weighted_mesh",
+        "horse_b_artillery_lod3.variant_weighted_mesh",
+        "horse_b_artillery_lod4.variant_weighted_mesh",
+        "horse_b_base_lod1.variant_weighted_mesh",
+        "horse_b_base_lod2.variant_weighted_mesh",
+        "horse_b_base_lod3.variant_weighted_mesh",
+        "horse_b_base_lod4.variant_weighted_mesh",
+        "horse_b_cavalry_lod1.variant_weighted_mesh",
+        "horse_b_cavalry_lod2.variant_weighted_mesh",
+        "horse_b_cavalry_lod3.variant_weighted_mesh",
+        "horse_b_cavalry_lod4.variant_weighted_mesh",
+        "horse_b_eastern_lod1.variant_weighted_mesh",
+        "horse_b_eastern_lod2.variant_weighted_mesh",
+        "horse_b_eastern_lod3.variant_weighted_mesh",
+        "horse_b_eastern_lod4.variant_weighted_mesh",
+        "horse_base_lod1.variant_weighted_mesh",
+        "horse_base_lod2.variant_weighted_mesh",
+        "horse_base_lod3.variant_weighted_mesh",
+        "horse_base_lod4.variant_weighted_mesh",
+        "horse_c_artillery_lod1.variant_weighted_mesh",
+        "horse_c_artillery_lod2.variant_weighted_mesh",
+        "horse_c_artillery_lod3.variant_weighted_mesh",
+        "horse_c_artillery_lod4.variant_weighted_mesh",
+        "horse_c_base_lod1.variant_weighted_mesh",
+        "horse_c_base_lod2.variant_weighted_mesh",
+        "horse_c_base_lod3.variant_weighted_mesh",
+        "horse_c_base_lod4.variant_weighted_mesh",
+        "horse_c_cavalry_lod1.variant_weighted_mesh",
+        "horse_c_cavalry_lod2.variant_weighted_mesh",
+        "horse_c_cavalry_lod3.variant_weighted_mesh",
+        "horse_c_cavalry_lod4.variant_weighted_mesh",
+        "horse_c_eastern_lod1.variant_weighted_mesh",
+        "horse_c_eastern_lod2.variant_weighted_mesh",
+        "horse_c_eastern_lod3.variant_weighted_mesh",
+        "horse_c_eastern_lod4.variant_weighted_mesh",
+        "horse_cavalry_lod1.variant_weighted_mesh",
+        "horse_cavalry_lod2.variant_weighted_mesh",
+        "horse_cavalry_lod3.variant_weighted_mesh",
+        "horse_cavalry_lod4.variant_weighted_mesh",
+        "horse_d_artillery_lod1.variant_weighted_mesh",
+        "horse_d_artillery_lod2.variant_weighted_mesh",
+        "horse_d_artillery_lod3.variant_weighted_mesh",
+        "horse_d_artillery_lod4.variant_weighted_mesh",
+        "horse_d_base_lod1.variant_weighted_mesh",
+        "horse_d_base_lod2.variant_weighted_mesh",
+        "horse_d_base_lod3.variant_weighted_mesh",
+        "horse_d_base_lod4.variant_weighted_mesh",
+        "horse_d_cavalry_lod1.variant_weighted_mesh",
+        "horse_d_cavalry_lod2.variant_weighted_mesh",
+        "horse_d_cavalry_lod3.variant_weighted_mesh",
+        "horse_d_cavalry_lod4.variant_weighted_mesh",
+        "horse_d_eastern_lod1.variant_weighted_mesh",
+        "horse_d_eastern_lod2.variant_weighted_mesh",
+        "horse_d_eastern_lod3.variant_weighted_mesh",
+        "horse_d_eastern_lod4.variant_weighted_mesh",
+        "horse_e_artillery_lod1.variant_weighted_mesh",
+        "horse_e_artillery_lod2.variant_weighted_mesh",
+        "horse_e_artillery_lod3.variant_weighted_mesh",
+        "horse_e_artillery_lod4.variant_weighted_mesh",
+        "horse_e_base_lod1.variant_weighted_mesh",
+        "horse_e_base_lod2.variant_weighted_mesh",
+        "horse_e_base_lod3.variant_weighted_mesh",
+        "horse_e_base_lod4.variant_weighted_mesh",
+        "horse_e_cavalry_lod1.variant_weighted_mesh",
+        "horse_e_cavalry_lod2.variant_weighted_mesh",
+        "horse_e_cavalry_lod3.variant_weighted_mesh",
+        "horse_e_cavalry_lod4.variant_weighted_mesh",
+        "horse_e_eastern_lod1.variant_weighted_mesh",
+        "horse_e_eastern_lod2.variant_weighted_mesh",
+        "horse_e_eastern_lod3.variant_weighted_mesh",
+        "horse_e_eastern_lod4.variant_weighted_mesh",
+        "horse_eastern_lod1.variant_weighted_mesh",
+        "horse_eastern_lod2.variant_weighted_mesh",
+        "horse_eastern_lod3.variant_weighted_mesh",
+        "horse_eastern_lod4.variant_weighted_mesh",
+        "horse_f_artillery_lod1.variant_weighted_mesh",
+        "horse_f_artillery_lod2.variant_weighted_mesh",
+        "horse_f_artillery_lod3.variant_weighted_mesh",
+        "horse_f_artillery_lod4.variant_weighted_mesh",
+        "horse_f_base_lod1.variant_weighted_mesh",
+        "horse_f_base_lod2.variant_weighted_mesh",
+        "horse_f_base_lod3.variant_weighted_mesh",
+        "horse_f_base_lod4.variant_weighted_mesh",
+        "horse_f_cavalry_lod1.variant_weighted_mesh",
+        "horse_f_cavalry_lod2.variant_weighted_mesh",
+        "horse_f_cavalry_lod3.variant_weighted_mesh",
+        "horse_f_cavalry_lod4.variant_weighted_mesh",
+        "horse_f_eastern_lod1.variant_weighted_mesh",
+        "horse_f_eastern_lod2.variant_weighted_mesh",
+        "horse_f_eastern_lod3.variant_weighted_mesh",
+        "horse_f_eastern_lod4.variant_weighted_mesh",
+        "na_horse_a_base_lod1.variant_weighted_mesh",
+        "na_horse_a_base_lod2.variant_weighted_mesh",
+        "na_horse_a_base_lod3.variant_weighted_mesh",
+        "na_horse_a_base_lod4.variant_weighted_mesh",
+        "na_horse_b_base_lod1.variant_weighted_mesh",
+        "na_horse_b_base_lod2.variant_weighted_mesh",
+        "na_horse_b_base_lod3.variant_weighted_mesh",
+        "na_horse_b_base_lod4.variant_weighted_mesh",
+        "na_horse_c_base_lod1.variant_weighted_mesh",
+        "na_horse_c_base_lod2.variant_weighted_mesh",
+        "na_horse_c_base_lod3.variant_weighted_mesh",
+        "na_horse_c_base_lod4.variant_weighted_mesh",
+        "na_horse_d_base_lod1.variant_weighted_mesh",
+        "na_horse_d_base_lod2.variant_weighted_mesh",
+        "na_horse_d_base_lod3.variant_weighted_mesh",
+        "na_horse_d_base_lod4.variant_weighted_mesh",
+        "na_horse_e_base_lod1.variant_weighted_mesh",
+        "na_horse_e_base_lod2.variant_weighted_mesh",
+        "na_horse_e_base_lod3.variant_weighted_mesh",
+        "na_horse_e_base_lod4.variant_weighted_mesh",
+        "na_horse_f_base_lod1.variant_weighted_mesh",
+        "na_horse_f_base_lod2.variant_weighted_mesh",
+        "na_horse_f_base_lod3.variant_weighted_mesh",
+        "na_horse_f_base_lod4.variant_weighted_mesh"
+      ],
+      "seeded_by": "horse_eastern_lod1.variant_weighted_mesh",
+      "root": 0,
+      "max_vertex_disagreement": 6.923056289058506e-07,
+      "fits": true,
+      "unplaced": [
+        11,
+        15,
+        29
+      ],
+      "bones": {
+        "0": {
+          "r": [
+            1.0,
+            0,
+            0,
+            0,
+            1.0,
+            0,
+            0,
+            0,
+            1.0
+          ],
+          "t": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "1": {
+          "r": [
+            0.2617064438215589,
+            0.1215912196747001,
+            0.9574577340855794,
+            0.007435665530754781,
+            -0.9922570947549275,
+            0.12397809801180816,
+            0.9651188777245981,
+            -0.025326531671936298,
+            -0.2605841872660012
+          ],
+          "t": [
+            -0.05928019117595568,
+            0.17238708872824635,
+            0.04911396253573541
+          ]
+        },
+        "2": {
+          "r": [
+            0.2617064819684362,
+            -0.12159078349801702,
+            0.9574577790503573,
+            -0.007435326000023085,
+            -0.992257142194361,
+            -0.12397773869349692,
+            0.9651188699963223,
+            0.025326767117379606,
+            -0.2605841930056464
+          ],
+          "t": [
+            -0.05928041401129652,
+            -0.16423050076444912,
+            0.049114108678019186
+          ]
+        },
+        "3": {
+          "r": [
+            0.9769469523330938,
+            3.435233347781619e-08,
+            0.21348220611348215,
+            -4.263332288589883e-08,
+            0.9999999999999986,
+            3.418627414486508e-08,
+            -0.21348220611348087,
+            -4.2499632313397484e-08,
+            0.9769469523330936
+          ],
+          "t": [
+            0.4083574931687056,
+            -3.992529565288727e-08,
+            8.134140798699008e-07
+          ]
+        },
+        "4": {
+          "r": [
+            -0.8256199480825721,
+            1.9817154936284217e-07,
+            0.5642266400375755,
+            -9.626736858065089e-08,
+            -0.9999999999999731,
+            2.1036101607526054e-07,
+            0.5642266400376021,
+            1.1936163702687285e-07,
+            0.8256199480825689
+          ],
+          "t": [
+            -0.23910406523093813,
+            -1.5552984927724722e-08,
+            -0.03948084306628948
+          ]
+        },
+        "5": {
+          "r": [
+            -0.3902659341093776,
+            0.24382276258103908,
+            0.8878304799459664,
+            -0.10083001369369615,
+            -0.969815547778033,
+            0.22201601659907913,
+            0.9151643617472569,
+            -0.002874671345349921,
+            0.4030706231572727
+          ],
+          "t": [
+            0.07749578503148352,
+            0.1762732446114124,
+            0.5535149397705824
+          ]
+        },
+        "6": {
+          "r": [
+            -0.3902658068288228,
+            -0.2438220484590229,
+            0.8878307320122983,
+            0.10083022003969483,
+            -0.9698157256069154,
+            -0.22201514608755635,
+            0.9151643932906235,
+            0.002875247950724035,
+            0.40307054742591564
+          ],
+          "t": [
+            0.07749558639721887,
+            -0.16811635898132463,
+            0.5535149717469339
+          ]
+        },
+        "7": {
+          "r": [
+            0.889476437228347,
+            -1.1310627401099195e-07,
+            0.45698103638504983,
+            8.401584763227528e-08,
+            0.999999999999993,
+            8.397757014087942e-08,
+            -0.45698103638505627,
+            -3.6302420968397394e-08,
+            0.8894764372283499
+          ],
+          "t": [
+            0.8334130341788475,
+            -4.213435915138455e-08,
+            -0.0928824732866699
+          ]
+        },
+        "8": {
+          "r": [
+            -0.8421025490890891,
+            -2.4309064797618255e-07,
+            0.5393174360407785,
+            3.721939883905606e-08,
+            -0.9999999999999221,
+            -3.9262238421811315e-07,
+            0.539317436040832,
+            -3.105552400026914e-07,
+            0.8421025490890326
+          ],
+          "t": [
+            -0.4741229349607533,
+            -2.811389844218411e-08,
+            0.12113055722876431
+          ]
+        },
+        "9": {
+          "r": [
+            0.27290814144178505,
+            0.10163338843622624,
+            0.9566565740587171,
+            0.00913819175572847,
+            -0.9946330536265828,
+            0.10306105998336489,
+            0.9619966942699056,
+            -0.019384091116953626,
+            -0.2723722034741129
+          ],
+          "t": [
+            -0.13585330728682946,
+            0.12115082666593188,
+            1.0538103344690346
+          ]
+        },
+        "10": {
+          "r": [
+            0.5022322676320722,
+            0.1853676858869774,
+            0.8446310261753672,
+            0.24087156079303965,
+            -0.9680843947541007,
+            0.06923507662096706,
+            0.8305080617009513,
+            0.16867550403805903,
+            -0.5308530246567645
+          ],
+          "t": [
+            1.2428603335564183,
+            0.10909850227447378,
+            -0.17129333202404212
+          ]
+        },
+        "12": {
+          "r": [
+            0.45764446838464057,
+            -4.363240316719526e-08,
+            0.8891352768600167,
+            -4.252392158452864e-08,
+            0.9999999999999966,
+            7.096022665690695e-08,
+            -0.8891352768600165,
+            -7.028407402713802e-08,
+            0.4576444683846368
+          ],
+          "t": [
+            1.1626909432668249,
+            5.039272669331721e-08,
+            -0.2620533262168964
+          ]
+        },
+        "13": {
+          "r": [
+            0.272908793749108,
+            -0.10163284453581951,
+            0.9566564457557188,
+            -0.009138204517671888,
+            -0.9946331110622335,
+            -0.10306050454396061,
+            0.9619965090958493,
+            0.019383995723801617,
+            -0.27237286428199803
+          ],
+          "t": [
+            -0.13585333026830756,
+            -0.11299371871986316,
+            1.0538102529425393
+          ]
+        },
+        "14": {
+          "r": [
+            0.5022325822126888,
+            -0.18536726617339389,
+            0.8446309312329131,
+            -0.24087107997351515,
+            -0.9680845320494434,
+            -0.06923482966688964,
+            0.8305080109164316,
+            -0.1686751773024494,
+            -0.5308532079262777
+          ],
+          "t": [
+            1.242860381877779,
+            -0.10094122210976464,
+            -0.1712932920386298
+          ]
+        },
+        "16": {
+          "r": [
+            -0.7970779747843258,
+            -3.243188865103081e-07,
+            0.6038763963872185,
+            -1.970748236367736e-08,
+            -0.9999999999998413,
+            -5.630743129809878e-07,
+            0.6038763963873051,
+            -4.6071501694412244e-07,
+            0.7970779747841926
+          ],
+          "t": [
+            -0.7466578229342795,
+            -9.021027913356987e-08,
+            0.2956733385144288
+          ]
+        },
+        "17": {
+          "r": [
+            -0.1111306683039957,
+            0.14343647063389228,
+            0.9834002000479766,
+            -0.07737248821370483,
+            -0.987774789515406,
+            0.13533093979358643,
+            0.990789317983358,
+            -0.06104870260609778,
+            0.12087010912622143
+          ],
+          "t": [
+            1.3754444322500756,
+            0.17268475438925013,
+            0.04795198847049173
+          ]
+        },
+        "18": {
+          "r": [
+            0.767132206061188,
+            0.08825020917316384,
+            0.6353897064043353,
+            0.050786231223972016,
+            -0.9957380898768723,
+            0.07698321301701155,
+            0.6394755172340532,
+            -0.02678725348463615,
+            -0.7683446530750313
+          ],
+          "t": [
+            -0.00886991805729656,
+            0.1254026789604927,
+            1.501424893690734
+          ]
+        },
+        "19": {
+          "r": [
+            -0.21832528284090313,
+            0.20191667511785666,
+            0.9547584653627271,
+            0.13966110939966048,
+            -0.9618244952290997,
+            0.23534743444223746,
+            0.9658306504733094,
+            0.18472492167175825,
+            0.181790698110951
+          ],
+          "t": [
+            1.1267825661524768,
+            0.36917422649374443,
+            0.09082750326946967
+          ]
+        },
+        "20": {
+          "r": [
+            0.3008656310520941,
+            2.0788598972897245e-06,
+            0.9536665413273678,
+            5.10924105555487e-07,
+            0.9999999999971292,
+            -2.341048263571954e-06,
+            -0.9536665413294967,
+            1.1915921877372406e-06,
+            0.30086563105016784
+          ],
+          "t": [
+            1.2934325665486825,
+            4.810594670498761e-08,
+            -0.5160644976250168
+          ]
+        },
+        "21": {
+          "r": [
+            -0.1111310895827104,
+            -0.1434359555928383,
+            0.9834002275631878,
+            0.07737347074283303,
+            -0.987774803424726,
+            -0.13533027652543994,
+            0.9907891940031279,
+            0.061049687652054166,
+            0.12087062788046998
+          ],
+          "t": [
+            1.3754445008915035,
+            -0.1645273733240285,
+            0.04795194575474529
+          ]
+        },
+        "22": {
+          "r": [
+            0.7671325202253545,
+            -0.08824971793947879,
+            0.6353893953287999,
+            -0.05078609647259093,
+            -0.9957381421549861,
+            -0.07698262572043728,
+            0.6394751510557485,
+            0.02678692855365431,
+            -0.7683449691648206
+          ],
+          "t": [
+            -0.008869826649478552,
+            -0.11724571326545093,
+            1.5014245243023858
+          ]
+        },
+        "23": {
+          "r": [
+            -0.21832567740712883,
+            -0.2019171542817013,
+            0.9547582738010172,
+            -0.1396599859322176,
+            -0.9618245733873884,
+            -0.2353477817137459,
+            0.965830723736893,
+            -0.18472399095663666,
+            0.18179125460516882
+          ],
+          "t": [
+            1.1267827179645642,
+            -0.36101718111776177,
+            0.09082742348506254
+          ]
+        },
+        "24": {
+          "r": [
+            -0.8041497648727807,
+            1.7017933031690606e-07,
+            0.5944267454068863,
+            -7.44769308034617e-08,
+            -0.9999999999999801,
+            1.8553795619521802e-07,
+            0.5944267454069059,
+            1.0492922391618849e-07,
+            0.804149764872777
+          ],
+          "t": [
+            -1.0359283071044534,
+            1.657597127039415e-08,
+            0.5148288602098912
+          ]
+        },
+        "25": {
+          "r": [
+            0.13619033238614683,
+            0.16345591406033827,
+            0.9771050903169269,
+            -0.06325028293653467,
+            -0.9828478508505706,
+            0.1732325136539425,
+            0.9886615169374197,
+            -0.08539476703589167,
+            -0.12351574268038375
+          ],
+          "t": [
+            1.3484532911668705,
+            0.15389272537611234,
+            0.2885920129408138
+          ]
+        },
+        "26": {
+          "r": [
+            0.8438680093351201,
+            0.07710495827243166,
+            0.5309817400161593,
+            -0.0005988470883722605,
+            -0.9894846270122116,
+            0.1446368358637209,
+            0.5365504861641134,
+            -0.12237237562583608,
+            -0.8349482483847387
+          ],
+          "t": [
+            0.10067240235349681,
+            0.13265464175766348,
+            1.5927368371228539
+          ]
+        },
+        "27": {
+          "r": [
+            0.5042464404284225,
+            6.210050231880704e-06,
+            0.8635597994792843,
+            -1.0609158504308602e-06,
+            0.9999999999778437,
+            -6.571736194671551e-06,
+            -0.8635597995009611,
+            2.3976103042111507e-06,
+            0.504246440423838
+          ],
+          "t": [
+            1.379554611667841,
+            4.74862834609624e-08,
+            -0.7890494439460111
+          ]
+        },
+        "28": {
+          "r": [
+            0.1361902060001057,
+            -0.16345517981035323,
+            0.9771052307621806,
+            0.0632514863777014,
+            -0.9828478790152603,
+            -0.17323191445635994,
+            0.9886614573556815,
+            0.08539584830873923,
+            -0.12351547203071613
+          ],
+          "t": [
+            1.3484533042317481,
+            -0.14573519648655905,
+            0.28859200878150604
+          ]
+        },
+        "30": {
+          "r": [
+            0.8775830656224782,
+            8.099241676986215e-06,
+            -0.4794246164592059,
+            -9.840882322755706e-06,
+            0.9999999999509516,
+            -1.119988382333093e-06,
+            0.47942461642661927,
+            5.7008440710513565e-06,
+            0.8775830656591374
+          ],
+          "t": [
+            1.51681080452664,
+            -2.597075649121581e-07,
+            -1.0240935664986892
+          ]
+        },
+        "31": {
+          "r": [
+            0.07446272855284311,
+            0.11190309995410588,
+            0.9909253242687497,
+            -0.02307595972701766,
+            -0.993224558225716,
+            0.11389678230752813,
+            0.9969567704465142,
+            -0.03134761805931487,
+            -0.07137593924331041
+          ],
+          "t": [
+            1.4149347735685909,
+            0.12301672249617952,
+            0.77120903363587
+          ]
+        },
+        "32": {
+          "r": [
+            0.07446273380368426,
+            -0.11190227685292002,
+            0.9909254168249064,
+            0.023077237574831162,
+            -0.9932246126329947,
+            -0.11389604894794353,
+            0.9969567404759326,
+            0.031348832437109134,
+            -0.07137582450965906
+          ],
+          "t": [
+            1.414934737733008,
+            -0.11485869777700965,
+            0.7712085488122216
+          ]
+        },
+        "33": {
+          "r": [
+            0.9288964756784619,
+            4.769809919896869e-06,
+            -0.3703394894544495,
+            -7.74713169303099e-06,
+            0.9999999999485265,
+            -6.552024495987474e-06,
+            0.3703394894041346,
+            8.955221258778904e-06,
+            0.9288964756676005
+          ],
+          "t": [
+            1.5564123360896454,
+            -6.281596110584966e-08,
+            -0.8821941864973218
+          ]
+        },
+        "34": {
+          "r": [
+            0.5991480358842851,
+            -0.1467559936993562,
+            -0.7870732554275487,
+            0.2993826987042858,
+            -0.8706770962159877,
+            0.3902452995763502,
+            -0.7425574932707524,
+            -0.46945082004211125,
+            -0.47772826664249873
+          ],
+          "t": [
+            1.6490573188480186,
+            0.09958628598231783,
+            -1.0700796841630402
+          ]
+        },
+        "35": {
+          "r": [
+            0.7577166629350299,
+            0.08587959485264024,
+            0.646908149506982,
+            0.025036185103998937,
+            -0.9943987296461296,
+            0.10268571426251169,
+            0.65210324960549,
+            -0.061610564565747754,
+            -0.7556225844876864
+          ],
+          "t": [
+            1.4490489700409288,
+            0.11244483326566068,
+            1.2279519839548017
+          ]
+        },
+        "36": {
+          "r": [
+            0.5991483725807312,
+            0.1467562063494507,
+            -0.7870729594718522,
+            -0.29938299436782684,
+            -0.8706766983178439,
+            -0.3902459605040037,
+            -0.7425571023949711,
+            0.46945149153480836,
+            -0.4777282143421386
+          ],
+          "t": [
+            1.6490573053363111,
+            -0.0914289565337698,
+            -1.0700798745154805
+          ]
+        },
+        "37": {
+          "r": [
+            0.7577171166567898,
+            -0.08587906529433734,
+            0.6469076883678938,
+            -0.025034872690888076,
+            -0.9943986829022468,
+            -0.10268648689885143,
+            0.652102772785603,
+            0.061612057151565994,
+            -0.7556228742824561
+          ],
+          "t": [
+            1.4490489366221355,
+            -0.10428623754838985,
+            1.2279513171031369
+          ]
+        },
+        "38": {
+          "r": [
+            0.7630349665095147,
+            0.07477840827463476,
+            0.6420170009740666,
+            0.04184259256100346,
+            -0.9969163438526352,
+            0.06638524540339025,
+            0.6450014242864869,
+            -0.023790607714106245,
+            -0.7638109515141802
+          ],
+          "t": [
+            1.5443687238339365,
+            0.11559438212192652,
+            1.3099863490158221
+          ]
+        },
+        "39": {
+          "r": [
+            0.7630354611200105,
+            -0.0747777156494205,
+            0.6420164938034125,
+            -0.041841241593451296,
+            -0.9969163637533915,
+            -0.0663857980492372,
+            0.6450009268018853,
+            0.023791950802110558,
+            -0.7638113297809472
+          ],
+          "t": [
+            1.5443686852572887,
+            -0.10743561192862662,
+            1.3099856347552223
+          ]
+        }
+      }
+    },
+    {
+      "id": 2,
+      "meshes": 44,
+      "members": [
+        "campaign_native_american_colonel_lod1.variant_weighted_mesh",
+        "campaign_native_american_colonel_lod2.variant_weighted_mesh",
+        "campaign_native_american_general_lod1.variant_weighted_mesh",
+        "campaign_native_american_general_lod2.variant_weighted_mesh",
+        "cherokee_archer_lod4.variant_weighted_mesh",
+        "cherokee_braves_lod4.variant_weighted_mesh",
+        "cherokee_elite_lod4.variant_weighted_mesh",
+        "cherokee_medicineman_lod4.variant_weighted_mesh",
+        "east_sikh_infantry_musketeers_lod3.variant_weighted_mesh",
+        "east_sikh_infantry_musketeers_lod4.variant_weighted_mesh",
+        "east_sikh_warriors_lod3.variant_weighted_mesh",
+        "east_sikh_warriors_lod4.variant_weighted_mesh",
+        "eastern_officer2_lod4.variant_weighted_mesh",
+        "episodic_american_chief_lod1.variant_weighted_mesh",
+        "episodic_american_chief_lod2.variant_weighted_mesh",
+        "euro_american_rangers_lod3.variant_weighted_mesh",
+        "euro_artillery_lod3.variant_weighted_mesh",
+        "euro_carabiniers_lod3.variant_weighted_mesh",
+        "euro_general_and_staff_officers_lod3.variant_weighted_mesh",
+        "euro_guerillas_lod3.variant_weighted_mesh",
+        "euro_heavy_cavalry_lod3.variant_weighted_mesh",
+        "euro_highlander_regular_lod4.variant_weighted_mesh",
+        "euro_highlanders_lod4.variant_weighted_mesh",
+        "euro_militia_infantry_lod3.variant_weighted_mesh",
+        "euro_minutemen_lod3.variant_weighted_mesh",
+        "euro_provincial_cavalry_lod3.variant_weighted_mesh",
+        "euro_republican_guard_lod3.variant_weighted_mesh",
+        "household_cavalry_lod3.variant_weighted_mesh",
+        "iroquois_archer_lod4.variant_weighted_mesh",
+        "iroquois_medicineman_lod4.variant_weighted_mesh",
+        "life_guards_lod3.variant_weighted_mesh",
+        "native_american_archers_lod1.variant_weighted_mesh",
+        "native_american_chief_lod1.variant_weighted_mesh",
+        "native_american_colonel_lod1.variant_weighted_mesh",
+        "native_american_general_lod1.variant_weighted_mesh",
+        "native_american_medicineman_lod1.variant_weighted_mesh",
+        "ottoman_cemaat_grenadiers_lod4.variant_weighted_mesh",
+        "ottoman_cemaat_janissaries_lod4.variant_weighted_mesh",
+        "peublo_archer_lod4.variant_weighted_mesh",
+        "pueblo_archer_lod4.variant_weighted_mesh",
+        "pueblo_braves_lod4.variant_weighted_mesh",
+        "pueblo_elite_lod4.variant_weighted_mesh",
+        "pueblo_mounted_braves_lod4.variant_weighted_mesh",
+        "stretlsy_cavalry_lod3.variant_weighted_mesh"
+      ],
+      "seeded_by": "campaign_native_american_colonel_lod2.variant_weighted_mesh",
+      "root": 0,
+      "max_vertex_disagreement": 3.4469840444546716e-07,
+      "fits": true,
+      "unplaced": [
+        1,
+        2
+      ],
+      "bones": {
+        "0": {
+          "r": [
+            1.0,
+            0,
+            0,
+            0,
+            1.0,
+            0,
+            0,
+            0,
+            1.0
+          ],
+          "t": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "4": {
+          "r": [
+            -0.9636778680711602,
+            2.5862875011051223e-06,
+            -0.2670673446588612,
+            3.5771896039760165e-07,
+            -0.999999999939713,
+            -1.0974809930036633e-05,
+            -0.26706734467114446,
+            -1.0671716488608318e-05,
+            0.9636778680121374
+          ],
+          "t": [
+            -0.03113614737015699,
+            0.11308542830790404,
+            -0.006981300097611304
+          ]
+        },
+        "5": {
+          "r": [
+            -0.9636779302194927,
+            -2.6499779107321505e-06,
+            -0.26706712040394,
+            -1.5950675095791323e-07,
+            -0.9999999999448828,
+            1.0498076445554073e-05,
+            -0.2670671204170395,
+            1.0159363589091145e-05,
+            0.9636779301659542
+          ],
+          "t": [
+            -0.031135347561193086,
+            -0.11308543396277194,
+            -0.00698441668128256
+          ]
+        },
+        "6": {
+          "r": [
+            0.9542985553856911,
+            3.9152042912762346e-08,
+            -0.29885492665971103,
+            -9.603412408987342e-08,
+            0.9999999999999798,
+            -1.7564770814168898e-07,
+            0.29885492665969815,
+            1.9632062528087837e-07,
+            0.9542985553856758
+          ],
+          "t": [
+            0.12163399482970322,
+            -4.562647706205556e-09,
+            -1.4146798288372509e-08
+          ]
+        },
+        "7": {
+          "r": [
+            -0.9226681367006458,
+            1.5648261580004575e-07,
+            -0.38559500712189476,
+            -1.6158648483969718e-07,
+            -0.999999999999987,
+            -1.9170153167505217e-08,
+            -0.38559500712189243,
+            4.461925242195065e-08,
+            0.9226681367006587
+          ],
+          "t": [
+            0.05311990673494324,
+            7.562529713567301e-09,
+            -0.0870230258282732
+          ]
+        },
+        "8": {
+          "r": [
+            -0.941990963659282,
+            8.619844218376441e-08,
+            -0.33563823438972185,
+            7.20241228480041e-07,
+            -0.9999999999971461,
+            -2.278224269282884e-06,
+            -0.3356382343889597,
+            -2.387807168637482e-06,
+            0.941990963656531
+          ],
+          "t": [
+            -0.4731055837924373,
+            0.11308561651288401,
+            -0.12946584741664324
+          ]
+        },
+        "9": {
+          "r": [
+            -0.9419910331757146,
+            -3.848300163109036e-07,
+            -0.335638039286971,
+            -4.141108606137641e-07,
+            -0.9999999999972494,
+            2.308792935020633e-06,
+            -0.3356380392869361,
+            2.3138535997763115e-06,
+            0.9419910331729637
+          ],
+          "t": [
+            -0.47310483180138246,
+            -0.11308549225468316,
+            -0.1294688732993536
+          ]
+        },
+        "10": {
+          "r": [
+            0.977582374556114,
+            -1.3087984822567684e-08,
+            -0.21055332093612106,
+            -3.0860178850859016e-07,
+            0.9999999999988348,
+            -1.494973589399568e-06,
+            0.2105533209358954,
+            1.526436962841653e-06,
+            0.9775823745549711
+          ],
+          "t": [
+            0.2547625394864337,
+            -2.990698309741416e-08,
+            0.041691486529074576
+          ]
+        },
+        "11": {
+          "r": [
+            -0.5809505085599186,
+            -0.016373336050716836,
+            0.8137741827254922,
+            0.05794893488374642,
+            -0.9980925588060696,
+            0.02128767253115277,
+            0.8118734061107137,
+            0.059524431307864153,
+            0.5807911970128883
+          ],
+          "t": [
+            -0.9455506449632136,
+            0.1130860784195364,
+            -0.297801751535114
+          ]
+        },
+        "12": {
+          "r": [
+            -0.5809500381990413,
+            0.01637275993623277,
+            0.8137745301056081,
+            -0.057949199323493385,
+            -0.9980925252490785,
+            -0.021288526010131675,
+            0.8118737238107283,
+            -0.05952515244825906,
+            0.5807906789986502
+          ],
+          "t": [
+            -0.9455496944301454,
+            -0.11308568273057282,
+            -0.297804690724478
+          ]
+        },
+        "13": {
+          "r": [
+            0.9547284080729657,
+            4.285728988974677e-07,
+            -0.29747885104369504,
+            -7.871975135992492e-07,
+            0.9999999999991008,
+            -1.0857475373967676e-06,
+            0.2974788510429623,
+            1.2707686300543983e-06,
+            0.9547284080724444
+          ],
+          "t": [
+            0.36447338527822043,
+            -5.4084613077600305e-08,
+            0.065321181940916
+          ]
+        },
+        "14": {
+          "r": [
+            -0.10429871987167572,
+            -0.9585824761677001,
+            -0.2650309669026074,
+            0.9923508851489566,
+            -0.11800089373568093,
+            0.036269957563573256,
+            -0.0660416366939264,
+            -0.2592208044540058,
+            0.9635575108736404
+          ],
+          "t": [
+            0.5149388896495504,
+            0.02804499839565023,
+            0.12565185819936472
+          ]
+        },
+        "15": {
+          "r": [
+            -0.580950492801892,
+            -0.016373300931584896,
+            0.8137741946816961,
+            0.05794887314113688,
+            -0.9980925624444087,
+            0.021287670018776097,
+            0.811873421793639,
+            0.059524379961152875,
+            0.5807911803525675
+          ],
+          "t": [
+            -1.0195911236921231,
+            0.12047131511041782,
+            -0.1943307046349961
+          ]
+        },
+        "16": {
+          "r": [
+            0.9321934078724927,
+            -1.0168243258050972e-07,
+            -0.3619605645910312,
+            -2.860812488803315e-07,
+            0.9999999999994413,
+            -1.017695082730286e-06,
+            0.3619605645909325,
+            1.0522387780038874e-06,
+            0.9321934078719427
+          ],
+          "t": [
+            0.5562127581647461,
+            5.0831435083698724e-08,
+            0.12506460491455573
+          ]
+        },
+        "17": {
+          "r": [
+            -0.10429851067751232,
+            0.9585826432503758,
+            -0.26503044491072325,
+            -0.9923507411639908,
+            -0.1180013236426496,
+            -0.03627249825778477,
+            -0.06604413056230804,
+            0.25921999089133896,
+            0.9635575588103509
+          ],
+          "t": [
+            0.5149389529142374,
+            -0.02804516658469077,
+            0.12565172379515635
+          ]
+        },
+        "18": {
+          "r": [
+            -0.5809500595064636,
+            0.01637284073403467,
+            0.8137745132687154,
+            -0.05794932684344118,
+            -0.9980925179723529,
+            -0.021288520051921347,
+            0.8118736994618243,
+            -0.059525252237239014,
+            0.5807907028080466
+          ],
+          "t": [
+            -1.0195901312961486,
+            -0.12047095115510728,
+            -0.1943335730847864
+          ]
+        },
+        "19": {
+          "r": [
+            0.8393350857206081,
+            1.7607093140243814e-08,
+            -0.5436143981522013,
+            -5.494175219636081e-07,
+            0.9999999999995166,
+            -8.159061112336216e-07,
+            0.5436143981519239,
+            9.834899015822448e-07,
+            0.8393350857202114
+          ],
+          "t": [
+            0.6397067123017754,
+            2.0521250521327004e-08,
+            0.15748422650590096
+          ]
+        },
+        "20": {
+          "r": [
+            -0.3015263466078118,
+            -0.9163206023492289,
+            -0.2635116999521896,
+            0.9294539675650821,
+            -0.3441108280145094,
+            0.13305284747308682,
+            -0.21259629460287735,
+            -0.20480305601605595,
+            0.9554363002145203
+          ],
+          "t": [
+            0.4961498187642238,
+            0.20681389098913067,
+            0.11375467759784373
+          ]
+        },
+        "21": {
+          "r": [
+            -0.3015255793014431,
+            0.9163209976915206,
+            -0.2635112032087925,
+            -0.9294538216699129,
+            -0.34411039571326485,
+            -0.133054984668947,
+            -0.2125980207107362,
+            0.2048020135440006,
+            0.9554361395918619
+          ],
+          "t": [
+            0.4961498928259491,
+            -0.20681400243279335,
+            0.11375409786563626
+          ]
+        },
+        "22": {
+          "r": [
+            -0.34695969927408876,
+            0.9378800387467389,
+            -2.2410000945728652e-07,
+            -8.722937361944693e-07,
+            -8.37535289936506e-08,
+            0.9999999999996163,
+            0.9378800387463598,
+            0.34695969927415093,
+            8.471659826161865e-07
+          ],
+          "t": [
+            0.7263253505749738,
+            -5.666803056568302e-08,
+            0.24194027612308144
+          ]
+        },
+        "23": {
+          "r": [
+            -0.26520338742266586,
+            0.9641924928661971,
+            -1.1171439548848472e-07,
+            -1.0627204614591749e-06,
+            -1.7644056778235314e-07,
+            0.9999999999994202,
+            0.9641924928656177,
+            0.2652033874226307,
+            1.071459727540204e-06
+          ],
+          "t": [
+            0.7263252499603703,
+            -5.968220934421726e-08,
+            0.24194024892718502
+          ]
+        },
+        "25": {
+          "r": [
+            -0.3863229166862307,
+            -0.8982623666488989,
+            -0.2094739236882809,
+            0.920357199885712,
+            -0.3903814010575673,
+            -0.023344942211588466,
+            -0.060804840774193694,
+            -0.20180952001987185,
+            0.9775355180083101
+          ],
+          "t": [
+            0.4043565053019031,
+            0.4897666914397881,
+            0.04903410707989324
+          ]
+        },
+        "26": {
+          "r": [
+            -0.3863222436342741,
+            0.898262719121679,
+            -0.20947365349730368,
+            -0.9203573870078873,
+            -0.3903810682318464,
+            0.023343130599306677,
+            -0.06080628465375995,
+            0.2018085949663463,
+            0.9775356191690993
+          ],
+          "t": [
+            0.4043568225954032,
+            -0.4897668297674975,
+            0.0490330429364985
+          ]
+        },
+        "27": {
+          "r": [
+            -0.4025945416661584,
+            -0.8893635268211516,
+            -0.21667983796574125,
+            0.9113180731534514,
+            -0.411688421361221,
+            -0.0034660151452194365,
+            -0.0861220329793532,
+            -0.19885965120493887,
+            0.9762365669027944
+          ],
+          "t": [
+            0.35078672156845003,
+            0.617388502359451,
+            0.04060252114719151
+          ]
+        },
+        "28": {
+          "r": [
+            -0.4025936704992495,
+            0.8893640612709676,
+            -0.2166792629523005,
+            -0.9113183265244988,
+            -0.41168787703687776,
+            0.003464049863216915,
+            -0.08612342430795282,
+            0.19885838785547774,
+            0.9762367015048101
+          ],
+          "t": [
+            0.3507873913139877,
+            -0.6173884608585012,
+            0.04060134054929406
+          ]
+        },
+        "29": {
+          "r": [
+            -0.4008923430611307,
+            -0.9042868016268866,
+            -0.14680159971326542,
+            0.909071830582814,
+            -0.3728192768903009,
+            -0.18599514407587225,
+            0.11346248770306362,
+            -0.20801722809039283,
+            0.971522051577741
+          ],
+          "t": [
+            0.30354306784416474,
+            0.7243295488320538,
+            0.030496161953477898
+          ]
+        },
+        "30": {
+          "r": [
+            -0.4008908779093002,
+            0.9042874944076041,
+            -0.14680133332884804,
+            -0.9090726205050988,
+            -0.3728181995438725,
+            0.1859934427254268,
+            0.11346133551611895,
+            0.2080161473224685,
+            0.9715224175468186
+          ],
+          "t": [
+            0.3035444850905801,
+            -0.7243297043246201,
+            0.030495046201525038
+          ]
+        },
+        "31": {
+          "r": [
+            -0.5161977079920735,
+            -0.8271500435765441,
+            -0.22217725282992454,
+            0.8468568454572764,
+            -0.531688123386292,
+            0.011883717941545621,
+            -0.12795862442946512,
+            -0.18201797950006351,
+            0.9749338672816912
+          ],
+          "t": [
+            0.2572860830582169,
+            0.8292229273828364,
+            0.043588067529586286
+          ]
+        },
+        "32": {
+          "r": [
+            -0.43209041828802575,
+            -0.8699399730955812,
+            -0.2377021531962617,
+            0.888000150202228,
+            -0.456402447352266,
+            0.056147478052742665,
+            -0.15733278000626458,
+            -0.18681876046404589,
+            0.9697139511599173
+          ],
+          "t": [
+            0.2693890485659235,
+            0.8175855387457648,
+            0.002964682516878897
+          ]
+        },
+        "33": {
+          "r": [
+            -0.5834340867649752,
+            -0.8105766894975687,
+            -0.050696122572471164,
+            0.753595594759327,
+            -0.5170328936158304,
+            -0.4059195320239939,
+            0.3028173475216635,
+            -0.27503166610847807,
+            0.9125016365341707
+          ],
+          "t": [
+            0.2517176385287992,
+            0.7942769439747168,
+            0.06804312520500017
+          ]
+        },
+        "34": {
+          "r": [
+            -0.5161963224625147,
+            0.8271511250348075,
+            -0.22217644571337297,
+            -0.8468574589776002,
+            -0.5316870873991623,
+            -0.011886347925089802,
+            -0.12796015336883534,
+            0.18201609117506087,
+            0.9749340191536939
+          ],
+          "t": [
+            0.25728747101708965,
+            -0.8292236785555274,
+            0.04358680368406733
+          ]
+        },
+        "35": {
+          "r": [
+            -0.4320894609085419,
+            0.869940737205615,
+            -0.2377010970145414,
+            -0.8880003388350197,
+            -0.4564017743479418,
+            -0.05614996527994867,
+            -0.1573343446315978,
+            0.18681684646252286,
+            0.9697140660406772
+          ],
+          "t": [
+            0.26939072188267527,
+            -0.8175857061517652,
+            0.0029634889252648858
+          ]
+        },
+        "36": {
+          "r": [
+            -0.5834328163922115,
+            0.8105775624791085,
+            -0.050696784533919875,
+            -0.7535968648109562,
+            -0.5170317986019067,
+            0.40591856890461886,
+            0.3028166344568073,
+            0.27503115176267673,
+            0.9125020281930043
+          ],
+          "t": [
+            0.2517191220481851,
+            -0.7942772197560175,
+            0.06804193420186393
+          ]
+        },
+        "37": {
+          "r": [
+            -0.5683323493714986,
+            -0.7911057771931967,
+            -0.22616363533827116,
+            0.8087886177482185,
+            -0.5876448874033777,
+            0.023118350062178772,
+            -0.1511929643164613,
+            -0.16977966780572196,
+            0.973814947482827
+          ],
+          "t": [
+            0.23348006126239518,
+            0.8682783409968031,
+            0.037686881046490886
+          ]
+        },
+        "38": {
+          "r": [
+            -0.6317882503306922,
+            -0.7377500222558078,
+            -0.23784135764336406,
+            0.7492504527670177,
+            -0.6598680273415949,
+            0.056550380376535064,
+            -0.19866395186973657,
+            -0.1424748790273867,
+            0.969656404647353
+          ],
+          "t": [
+            0.24861015514177542,
+            0.8602888996661382,
+            -0.004601353086660844
+          ]
+        },
+        "39": {
+          "r": [
+            -0.5683310086385547,
+            0.7911070643373248,
+            -0.2261625021427353,
+            -0.8087894566230132,
+            -0.5876436599297059,
+            -0.023120203283496114,
+            -0.1511935166445064,
+            0.1697779187644864,
+            0.9738151666639137
+          ],
+          "t": [
+            0.23348162486474508,
+            -0.8682787423757705,
+            0.03768556500772664
+          ]
+        },
+        "40": {
+          "r": [
+            -0.6317869938832583,
+            0.7377514601838455,
+            -0.2378402349405153,
+            -0.749251247666545,
+            -0.6598669011266142,
+            -0.056552989909317716,
+            -0.19866494967678575,
+            0.1424726492845676,
+            0.9696565278364065
+          ],
+          "t": [
+            0.24861180153373605,
+            -0.8602890610732777,
+            -0.004602633982571853
+          ]
+        }
+      }
+    },
+    {
+      "id": 3,
+      "meshes": 16,
+      "members": [
+        "campaign_john_smith_lod1.variant_weighted_mesh",
+        "campaign_john_smith_lod2.variant_weighted_mesh",
+        "euro_able_seamen_lod1.variant_weighted_mesh",
+        "euro_able_seamen_lod2.variant_weighted_mesh",
+        "euro_able_seamen_lod3.variant_weighted_mesh",
+        "euro_able_seamen_lod4.variant_weighted_mesh",
+        "euro_line_infantry_lod2.variant_weighted_mesh",
+        "euro_line_infantry_lod4.variant_weighted_mesh",
+        "euro_pirate_lod1.variant_weighted_mesh",
+        "euro_pirate_lod2.variant_weighted_mesh",
+        "euro_pirate_lod3.variant_weighted_mesh",
+        "euro_pirate_lod4.variant_weighted_mesh",
+        "euro_pirate_officer_lod1.variant_weighted_mesh",
+        "euro_pirate_officer_lod2.variant_weighted_mesh",
+        "euro_pirate_officer_lod3.variant_weighted_mesh",
+        "euro_pirate_officer_lod4.variant_weighted_mesh"
+      ],
+      "seeded_by": "euro_pirate_officer_lod1.variant_weighted_mesh",
+      "root": 0,
+      "max_vertex_disagreement": 2.0479874464573568e-07,
+      "fits": true,
+      "unplaced": [
+        1,
+        2,
+        13,
+        14,
+        16,
+        17,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "bones": {
+        "0": {
+          "r": [
+            1.0,
+            0,
+            0,
+            0,
+            1.0,
+            0,
+            0,
+            0,
+            1.0
+          ],
+          "t": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "4": {
+          "r": [
+            -0.9636778679039737,
+            2.572297815806035e-06,
+            -0.2670673452622669,
+            3.6951219156700077e-07,
+            -0.9999999999398164,
+            -1.0964981637662241e-05,
+            -0.267067345274399,
+            -1.06653947664348e-05,
+            0.9636778678450253
+          ],
+          "t": [
+            -0.031136153501140934,
+            0.11308541325213614,
+            -0.006981308529190655
+          ]
+        },
+        "5": {
+          "r": [
+            -0.9636779365420777,
+            -2.6257649665129e-06,
+            -0.2670670975899291,
+            -1.715426786730312e-07,
+            -0.9999999999453754,
+            1.0450845072867976e-05,
+            -0.2670670976027819,
+            1.0117062220121875e-05,
+            0.9636779364889866
+          ],
+          "t": [
+            -0.03113538318277559,
+            -0.11308540612865065,
+            -0.006984440960011135
+          ]
+        },
+        "6": {
+          "r": [
+            0.9542986174335147,
+            3.920351078317276e-09,
+            -0.2988547285295684,
+            -4.8474342892306896e-08,
+            0.9999999999999886,
+            -1.4166965865489848e-07,
+            0.2988547285295644,
+            1.496819458821752e-07,
+            0.9542986174335043
+          ],
+          "t": [
+            0.1216339638958901,
+            -1.3600496815760215e-08,
+            8.710505039477567e-09
+          ]
+        },
+        "7": {
+          "r": [
+            -0.9226681522113093,
+            2.0745137695270828e-07,
+            -0.3855949700072931,
+            -2.0166435122244957e-07,
+            -0.9999999999999782,
+            -5.545223447994315e-08,
+            -0.385594970007296,
+            2.6596748614176333e-08,
+            0.9226681522113309
+          ],
+          "t": [
+            0.05311986643427441,
+            4.7206478101524674e-08,
+            -0.08702305405970771
+          ]
+        },
+        "8": {
+          "r": [
+            -0.9419909194197174,
+            1.0085897612617192e-07,
+            -0.3356383585509648,
+            7.222239053756581e-07,
+            -0.9999999999970306,
+            -2.3274673981029804e-06,
+            -0.3356383585502028,
+            -2.434859200624189e-06,
+            0.941990919416847
+          ],
+          "t": [
+            -0.47310555709913316,
+            0.11308561621534156,
+            -0.12946585470008679
+          ]
+        },
+        "9": {
+          "r": [
+            -0.9419910350399667,
+            -2.072938129387879e-07,
+            -0.33563803405497683,
+            -5.696624462642105e-07,
+            -0.9999999999973818,
+            2.2164077213054892e-06,
+            -0.3356380340545572,
+            2.279036586884477e-06,
+            0.9419910350373819
+          ],
+          "t": [
+            -0.4731048538752299,
+            -0.1130855205480505,
+            -0.12946888376573348
+          ]
+        },
+        "10": {
+          "r": [
+            0.9775824201958112,
+            2.3508338064897106e-08,
+            -0.21055310903451313,
+            -3.3448870103987e-07,
+            0.9999999999989049,
+            -1.4413557568177827e-06,
+            0.2105531090342485,
+            1.4794716850852677e-06,
+            0.9775824201947492
+          ],
+          "t": [
+            0.25476251671518907,
+            -4.569012571345047e-08,
+            0.04169149187369404
+          ]
+        },
+        "11": {
+          "r": [
+            -0.5809505137934357,
+            -0.016373321368408373,
+            0.8137741792847144,
+            0.057948831862628364,
+            -0.9980925659651856,
+            0.021287617311209466,
+            0.8118734097190892,
+            0.05952431530390329,
+            0.5807912038578936
+          ],
+          "t": [
+            -0.9455506410988719,
+            0.1130860757546031,
+            -0.2978018562122299
+          ]
+        },
+        "12": {
+          "r": [
+            -0.5809499986054941,
+            0.016373046699779147,
+            0.8137745526016673,
+            -0.05794943277779327,
+            -0.9980925157103158,
+            -0.021288337741255128,
+            0.8118737354792362,
+            -0.05952523351336472,
+            0.5807906543791581
+          ],
+          "t": [
+            -0.9455497974541688,
+            -0.11308582286962053,
+            -0.29780467947719674
+          ]
+        },
+        "15": {
+          "r": [
+            -0.5809505167568436,
+            -0.0163733186718349,
+            0.8137741772234036,
+            0.05794883052862459,
+            -0.9980925659867675,
+            0.021287619930723266,
+            0.8118734076937868,
+            0.05952431568376663,
+            0.5807912066500818
+          ],
+          "t": [
+            -1.0195910736217495,
+            0.12047130240398374,
+            -0.19433076813355749
+          ]
+        },
+        "18": {
+          "r": [
+            -0.580949973012421,
+            0.016373069988368735,
+            0.8137745704038828,
+            -0.057949444298705056,
+            -0.9980925155239387,
+            -0.021288315118127944,
+            0.81187375297046,
+            -0.059525230232678784,
+            0.580790630264821
+          ],
+          "t": [
+            -1.0195900349243463,
+            -0.12047113197587139,
+            -0.19433353060383224
+          ]
+        }
+      }
+    },
+    {
+      "id": 4,
+      "meshes": 4,
+      "members": [
+        "elephant_lod1.variant_weighted_mesh",
+        "elephant_lod2.variant_weighted_mesh",
+        "elephant_lod3.variant_weighted_mesh",
+        "elephant_lod4.variant_weighted_mesh"
+      ],
+      "seeded_by": "elephant_lod3.variant_weighted_mesh",
+      "root": 0,
+      "max_vertex_disagreement": 3.503494223658208e-07,
+      "fits": true,
+      "unplaced": [
+
+      ],
+      "bones": {
+        "0": {
+          "r": [
+            1.0,
+            0,
+            0,
+            0,
+            1.0,
+            0,
+            0,
+            0,
+            1.0
+          ],
+          "t": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "1": {
+          "r": [
+            -0.18909817067349102,
+            0.20956251665860157,
+            0.9593359335809599,
+            0.014342590985227758,
+            -0.9762684393177881,
+            0.2160884644673128,
+            0.9818534370932203,
+            0.05462129624719564,
+            0.1816049064989885
+          ],
+          "t": [
+            -0.14864837618898807,
+            0.3586605722310585,
+            0.5262158202721584
+          ]
+        },
+        "2": {
+          "r": [
+            -0.18909808782319032,
+            -0.20956160008682914,
+            0.9593361501322989,
+            -0.014342325850473927,
+            -0.976268661560983,
+            -0.21608747798779415,
+            0.9818534569225754,
+            -0.054620840555364175,
+            0.18160493634869515
+          ],
+          "t": [
+            -0.14864824311171665,
+            -0.3586601991510056,
+            0.5262163058199867
+          ]
+        },
+        "3": {
+          "r": [
+            0.9747809970049436,
+            1.1065227339956962e-07,
+            -0.22316363475717904,
+            -6.216446876705639e-08,
+            0.999999999999973,
+            2.242996741830955e-07,
+            0.22316363475719792,
+            -2.0477021113463056e-07,
+            0.9747809970049243
+          ],
+          "t": [
+            0.5877959436828248,
+            3.568269948961422e-07,
+            -4.9673570146069324e-08
+          ]
+        },
+        "4": {
+          "r": [
+            -0.9219427850731914,
+            -2.751855719030646e-07,
+            0.3873260913641262,
+            -4.9911868354147785e-08,
+            -0.999999999999655,
+            -8.292791680681717e-07,
+            0.3873260913642207,
+            -7.838801146324261e-07,
+            0.9219427850728594
+          ],
+          "t": [
+            -0.24945741590210163,
+            -3.495612656056736e-08,
+            -0.040622925821405476
+          ]
+        },
+        "5": {
+          "r": [
+            -0.40777447437496694,
+            0.1498614840730943,
+            0.9007005682465334,
+            -0.04884706070971762,
+            -0.9886070325974033,
+            0.14237310054563865,
+            0.9117751601728582,
+            0.014059540901716322,
+            0.41044900609136886
+          ],
+          "t": [
+            -0.3358563622005021,
+            0.37285970213059105,
+            1.4982540416745493
+          ]
+        },
+        "6": {
+          "r": [
+            -0.4077748388936082,
+            -0.14986118609688492,
+            0.900700452796004,
+            0.048847921856089646,
+            -0.9886070920880975,
+            -0.1423723919987896,
+            0.9117749510134794,
+            -0.014058533876280277,
+            0.41044950521302387
+          ],
+          "t": [
+            -0.33585627554376796,
+            -0.3728590799042162,
+            1.498254317594437
+          ]
+        },
+        "7": {
+          "r": [
+            0.9391301044920934,
+            1.6867194982395084e-07,
+            -0.3435617074655457,
+            -9.633907491202187e-08,
+            0.9999999999999695,
+            2.27606926649776e-07,
+            0.3435617074655736,
+            -1.8065409973511137e-07,
+            0.939130104492081
+          ],
+          "t": [
+            1.269455449796456,
+            1.573023413080809e-08,
+            0.15605746654973818
+          ]
+        },
+        "8": {
+          "r": [
+            -0.504374128260515,
+            -2.386480068361008e-07,
+            0.8634852278651839,
+            -5.840786261026056e-07,
+            -0.9999999999996387,
+            -6.175463545920616e-07,
+            0.8634852278650194,
+            -8.158176698103877e-07,
+            0.5043741282601933
+          ],
+          "t": [
+            -0.5844393941533174,
+            -6.926775725224488e-08,
+            0.10010964391409682
+          ]
+        },
+        "9": {
+          "r": [
+            0.36141965910923446,
+            0.09142131702745643,
+            0.9279105413790325,
+            0.023586820764452926,
+            -0.9957595429816124,
+            0.08891903309909135,
+            0.9321048717261331,
+            -0.010250627006042932,
+            -0.36204341279795854
+          ],
+          "t": [
+            -0.6208639854137226,
+            0.3387186166268837,
+            2.1355235215473596
+          ]
+        },
+        "10": {
+          "r": [
+            -0.3144834246082059,
+            0.03311747585192881,
+            0.9486850944543673,
+            0.013144664072935137,
+            -0.9991434986239642,
+            0.03923629651067763,
+            0.949171951467754,
+            0.024809311773224457,
+            0.31377875102727154
+          ],
+          "t": [
+            1.707514036071356,
+            0.3470382663311723,
+            0.7510143062934059
+          ]
+        },
+        "11": {
+          "r": [
+            0.9987836312812636,
+            -8.003138956269584e-07,
+            0.04930778725488133,
+            8.866175837951573e-07,
+            0.9999999999981133,
+            -1.7284335628031666e-06,
+            -0.04930778725340512,
+            1.7700483014304602e-06,
+            0.9987836312800886
+          ],
+          "t": [
+            1.9148822206157443,
+            1.1799477478424691e-07,
+            0.3921745832266723
+          ]
+        },
+        "12": {
+          "r": [
+            0.36141910504805363,
+            -0.09142151780777358,
+            0.9279107374031119,
+            -0.023586489341348868,
+            -0.9957595206804501,
+            -0.08891937075120548,
+            0.9321050949473532,
+            0.010251002680855222,
+            -0.36204282746275007
+          ],
+          "t": [
+            -0.6208640434772901,
+            -0.3387175996695477,
+            2.135523998042294
+          ]
+        },
+        "13": {
+          "r": [
+            -0.3194568885318201,
+            -0.03306345556262184,
+            0.9470238139961565,
+            -0.013078717008643203,
+            -0.9991420622409182,
+            -0.03929486763399326,
+            0.9475105506172352,
+            -0.0249388726133268,
+            0.31875038682611834
+          ],
+          "t": [
+            1.7075141048645799,
+            -0.34703756071768255,
+            0.7510148863519347
+          ]
+        },
+        "14": {
+          "r": [
+            -0.5240801608542992,
+            -3.077157626519616e-07,
+            0.8516689409617078,
+            -4.6326997421092063e-07,
+            -0.9999999999996838,
+            -6.46385395558388e-07,
+            0.8516689409616374,
+            -7.333104103762038e-07,
+            0.5240801608539911
+          ],
+          "t": [
+            -0.9051957275549971,
+            -4.836912320165632e-07,
+            0.6492422882208406
+          ]
+        },
+        "15": {
+          "r": [
+            0.7190659584216312,
+            -3.397924713682711e-06,
+            -0.6949418302474213,
+            -6.604154840726765e-06,
+            0.9999999999094793,
+            -1.1722920234321305e-05,
+            0.694941830224348,
+            1.3019056326323758e-05,
+            0.7190659583341003
+          ],
+          "t": [
+            2.338080939800202,
+            4.15597221182828e-07,
+            0.3685687390076011
+          ]
+        },
+        "16": {
+          "r": [
+            -0.1709049370437096,
+            0.035003268611177994,
+            0.9846655643824551,
+            0.012126857379550566,
+            -0.9992183283531919,
+            0.03762541180038584,
+            0.9852128916250447,
+            0.018371267500809193,
+            0.170346865853857
+          ],
+          "t": [
+            1.5592484701465368,
+            0.35323527830207396,
+            1.198508494901552
+          ]
+        },
+        "17": {
+          "r": [
+            -0.17514267428573124,
+            -0.034903518232890826,
+            0.9839241780030658,
+            -0.01234112947045914,
+            -0.9992150531245896,
+            -0.0376427168602013,
+            0.9844657130481669,
+            -0.0187355817681273,
+            0.17457444775331313
+          ],
+          "t": [
+            1.5557965013571216,
+            -0.35324896397744954,
+            1.2010101080804052
+          ]
+        },
+        "18": {
+          "r": [
+            -0.18630184476009648,
+            -0.6386969667679383,
+            0.7465640007932478,
+            -0.9244860555699121,
+            -0.14326852797177425,
+            -0.35326995619439044,
+            0.3325915749019662,
+            -0.7560028528611755,
+            -0.5637752484545535
+          ],
+          "t": [
+            2.548601432525457,
+            -0.4392758746808218,
+            0.27467821524038083
+          ]
+        },
+        "19": {
+          "r": [
+            0.3607628611700672,
+            -3.6348293834254086e-06,
+            -0.9326575780999021,
+            -3.4036262390735317e-06,
+            0.9999999999806157,
+            -5.213844220974817e-06,
+            0.9326575781007743,
+            5.0553791637597545e-06,
+            0.36076286115070233
+          ],
+          "t": [
+            2.4353406468864662,
+            -9.993494420323934e-07,
+            0.6337552989735962
+          ]
+        },
+        "20": {
+          "r": [
+            -0.18630710463506095,
+            0.6386969808120481,
+            0.746562676179352,
+            0.9244821450636611,
+            -0.1432717525162614,
+            0.3532788818899473,
+            0.33259949822721174,
+            0.756002229912382,
+            -0.5637714094795101
+          ],
+          "t": [
+            2.5486020405361214,
+            0.43927725416696684,
+            0.2746803227174104
+          ]
+        },
+        "21": {
+          "r": [
+            -0.22799955666572103,
+            0.023813395217644102,
+            0.9733699832892129,
+            0.004108166636921037,
+            -0.9996684419549585,
+            0.025419070129117958,
+            0.9736525690035018,
+            0.009794302811022669,
+            0.22782613218269704
+          ],
+          "t": [
+            1.4719011220433862,
+            0.35943353665238414,
+            1.702038226121973
+          ]
+        },
+        "22": {
+          "r": [
+            -0.2280327861872754,
+            -0.023816373416963896,
+            0.9733621262309997,
+            -0.004084347452732584,
+            -0.9996685947915744,
+            -0.025416897791131144,
+            0.9736448872815767,
+            -0.009771435140406744,
+            0.22785994059014225
+          ],
+          "t": [
+            1.4676474881512624,
+            -0.3594603510836303,
+            1.6964911044412805
+          ]
+        },
+        "23": {
+          "r": [
+            0.32356579992073153,
+            8.415489860611608e-06,
+            0.9462056716437692,
+            -2.388225519275866e-05,
+            -0.9999999995692844,
+            1.706074202036112e-05,
+            0.9462056713797984,
+            -2.811779795405811e-05,
+            -0.3235657995803859
+          ],
+          "t": [
+            3.0414450768982246,
+            -2.694375653533587e-06,
+            1.0731750221516272
+          ]
+        },
+        "24": {
+          "r": [
+            -0.3913295542797454,
+            -0.8673959656542329,
+            0.3073848056003693,
+            0.07689890250149761,
+            -0.36367719228908363,
+            -0.9283455491371703,
+            0.917032027107713,
+            -0.33965149576512965,
+            0.20901943135323306
+          ],
+          "t": [
+            2.4938590703017454,
+            -0.7109244071547285,
+            0.37240594032066665
+          ]
+        },
+        "25": {
+          "r": [
+            -0.3913235555780853,
+            0.8674001783609642,
+            0.3073805547348325,
+            -0.07690529029043564,
+            -0.3636735452613199,
+            0.9283464486938093,
+            0.9170340512625847,
+            0.33964464231963265,
+            0.20902168731617304
+          ],
+          "t": [
+            2.493858108090746,
+            0.7109243850547349,
+            0.372410407985444
+          ]
+        },
+        "26": {
+          "r": [
+            0.01896683764601395,
+            0.04733805606621154,
+            0.9986988372465355,
+            0.05463067058982587,
+            -0.9974353575290786,
+            0.04624064642438662,
+            0.9983264741058491,
+            0.05368254836267906,
+            -0.0215043042359645
+          ],
+          "t": [
+            1.2761830763107567,
+            0.3629598248536285,
+            2.5378363484805613
+          ]
+        },
+        "27": {
+          "r": [
+            0.01896578306322963,
+            -0.04732167993371627,
+            0.9986996333638306,
+            -0.05461747540374546,
+            -0.9974368224560777,
+            -0.04622463184542191,
+            0.9983272161237117,
+            -0.05366976632122053,
+            -0.02150176108382265
+          ],
+          "t": [
+            1.2719005291360206,
+            -0.3629659543138977,
+            2.5322843760753777
+          ]
+        },
+        "28": {
+          "r": [
+            0.0030285647295713036,
+            2.5878094433469466e-05,
+            0.9999954135524837,
+            -9.360714435577811e-06,
+            -0.9999999996206138,
+            2.590656277209928e-05,
+            0.9999954138435118,
+            -9.439131205394952e-06,
+            -0.0030285644861846595
+          ],
+          "t": [
+            3.1549684104785425,
+            -1.0691350723445831e-05,
+            1.4051520766093368
+          ]
+        },
+        "29": {
+          "r": [
+            -0.14151995780451038,
+            2.9198620051746913e-05,
+            0.9899354022816087,
+            1.708671557437324e-05,
+            -0.999999999343999,
+            3.193817619482154e-05,
+            0.9899354025647604,
+            2.143463400297584e-05,
+            0.14151995721276472
+          ],
+          "t": [
+            3.1561214720559105,
+            -1.427139065048527e-05,
+            1.7858990636268126
+          ]
+        },
+        "30": {
+          "r": [
+            -0.26962251453371716,
+            5.331529912411144e-05,
+            0.9629660932836601,
+            -1.548752253779281e-05,
+            -0.9999999985780725,
+            5.1029329714089475e-05,
+            0.9629660946350359,
+            -1.155302880675277e-06,
+            0.26962251497605527
+          ],
+          "t": [
+            3.1134950675981803,
+            -9.117504030735757e-06,
+            2.084072183293989
+          ]
+        },
+        "31": {
+          "r": [
+            -0.43055840260403644,
+            4.373666808688315e-05,
+            0.9025627180612799,
+            -1.1559193840007985e-05,
+            -0.9999999990110942,
+            4.294411815658178e-05,
+            0.9025627190469627,
+            8.057053503718375e-06,
+            0.4305584026838153
+          ],
+          "t": [
+            3.0239608771811803,
+            -1.423622478285015e-05,
+            2.403847131300427
+          ]
+        },
+        "32": {
+          "r": [
+            -0.748242125266702,
+            7.138443978123716e-05,
+            0.6634257433056333,
+            -4.696896715795189e-05,
+            -0.9999999974049597,
+            5.4625977592209494e-05,
+            0.6634257454834613,
+            9.713035618978053e-06,
+            0.7482421266778366
+          ],
+          "t": [
+            2.8782450098438406,
+            -1.8138599849351947e-05,
+            2.709305780271782
+          ]
+        },
+        "33": {
+          "r": [
+            -0.9948888827799754,
+            6.122470346473489e-05,
+            0.10097577517577916,
+            -5.924951652546963e-05,
+            -0.99999999799027,
+            2.256004508111711e-05,
+            0.10097577635407701,
+            1.6461972186111823e-05,
+            0.9948888844080511
+          ],
+          "t": [
+            2.623182717725777,
+            -3.420415978460266e-05,
+            2.9354561720933354
+          ]
+        }
+      }
+    },
+    {
+      "id": 5,
+      "meshes": 4,
+      "members": [
+        "native_american_braves_lod1.variant_weighted_mesh",
+        "native_american_elite_lod1.variant_weighted_mesh",
+        "native_american_mounted_braves_lod1.variant_weighted_mesh",
+        "native_american_musketeer_lod1.variant_weighted_mesh"
+      ],
+      "seeded_by": "native_american_musketeer_lod1.variant_weighted_mesh",
+      "root": 0,
+      "max_vertex_disagreement": 8.111452697858726e-08,
+      "fits": true,
+      "unplaced": [
+        39
+      ],
+      "bones": {
+        "0": {
+          "r": [
+            1.0,
+            0,
+            0,
+            0,
+            1.0,
+            0,
+            0,
+            0,
+            1.0
+          ],
+          "t": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "4": {
+          "r": [
+            -0.9636778584311348,
+            2.577507990542127e-06,
+            -0.26706737944372455,
+            3.6786005414013445e-07,
+            -0.9999999999396684,
+            -1.0978527537508498e-05,
+            -0.2670673794559092,
+            -1.0678007326986316e-05,
+            0.9636778583720462
+          ],
+          "t": [
+            -0.031136144915938475,
+            0.11308541121069793,
+            -0.006981295914996986
+          ]
+        },
+        "5": {
+          "r": [
+            -0.9636779331644232,
+            -2.662252230445361e-06,
+            -0.2670671097774082,
+            -1.62480356835637e-07,
+            -0.9999999999442855,
+            1.0554766429232872e-05,
+            -0.2670671097906279,
+            1.0214788656717766e-05,
+            0.9636779331102996
+          ],
+          "t": [
+            -0.03113538393773711,
+            -0.11308541678806804,
+            -0.006984433424333122
+          ]
+        },
+        "6": {
+          "r": [
+            0.9542986222311494,
+            2.2244942554650038e-08,
+            -0.2988547132098297,
+            -7.034383708859338e-08,
+            0.9999999999999865,
+            -1.5018697150856464e-07,
+            0.2988547132098223,
+            1.6434580711599533e-07,
+            0.9542986222311378
+          ],
+          "t": [
+            0.12163396256928344,
+            -4.055088984474188e-09,
+            3.3647823416416145e-09
+          ]
+        },
+        "7": {
+          "r": [
+            -0.9226681431932117,
+            1.0267043043841661e-07,
+            -0.3855949915862247,
+            -1.0963880688992895e-07,
+            -0.9999999999999939,
+            -3.91653476922209e-09,
+            -0.38559499158622285,
+            3.8662512655283015e-08,
+            0.9226681431932173
+          ],
+          "t": [
+            0.05311987812330662,
+            -2.151485049839419e-08,
+            -0.08702304389727558
+          ]
+        },
+        "8": {
+          "r": [
+            -0.941990951669956,
+            1.342506951466969e-07,
+            -0.33563826803854246,
+            6.961701264647797e-07,
+            -0.9999999999969873,
+            -2.3538336672781204e-06,
+            -0.33563826803784735,
+            -2.4509513521854863e-06,
+            0.9419909516670245
+          ],
+          "t": [
+            -0.4731055601097985,
+            0.11308561026348705,
+            -0.12946585854935075
+          ]
+        },
+        "9": {
+          "r": [
+            -0.9419910695958015,
+            -2.7913818328097366e-07,
+            -0.3356379370716011,
+            -5.252787077429628e-07,
+            -0.9999999999972038,
+            2.305895578171172e-06,
+            -0.335637937071306,
+            2.3484365037644983e-06,
+            0.9419910695930205
+          ],
+          "t": [
+            -0.47310484660678925,
+            -0.11308552972658156,
+            -0.12946886559600823
+          ]
+        },
+        "10": {
+          "r": [
+            0.9775824233431353,
+            1.0105674273179387e-07,
+            -0.21055309442169823,
+            -4.150940889160922e-07,
+            0.9999999999988667,
+            -1.4472926338830678e-06,
+            0.21055309442131326,
+            1.5022471851104814e-06,
+            0.977582423342069
+          ],
+          "t": [
+            0.25476243245661895,
+            -5.040341403320951e-08,
+            0.04169146679679596
+          ]
+        },
+        "11": {
+          "r": [
+            -0.5809503719290157,
+            -0.01637327653672353,
+            0.8137742814632262,
+            0.05794884510625925,
+            -0.9980925640935242,
+            0.021287669014359994,
+            0.8118735102874023,
+            0.05952435901936377,
+            0.5807910587956264
+          ],
+          "t": [
+            -0.9455506793039785,
+            0.11308604283210325,
+            -0.2978018146969421
+          ]
+        },
+        "12": {
+          "r": [
+            -0.5809498159412394,
+            0.016372996030853227,
+            0.8137746840242782,
+            -0.05794931462810129,
+            -0.998092523397699,
+            -0.021288298939740515,
+            0.8118738746209127,
+            -0.0595251185516511,
+            0.5807904716586166
+          ],
+          "t": [
+            -0.9455498338485663,
+            -0.11308580381068924,
+            -0.29780463248483746
+          ]
+        },
+        "13": {
+          "r": [
+            0.9547284736976104,
+            5.567964023677068e-07,
+            -0.29747864042771416,
+            -9.013300231578339e-07,
+            0.9999999999990727,
+            -1.0210112378589658e-06,
+            0.2974786404268698,
+            1.242914930530022e-06,
+            0.9547284736972264
+          ],
+          "t": [
+            0.3644733160032283,
+            -9.016715526201585e-08,
+            0.06532112245641769
+          ]
+        },
+        "14": {
+          "r": [
+            -0.1042986739085037,
+            -0.9585825345399849,
+            -0.2650307738656522,
+            0.9923508936375597,
+            -0.11800082773909891,
+            0.036269940027864225,
+            -0.0660415817320043,
+            -0.2592206186393869,
+            0.9635575646294039
+          ],
+          "t": [
+            0.5149388213450553,
+            0.02804495354664846,
+            0.12565171806860412
+          ]
+        },
+        "15": {
+          "r": [
+            -0.5809503402594783,
+            -0.0163732042564321,
+            0.8137743055262763,
+            0.057948752204686836,
+            -0.9980925690747567,
+            0.021287688359039266,
+            0.8118735395800974,
+            0.05952429537700437,
+            0.5807910243706896
+          ],
+          "t": [
+            -1.0195910961398715,
+            0.12047127336117297,
+            -0.19433071393759646
+          ]
+        },
+        "16": {
+          "r": [
+            0.9321934913621461,
+            -7.286912950417308e-08,
+            -0.3619603495716729,
+            -2.9477449911400825e-07,
+            0.9999999999994961,
+            -9.604808915025931e-07,
+            0.3619603495715601,
+            1.0020507163866537e-06,
+            0.9321934913616535
+          ],
+          "t": [
+            0.5562127190652537,
+            -1.8761971418070337e-08,
+            0.1250644897745968
+          ]
+        },
+        "17": {
+          "r": [
+            -0.10429853923620758,
+            0.9585827266385042,
+            -0.2650301320670611,
+            -0.9923507396002728,
+            -0.11800133370854861,
+            -0.036272508292036265,
+            -0.06604410895746374,
+            0.2592196779438135,
+            0.963557644481491
+          ],
+          "t": [
+            0.5149388862987575,
+            -0.028045219081179587,
+            0.12565160994578237
+          ]
+        },
+        "18": {
+          "r": [
+            -0.580949783534667,
+            0.016372990255812746,
+            0.8137747072753656,
+            -0.05794932508964701,
+            -0.9980925225417586,
+            -0.021288310592543457,
+            0.8118738970632562,
+            -0.059525134492189345,
+            0.5807904386532277
+          ],
+          "t": [
+            -1.0195900494831274,
+            -0.12047109880070901,
+            -0.1943334622072902
+          ]
+        },
+        "19": {
+          "r": [
+            0.8393352343591428,
+            6.39439023727473e-09,
+            -0.5436141686557503,
+            -4.877065350352159e-07,
+            0.9999999999996068,
+            -7.412516301149651e-07,
+            0.5436141686555316,
+            8.872827930925305e-07,
+            0.839335234358815
+          ],
+          "t": [
+            0.6397067339505927,
+            -5.1362960787271803e-08,
+            0.15748410392704007
+          ]
+        },
+        "20": {
+          "r": [
+            -0.309421514256325,
+            -0.8883523684118837,
+            -0.33924680698913,
+            0.9329541021044568,
+            -0.3526277003798732,
+            0.0724592871291873,
+            -0.1839972007444417,
+            -0.29408123786090085,
+            0.9379025832443416
+          ],
+          "t": [
+            0.49614981399323754,
+            0.2068137699183245,
+            0.11375457046814363
+          ]
+        },
+        "21": {
+          "r": [
+            -0.3094210290088083,
+            0.8883524689707473,
+            -0.3392469862514742,
+            -0.9329539359381342,
+            -0.3526277788287948,
+            -0.07246104481592422,
+            -0.18399885930264598,
+            0.29408084002846624,
+            0.9379023826089129
+          ],
+          "t": [
+            0.49614983505004084,
+            -0.2068140552382442,
+            0.11375399821592591
+          ]
+        },
+        "22": {
+          "r": [
+            -0.346960269055508,
+            0.9378798279613784,
+            -2.5502925067603924e-07,
+            -7.99917520696853e-07,
+            -2.4001313136286e-08,
+            0.9999999999996799,
+            0.9378798279610712,
+            0.34696026905560107,
+            7.585540086094092e-07
+          ],
+          "t": [
+            0.7263253926509754,
+            -1.429642566346606e-07,
+            0.24194016026770535
+          ]
+        },
+        "23": {
+          "r": [
+            -0.2652054763495646,
+            0.9641919182995444,
+            -2.1314186961240547e-07,
+            -9.103128802112591e-07,
+            -2.9328280791141604e-08,
+            0.9999999999995853,
+            0.9641919182991374,
+            0.26520547634964886,
+            8.854943427484643e-07
+          ],
+          "t": [
+            0.7263253734725685,
+            -1.3523504149790248e-07,
+            0.24194014998599783
+          ]
+        },
+        "24": {
+          "r": [
+            -0.6180460206676096,
+            0.7861419186996215,
+            4.58147417152342e-07,
+            -8.062247641360433e-07,
+            -1.216614203569444e-06,
+            0.9999999999989352,
+            0.786141918699341,
+            0.618046020666582,
+            1.3857306499370762e-06
+          ],
+          "t": [
+            0.6764818747715111,
+            -1.0795188364070047e-07,
+            0.21890806541731098
+          ]
+        },
+        "25": {
+          "r": [
+            -0.4052912175078051,
+            -0.869331275641102,
+            -0.2828465347202529,
+            0.9133124008806028,
+            -0.3985712341024033,
+            -0.08367454657060976,
+            -0.03999359209612047,
+            -0.29223980656012893,
+            0.9555084552493226
+          ],
+          "t": [
+            0.40195297920514617,
+            0.4908321188473042,
+            0.0577404003232878
+          ]
+        },
+        "26": {
+          "r": [
+            -0.40529117765327005,
+            0.8693311909947845,
+            -0.2828468519888724,
+            -0.9133123561546865,
+            -0.39857162202582985,
+            0.08367318692911867,
+            -0.039995017334684524,
+            0.29223952928939756,
+            0.9555084803962278
+          ],
+          "t": [
+            0.4019531815150184,
+            -0.49083242035926283,
+            0.057739419310893665
+          ]
+        },
+        "27": {
+          "r": [
+            -0.4193304968159164,
+            -0.8601109336329401,
+            -0.2904670657496106,
+            0.9053609518821147,
+            -0.41980407196444725,
+            -0.06392251535398834,
+            -0.0669588026119663,
+            -0.2897821992585833,
+            0.9547475036603286
+          ],
+          "t": [
+            0.3457528926843208,
+            0.617477043357139,
+            0.05219468082675025
+          ]
+        },
+        "28": {
+          "r": [
+            -0.4193303249511948,
+            0.8601110270023672,
+            -0.2904670373816241,
+            -0.9053609532938051,
+            -0.41980425008407113,
+            0.06392132556731964,
+            -0.06695985982107411,
+            0.2897816640857106,
+            0.9547475919490225
+          ],
+          "t": [
+            0.34575328668470734,
+            -0.6174772426959048,
+            0.052193475365354444
+          ]
+        },
+        "29": {
+          "r": [
+            -0.4328233051808348,
+            -0.8753364047746731,
+            -0.2155230033395217,
+            0.8918026151814634,
+            -0.3808258115807972,
+            -0.24425355020824213,
+            0.13172730183162837,
+            -0.297922606913233,
+            0.9454575814081674
+          ],
+          "t": [
+            0.2965453055151587,
+            0.7237190804125275,
+            0.044337022420784356
+          ]
+        },
+        "30": {
+          "r": [
+            -0.43282264791474023,
+            0.8753366612208902,
+            -0.21552328174639707,
+            -0.8918031010517646,
+            -0.3808255164146239,
+            0.24425223643191402,
+            0.1317261720636011,
+            0.297922230741849,
+            0.945457857349163
+          ],
+          "t": [
+            0.29654627796800953,
+            -0.7237194744840574,
+            0.04433602309202908
+          ]
+        },
+        "31": {
+          "r": [
+            -0.5276201161532453,
+            -0.7961443916881068,
+            -0.2962619121892153,
+            0.840820491472642,
+            -0.5391232087042571,
+            -0.048652512331140395,
+            -0.1209872478823347,
+            -0.2747731308188641,
+            0.9538667686998308
+          ],
+          "t": [
+            0.24660388119114848,
+            0.8266199467068692,
+            0.059536392846621086
+          ]
+        },
+        "32": {
+          "r": [
+            -0.4426578266413771,
+            -0.8404622038448767,
+            -0.31253373005380664,
+            0.8854681183567341,
+            -0.46467807350709833,
+            -0.004527623605971698,
+            -0.14142227507333519,
+            -0.27874284189902515,
+            0.9498958722950299
+          ],
+          "t": [
+            0.2620858272560199,
+            0.8175904632699291,
+            0.01939977148989208
+          ]
+        },
+        "33": {
+          "r": [
+            -0.6250290655313542,
+            -0.7729146636382108,
+            -0.10927758221169231,
+            0.7216988310550271,
+            -0.5188271943517727,
+            -0.4582238968614315,
+            0.2974717877292057,
+            -0.36526875740213394,
+            0.8820936857109285
+          ],
+          "t": [
+            0.2401300845322385,
+            0.7902217459358103,
+            0.08152599235195121
+          ]
+        },
+        "34": {
+          "r": [
+            -0.5276194141372904,
+            0.7961449201823337,
+            -0.29626174220321977,
+            -0.8408207154160328,
+            -0.5391230487179474,
+            0.0486504148835076,
+            -0.12098875300082285,
+            0.27477191342808455,
+            0.953866928475023
+          ],
+          "t": [
+            0.2466048345532681,
+            -0.8266206863499176,
+            0.059535244911563236
+          ]
+        },
+        "35": {
+          "r": [
+            -0.44265723242346416,
+            0.8404626866815011,
+            -0.31253327323552504,
+            -0.8854681887466331,
+            -0.46467795872625844,
+            0.0045256371656441086,
+            -0.14142369426993653,
+            0.2787415773976144,
+            0.9498960320629476
+          ],
+          "t": [
+            0.2620869866282727,
+            -0.8175906294499532,
+            0.019398656718650313
+          ]
+        },
+        "36": {
+          "r": [
+            -0.6250285741207191,
+            0.7729149366205499,
+            -0.10927846211157721,
+            -0.7216995824572461,
+            -0.5188267314651033,
+            0.4582232375145051,
+            0.29747099726470405,
+            0.3652688372501669,
+            0.8820939192173658
+          ],
+          "t": [
+            0.24013109154041393,
+            -0.7902220271328797,
+            0.08152483077619171
+          ]
+        },
+        "37": {
+          "r": [
+            -0.5767786911798822,
+            -0.7596408163122848,
+            -0.30045327688881696,
+            0.8029613462282021,
+            -0.5948523852669092,
+            -0.03746620084373212,
+            -0.1502644930255189,
+            -0.2628620739754496,
+            0.9530603927354803
+          ],
+          "t": [
+            0.22227120601516998,
+            0.8653969237424424,
+            0.05395677104664621
+          ]
+        },
+        "38": {
+          "r": [
+            -0.634788689173607,
+            -0.706594175107042,
+            -0.3126787357689237,
+            0.7447944090012042,
+            -0.6672812501713349,
+            -0.00412571088763998,
+            -0.20572945442449753,
+            -0.2355003288205334,
+            0.9498499811589289
+          ],
+          "t": [
+            0.24079865710101944,
+            0.8601719866893017,
+            0.012598841540577468
+          ]
+        },
+        "40": {
+          "r": [
+            -0.6347877635087371,
+            0.7065951375536416,
+            -0.3126784400708271,
+            -0.7447948016755576,
+            -0.6672808273491031,
+            0.004123208624876514,
+            -0.20573088901923145,
+            0.23549863914224042,
+            0.9498500893643735
+          ],
+          "t": [
+            0.24079990725970685,
+            -0.8601722600164617,
+            0.012597663642520112
+          ]
+        }
+      }
+    },
+    {
+      "id": 6,
+      "meshes": 4,
+      "members": [
+        "camel_base_lod1.variant_weighted_mesh",
+        "camel_base_lod2.variant_weighted_mesh",
+        "camel_base_lod3.variant_weighted_mesh",
+        "camel_base_lod4.variant_weighted_mesh"
+      ],
+      "seeded_by": "camel_base_lod2.variant_weighted_mesh",
+      "root": 0,
+      "max_vertex_disagreement": 5.457641427143156e-07,
+      "fits": true,
+      "unplaced": [
+        13
+      ],
+      "bones": {
+        "0": {
+          "r": [
+            1.0,
+            0,
+            0,
+            0,
+            1.0,
+            0,
+            0,
+            0,
+            1.0
+          ],
+          "t": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "1": {
+          "r": [
+            -0.07486464370690267,
+            0.07051506752206227,
+            0.9946973963849496,
+            0.03711079139384696,
+            0.9970026892100822,
+            -0.06788539511549363,
+            -0.9965029223663928,
+            0.03183179165902078,
+            -0.07725712106347075
+          ],
+          "t": [
+            -0.09509930758006563,
+            -0.22520718663735112,
+            -0.03025438815605308
+          ]
+        },
+        "2": {
+          "r": [
+            -0.07486316901938903,
+            -0.07051375643377655,
+            0.994697600317791,
+            -0.03711057446921334,
+            0.9970027824019206,
+            0.06788414502218387,
+            -0.9965030412331611,
+            -0.0318317771484084,
+            -0.07725559382099575
+          ],
+          "t": [
+            -0.09509909481163209,
+            0.22520656688401022,
+            -0.030254820456916076
+          ]
+        },
+        "3": {
+          "r": [
+            0.9959285979886491,
+            -1.805943357976586e-08,
+            0.09014559173006678,
+            -2.4335036861689275e-09,
+            0.9999999999999742,
+            2.2722164241875982e-07,
+            -0.09014559173006814,
+            -2.2651590139546798e-07,
+            0.9959285979886233
+          ],
+          "t": [
+            0.523142022565296,
+            2.4059141578033155e-07,
+            2.126021591830618e-07
+          ]
+        },
+        "4": {
+          "r": [
+            -0.5585051354227413,
+            2.04664601367045e-06,
+            -0.8295010631109742,
+            9.634463381817347e-08,
+            -0.9999999999967891,
+            -2.532190831129465e-06,
+            -0.8295010631134933,
+            -1.4941595592333995e-06,
+            0.5585051354207515
+          ],
+          "t": [
+            -0.35583272484771505,
+            -1.757733908465619e-08,
+            -0.14192493078402466
+          ]
+        },
+        "5": {
+          "r": [
+            -0.3718778961653917,
+            0.20525868111922652,
+            0.9053042053192937,
+            0.12382975422189126,
+            0.9775002765881353,
+            -0.17076124044836666,
+            -0.9199853380967266,
+            0.04860126639620152,
+            -0.38892787839358745
+          ],
+          "t": [
+            -0.13649017436814942,
+            -0.20468960274977188,
+            -0.5812015618619308
+          ]
+        },
+        "6": {
+          "r": [
+            -0.3718770803233402,
+            -0.2052562453206056,
+            0.905305092710228,
+            -0.12382863299766332,
+            0.9775007871356948,
+            0.17075913093895412,
+            -0.9199858187929411,
+            -0.048601285024000865,
+            -0.3889267390060727
+          ],
+          "t": [
+            -0.13648943785226036,
+            0.2046892593935821,
+            -0.581201364915297
+          ]
+        },
+        "7": {
+          "r": [
+            0.9746062101608534,
+            1.5455062357672134e-07,
+            0.22392573571582808,
+            -6.094895102504161e-09,
+            0.99999999999978,
+            -6.636597641856978e-07,
+            -0.22392573571588104,
+            6.45442123775597e-07,
+            0.9746062101606399
+          ],
+          "t": [
+            1.0671376607017053,
+            2.538260236717438e-07,
+            -0.049239206547454756
+          ]
+        },
+        "8": {
+          "r": [
+            -0.6512679303163533,
+            1.3685191786777702e-06,
+            -0.7588478654773834,
+            -1.3206484499768848e-08,
+            -0.9999999999983942,
+            -1.7920828153120209e-06,
+            -0.7588478654786173,
+            -1.157104353269645e-06,
+            0.6512679303153255
+          ],
+          "t": [
+            -0.538947451835293,
+            2.8935267821787954e-08,
+            -0.4138888169087684
+          ]
+        },
+        "9": {
+          "r": [
+            0.003054778894623744,
+            0.11547131929638062,
+            0.9933061173403989,
+            0.02173312970392831,
+            0.9930684711786244,
+            -0.11551053036075237,
+            -0.9997591406929859,
+            0.021940509814117097,
+            0.0005240514473210389
+          ],
+          "t": [
+            -0.3598264178907263,
+            -0.13032209283584675,
+            -1.1337090405994792
+          ]
+        },
+        "10": {
+          "r": [
+            0.5580421092165728,
+            0.03392928509513055,
+            0.8291186935258741,
+            -0.05028374531083405,
+            0.9987102610548684,
+            -0.007025626038444144,
+            -0.8282877213255271,
+            -0.037770598044646275,
+            0.5590284721055951
+          ],
+          "t": [
+            1.3458037624562962,
+            -0.17634246501763298,
+            -0.14901303412558115
+          ]
+        },
+        "11": {
+          "r": [
+            0.8429629078981702,
+            8.988838401911836e-07,
+            0.5379716869009494,
+            1.4368872770583081e-06,
+            0.9999999999912749,
+            -3.922374669299011e-06,
+            -0.5379716868997818,
+            4.079421029409835e-06,
+            0.8429629078895238
+          ],
+          "t": [
+            1.6082965393989312,
+            -2.4001842985343913e-08,
+            -0.17357535136058994
+          ]
+        },
+        "12": {
+          "r": [
+            0.0030560773708106503,
+            -0.11546919556576356,
+            0.9933063602265405,
+            -0.021732883441999237,
+            0.9930687202334273,
+            0.11550843549818651,
+            -0.9997591420779309,
+            -0.021940414064863266,
+            0.0005254162751930913
+          ],
+          "t": [
+            -0.35982471128048277,
+            0.13032227840431088,
+            -1.1337091344614134
+          ]
+        },
+        "14": {
+          "r": [
+            -0.6435497942021982,
+            -8.169835576494743e-07,
+            -0.7654042476898337,
+            -7.68118645337425e-07,
+            -0.9999999999982373,
+            1.7132203768457935e-06,
+            -0.7654042476898842,
+            1.6904638948944776e-06,
+            0.6435497942004369
+          ],
+          "t": [
+            -0.722797997578132,
+            -1.3770523001540868e-07,
+            -0.628109043890266
+          ]
+        },
+        "15": {
+          "r": [
+            -0.6625614502591053,
+            -0.11755233524565185,
+            0.7397254714479184,
+            -0.1298496713044522,
+            0.9906803488044265,
+            0.041127963174285735,
+            -0.7376661761885774,
+            -0.06880330639608538,
+            -0.6716507407397755
+          ],
+          "t": [
+            1.5293224783657977,
+            -0.19053774489125813,
+            -0.42137573423460795
+          ]
+        },
+        "16": {
+          "r": [
+            0.924508307558907,
+            0.00698789585149126,
+            0.38109783332647607,
+            0.01705840056776975,
+            0.9980716172313652,
+            -0.0596829778683832,
+            -0.3807799892649757,
+            0.061678328355566504,
+            0.9226062993425899
+          ],
+          "t": [
+            -0.3576303055841819,
+            -0.11469864008730352,
+            -1.8524257024365447
+          ]
+        },
+        "17": {
+          "r": [
+            0.9544924777769609,
+            1.304302420550281e-05,
+            -0.29823499073227056,
+            -1.6890288126494075e-05,
+            0.9999999998040782,
+            -1.0322828833366227e-05,
+            0.2982349905391987,
+            1.4890337393717194e-05,
+            0.9544924778102559
+          ],
+          "t": [
+            1.8797786864146038,
+            3.5023753266323345e-07,
+            -0.3468369047817468
+          ]
+        },
+        "18": {
+          "r": [
+            -0.6625621923479181,
+            0.11755184295109158,
+            0.7397248850011214,
+            0.12984964893201478,
+            0.9906803821102825,
+            -0.04112723153893361,
+            -0.7376655135922741,
+            0.0688036679300344,
+            -0.6716514314255723
+          ],
+          "t": [
+            1.529322181237419,
+            0.19053781639461623,
+            -0.421375586831224
+          ]
+        },
+        "19": {
+          "r": [
+            0.9245090017287496,
+            -0.006985822810895284,
+            0.38109618733616796,
+            -0.017060097945791997,
+            0.9980716493355953,
+            0.05968195582086008,
+            -0.3807782278184892,
+            -0.06167804367988568,
+            0.9226070453596337
+          ],
+          "t": [
+            -0.35762789853262855,
+            0.11469924231400995,
+            -1.8524260061321693
+          ]
+        },
+        "20": {
+          "r": [
+            0.04568475072548278,
+            -0.09631715323854631,
+            0.9943017195716668,
+            0.07049927745170428,
+            0.9931700466843523,
+            0.0929683292728735,
+            -0.9964651300622307,
+            0.0658503178505937,
+            0.05216301572031362
+          ],
+          "t": [
+            1.354508051134326,
+            -0.22479808454910655,
+            -0.6160058971812237
+          ]
+        },
+        "21": {
+          "r": [
+            0.1286923332318196,
+            4.136811175436621e-07,
+            -0.991684568482932,
+            -2.504600005887929e-05,
+            0.9999999996823349,
+            -2.8331055637583393e-06,
+            0.9916845681667371,
+            2.5202330725924993e-05,
+            0.12869233320130025
+          ],
+          "t": [
+            2.1605857478246633,
+            -4.4160137559248725e-06,
+            -0.25909712906718796
+          ]
+        },
+        "22": {
+          "r": [
+            0.045682857428466506,
+            0.09631722523765136,
+            0.9943017995858651,
+            -0.07049869009337308,
+            0.9931700670686531,
+            -0.09296855691020287,
+            -0.9964652584171154,
+            -0.06584990509762795,
+            0.052161084788801215
+          ],
+          "t": [
+            1.3545076901745141,
+            0.22479799031025205,
+            -0.6160060057243916
+          ]
+        },
+        "23": {
+          "r": [
+            -0.09365341221739887,
+            0.05921009378440448,
+            0.9938426450772176,
+            0.07486489305722423,
+            0.9958226516597852,
+            -0.05227326495259638,
+            -0.9927861230736297,
+            0.06950835370885983,
+            -0.09769494663039455
+          ],
+          "t": [
+            1.3853100934872613,
+            -0.1772646503208168,
+            -1.287860052834932
+          ]
+        },
+        "24": {
+          "r": [
+            -0.277994413299338,
+            -6.1017244431131445e-05,
+            -0.9605826890233098,
+            -1.7824204932730993e-05,
+            0.999999998138045,
+            -5.8362716261239916e-05,
+            0.9605826907958808,
+            8.971136383789786e-07,
+            -0.27799441386930857
+          ],
+          "t": [
+            2.201785074569725,
+            -1.201624732851323e-05,
+            0.058381478613908244
+          ]
+        },
+        "25": {
+          "r": [
+            -0.09365362588756429,
+            -0.059209113903386665,
+            0.9938426833200956,
+            -0.0748646133758875,
+            0.9958227235664828,
+            0.0522722956518199,
+            -0.9927861240076792,
+            -0.06950815822195387,
+            -0.09769507622393607
+          ],
+          "t": [
+            1.3853085348817429,
+            0.1772648145608309,
+            -1.2878600343045972
+          ]
+        },
+        "26": {
+          "r": [
+            0.9999113172358602,
+            -0.00010217019360553924,
+            -0.013317177812817493,
+            0.00010201614829720863,
+            0.9999999947213609,
+            -1.2246727159920606e-05,
+            0.013317178993770912,
+            1.0887073899667884e-05,
+            0.9999113223806996
+          ],
+          "t": [
+            2.0988983651065167,
+            -1.8857757832704135e-05,
+            0.4138966055243001
+          ]
+        },
+        "27": {
+          "r": [
+            0.9227508958834447,
+            -0.028701005979146973,
+            0.38432673131345574,
+            0.06110100209560958,
+            0.9955054148938409,
+            -0.07235769800065676,
+            -0.380522603388041,
+            0.09025087906955187,
+            0.9203571736765901
+          ],
+          "t": [
+            1.3320950010137147,
+            -0.13472547331868662,
+            -1.8519777530332968
+          ]
+        },
+        "28": {
+          "r": [
+            0.9227507098459833,
+            0.028702962059896336,
+            0.38432703189825446,
+            -0.06110300507947357,
+            0.9955053164128382,
+            0.07235736150546489,
+            -0.3805227328938327,
+            -0.09025134327400819,
+            0.9203570746119385
+          ],
+          "t": [
+            1.3320929997783473,
+            0.13472565623421984,
+            -1.8519778328453453
+          ]
+        },
+        "29": {
+          "r": [
+            0.9997880477431743,
+            -1.0126904828077621e-05,
+            0.02058784805018532,
+            1.0303400126558493e-05,
+            0.9999999999110765,
+            -8.46671637595913e-06,
+            -0.020587847962613204,
+            8.677046672510783e-06,
+            0.9997880477586119
+          ],
+          "t": [
+            2.185509384701671,
+            -4.725316291227236e-06,
+            0.3412598415502943
+          ]
+        }
+      }
+    },
+    {
+      "id": 7,
+      "meshes": 3,
+      "members": [
+        "euro_campaign_admiralship_weighted_model.variant_weighted_mesh",
+        "euro_campaign_ship_anim_unfurled_idle.variant_weighted_mesh",
+        "euro_campaign_ship_weighted_model.variant_weighted_mesh"
+      ],
+      "seeded_by": "euro_campaign_ship_anim_unfurled_idle.variant_weighted_mesh",
+      "root": 1,
+      "max_vertex_disagreement": 8.956841240852321e-08,
+      "fits": true,
+      "unplaced": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "bones": {
+        "1": {
+          "r": [
+            1.0,
+            0,
+            0,
+            0,
+            1.0,
+            0,
+            0,
+            0,
+            1.0
+          ],
+          "t": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "10": {
+          "r": [
+            -0.8490028128990822,
+            -2.0863926301980074e-08,
+            0.5283883266021739,
+            -3.233922115968264e-08,
+            0.9999999999999994,
+            -1.2475982349196744e-08,
+            -0.5283883266021732,
+            -2.7679811268943806e-08,
+            -0.8490028128990823
+          ],
+          "t": [
+            0.7063224538663211,
+            -9.894161484558239e-08,
+            1.139271121886054e-07
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+# Built by src/build.ps1. A release ships the DLL separately, not from git.
+bin/
+src/dinput8.dll
+src/dinput8.pdb
+src/ese_proxy.lib
+*.obj
+*.exp
+
+# Extracted vanilla assets and generated packs. The scripts that build them stay.
+staged/
+
+# Live UI dumps, decompiled panels, and one-off probe scripts.
+tools/ui/_probe/
+tools/_scratch/
+src/_*.ps1
+
+# Local backups and logs.
+*.bak
+*.bak_*
+*.orig
+*.old
+*.prev
+*.tmp
+*.log
+ese_log.txt

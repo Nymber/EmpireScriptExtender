@@ -1,0 +1,23 @@
+; Module-definition file for the dinput8 proxy.
+;
+; WHY THIS EXISTS: the exported functions are __stdcall (WINAPI), and a 32-bit
+; MinGW-ABI build decorates stdcall exports with an @N suffix - the DLL would
+; export "DirectInput8Create@20" while Empire imports "DirectInput8Create".
+; Windows resolves imports by exact name, so the import would fail and the game
+; would simply refuse to launch.
+;
+; The usual fix is the linker flag --kill-at, but Zig's lld rejects it
+; ("unsupported linker arg"), so we alias the names explicitly instead:
+;   <exported name> = <internal decorated symbol>
+;
+; The calling convention MUST stay stdcall: Empire calls DirectInput8Create
+; expecting the callee to clean up its 20 bytes of arguments. Declaring these
+; __cdecl to dodge the decoration would leak the stack on every call.
+
+LIBRARY dinput8
+EXPORTS
+    DirectInput8Create  = DirectInput8Create@20
+    DllGetClassObject   = DllGetClassObject@12
+    DllCanUnloadNow     = DllCanUnloadNow@0
+    DllRegisterServer   = DllRegisterServer@0
+    DllUnregisterServer = DllUnregisterServer@0
