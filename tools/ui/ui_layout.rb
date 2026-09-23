@@ -5,7 +5,7 @@
 # paid for a trap the next script then paid for again. This file is those
 # operations, once.
 #
-# What is proven (see SaveParser/.claude/skills/empire-trade-mod/SKILL.md):
+# What is proven (see tools/ui/README.md and the trade-mod roadmaps):
 #
 #   * xml2ui writes <children count="N"> verbatim. Recompute every count after
 #     moving nodes, or the .ui loads corrupt.

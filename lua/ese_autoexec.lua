@@ -9,7 +9,7 @@
 -- ============================================================================
 
 ESE = ESE or {}
-ESE.version = '0.2 (real-data rebuild)'
+ESE.version = '0.3 (shared mod runtime)'
 ESE.notes   = {}
 ESE.faults  = {}
 
@@ -26,6 +26,23 @@ local function safe(label, fn)
   if r ~= 'true' then ESE.faults[#ESE.faults+1] = label .. ': ' .. tostring(r) end
 end
 ESE.safe = safe
+
+-- Load the shared registry and hook bus before campaign features register.
+-- The actual mods load at the end, after this file has defined its reporting API.
+local ESE_ROOT = os.getenv('ESE_MODS_DIR')
+if not ESE_ROOT or ESE_ROOT == '' then ESE_ROOT = os.getenv('ESE_CHAIN_DIR') end
+if not ESE_ROOT or ESE_ROOT == '' then ESE_ROOT = [[EmpireScriptExtender\lua\]] end
+ESE_ROOT = ESE_ROOT:gsub('/', '\\')
+if ESE_ROOT:sub(-1) ~= '\\' then ESE_ROOT = ESE_ROOT .. '\\' end
+local core_chunk, core_error = loadfile(ESE_ROOT .. 'ese_core.lua')
+if core_chunk then
+  local core_ok, core_result = pcall(core_chunk)
+  if not core_ok and type(ESE_Log) == 'function' then
+    ESE_Log('[core] campaign runtime failed: ' .. tostring(core_result))
+  end
+elseif type(ESE_Log) == 'function' then
+  ESE_Log('[core] campaign bootstrap failed: ' .. tostring(core_error))
+end
 
 -- ============================================================================
 -- STATE
@@ -109,9 +126,8 @@ end
 -- ============================================================================
 -- FACTION SAMPLE  (FactionTurnStart fires for ~43 factions; ours only)
 -- ============================================================================
-if type(events) == 'table' and type(events.FactionTurnStart) == 'table' then
-  events.FactionTurnStart[#events.FactionTurnStart+1] = function(context)
-    safe('FactionTurnStart', function()
+if type(ESE.on_event) == 'function' then
+  ESE.on_event('FactionTurnStart', 'core.economy-faction', function(context)
       if not conditions.FactionIsHuman(LocalFaction, context) then return end
 
       local e = {}
@@ -143,17 +159,15 @@ if type(events) == 'table' and type(events.FactionTurnStart) == 'table' then
       if ESE.auto_report and #ESE.alerts > 0 and type(ESE_Say) == 'function' then
         ESE_Say(ESE.report())
       end
-    end)
-  end
+  end, 50)
   log('faction sampler on FactionTurnStart')
 end
 
 -- ============================================================================
 -- REGION SAMPLE  (RegionTurnStart; ours only)
 -- ============================================================================
-if type(events) == 'table' and type(events.RegionTurnStart) == 'table' then
-  events.RegionTurnStart[#events.RegionTurnStart+1] = function(context)
-    safe('RegionTurnStart', function()
+if type(ESE.on_event) == 'function' then
+  ESE.on_event('RegionTurnStart', 'core.economy-region', function(context)
       if not conditions.RegionIsLocal(context) then return end
       ESE.regions[#ESE.regions+1] = {
         unexported  = conditions.RegionHasUnexportedTrade(context),
@@ -167,8 +181,7 @@ if type(events) == 'table' and type(events.RegionTurnStart) == 'table' then
         slots       = conditions.RegionSlotCount(context),
         tax_exempt  = conditions.RegionTaxExempt(context),
       }
-    end)
-  end
+  end, 50)
   log('region sampler on RegionTurnStart')
 end
 
@@ -273,61 +286,10 @@ end
 
 
 -- ============================================================================
--- MOD FOLDERS
---
--- This file is the loader. A mod is a sibling folder that contains mod.lua;
--- removing the folder removes the mod, and a new folder is picked up the next
--- time the campaign loads. Lua 5.1 cannot list a directory (no lfs, and
--- io.popen is not in this state), so the list is ese_mods.lua, regenerated
--- from the folders that exist. ESE_MODS_DIR overrides the folder that list is
--- read from, for a toolkit that is not inside the Steam folder.
---
--- Long brackets, not quotes: Lua 5.1 drops unknown backslash escapes, so a
--- quoted Windows path compiles and then points at the wrong file. Relative
--- loadfile resolves against the process cwd, which for Empire is the install.
+-- CONFIGURED MODS
 -- ============================================================================
-ESE.mods = {}
-do
-  local function mlog(s)
-    log(s)
-    if type(ESE_Log) == 'function' then ESE_Log('[mods] ' .. tostring(s)) end
-  end
-  local root = os.getenv('ESE_MODS_DIR')
-  if not root or root == '' then root = os.getenv('ESE_CHAIN_DIR') end
-  if root and root ~= '' then
-    root = root:gsub('/', '\\')
-    if root:sub(-1) ~= '\\' then root = root .. '\\' end
-  else
-    root = [[EmpireScriptExtender\lua\]]
-  end
-  ESE.mods_dir = root
-
-  local list, lerr = loadfile(root .. 'ese_mods.lua')
-  if not list then
-    mlog('no ese_mods.lua in ' .. root .. ' (' .. tostring(lerr) .. ')')
-  else
-    local ok, mods = pcall(list)
-    if not ok or type(mods) ~= 'table' then
-      mlog('ese_mods.lua did not return a table - ' .. tostring(mods))
-    else
-      for _, name in ipairs(mods) do
-        local dir = root .. name .. '\\'
-        local f, ferr = loadfile(dir .. 'mod.lua')
-        if not f then
-          mlog(name .. ': no mod.lua - ' .. tostring(ferr))
-        else
-          ESE.mod_dir = dir
-          local mok, err = pcall(f)
-          ESE.mod_dir = nil
-          if mok then
-            ESE.mods[#ESE.mods+1] = name
-            mlog(name .. ': loaded')
-          else
-            mlog(name .. ': FAILED - ' .. tostring(err))
-          end
-        end
-      end
-    end
-  end
-  mlog(#ESE.mods .. ' mod(s) from ' .. root)
+if type(ESE.load_configured_mods) == 'function' then
+  ESE.load_configured_mods('campaign')
+elseif type(ESE_Log) == 'function' then
+  ESE_Log('[core] campaign mods skipped because the shared runtime did not load')
 end

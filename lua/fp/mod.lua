@@ -24,7 +24,7 @@ end
 -- Do not strip `return` from the part files. Several are multi-line, and
 -- dropping only the first line leaves an orphaned continuation. pcall makes
 -- a top-level return leave the wrapper instead of this chunk.
-local parts = { 'fpsetup.lua', 'fppick.lua', 'fpdrive.lua', 'walkdiff.lua', 'fpctl.lua', 'fpcmp.lua' }
+local parts = { 'fpsetup.lua', 'fppick.lua', 'fpdrive.lua', 'walkdiff.lua', 'fpctl.lua', 'fpcmp.lua', 'fpselect.lua' }
 local failed = 0
 for _, name in ipairs(parts) do
   local f, ferr = loadfile(base .. name)
@@ -40,10 +40,14 @@ for _, name in ipairs(parts) do
   end
 end
 
-if type(ESE_Tick) == 'function' then
+local function fp_tick() FPHOT(); FPMOVE(); FPSTEP(); FPCTL() end
+if type(ESE.on_tick) == 'function' then
+  ESE.on_tick('fp.main', fp_tick, 100)
+elseif type(ESE_Tick) == 'function' then
   ESE_Tick('ms', '16')
   ESE_Tick('on', 'FPHOT() FPMOVE() FPSTEP() FPCTL()')
 end
 FPCTLON = false
 FPDRIVE = false
 flog('rig installed, FPSTEP=' .. type(FPSTEP) .. ' failed=' .. failed)
+

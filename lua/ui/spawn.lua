@@ -1,16 +1,13 @@
--- spawn.lua - defines ToggleEseUi in a UI lua_State.
+-- spawn.lua - the same toggle the HUD button runs, for a pipe eval.
 --
--- The HUD button ese_ui_spawn calls root:LuaCall("ToggleEseUi"). That
--- reaches this state only if this file has been loaded into it first:
+-- The packed button does not call this file. Its OnSelect opens dialogue_box
+-- itself. Load this only when you want the same toggle from ese.ps1 -UI:
 --
 --   ese.ps1 -UI "assert(loadfile([[EmpireScriptExtender\lua\ui\spawn.lua]]))()"
 --
 -- What it toggles is dialogue_box. That is the one panel ESE already opens
 -- without faulting. It is not the trade screen. A panel of our own needs
 -- its own layout file and a compiled script, which this button does not.
---
--- ClosePanel is not a function this install has been shown to have, so the
--- second click hides the box through the component instead of the manager.
 
 local function manager()
   local ok, pm = pcall(function()

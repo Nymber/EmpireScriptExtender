@@ -1,7 +1,6 @@
--- generated from the folders under EmpireScriptExtender\lua that contain mod.lua
--- drop a folder in (with mod.lua) or delete one, then regenerate this file
--- fp is battle-only: its mod.lua returns unless ESE.battle is set
+-- Authoritative activation registry. Changes apply to the next Lua state.
 return {
-  'production chains',
-  'fp',
+  { id='production-chains', path='production chains', enabled=true },
+  { id='fp',                path='fp',                enabled=true },
+  { id='ui', path='ui', enabled=true },
 }

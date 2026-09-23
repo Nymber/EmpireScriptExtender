@@ -21,7 +21,7 @@
 
   Usage:
     .\packtool.ps1 -Find panelmanager
-    .\packtool.ps1 -Find export_triggers -Extract -Out C:\temp
+    .\packtool.ps1 -Find export_triggers -Extract -Out .\temp
     .\packtool.ps1 -Pack patch2.pack -Find ui\        -- limit to one pack
 #>
 param(

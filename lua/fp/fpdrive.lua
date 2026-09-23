@@ -1,8 +1,8 @@
--- TRUE first person: drive the SOLDIER, not his regiment.
--- Writing a live man's position vec3 at +0x48 holds - the engine does not snap
--- him back - so WASD can move the man himself and the camera follows as usual.
--- Y is rewritten every step from the heightfield so he walks up and down slopes
--- instead of sinking or floating, and his mount lift is preserved.
+-- Experimental true first person: attempt to drive the SOLDIER, not his
+-- regiment. Live testing on 2026-09-23 showed direct writes to entity+0x48
+-- apply immediately, then the formation/controller pass restores the man about
+-- a second later. Keep this path opt-in and treat it as a probe until the
+-- engine-owned movement path is found.
 FPDRIVE  = false   -- master switch for personal movement
 FPSPEED  = FPSPEED  or 2.2    -- m/s walking
 FPRUNSPD = FPRUNSPD or 5.0    -- m/s with shift
@@ -66,4 +66,4 @@ function FPMOVE()
   ESE_WriteFloat(aa(u,0x50), nz)
   ESE_WriteFloat(aa(u,0x4C), FPGROUND(nx,nz) + lift + (FPJUMPH or 0))
 end
-return "drive loaded (set FPDRIVE=true; WASD moves the MAN, space jumps)"
+return "drive loaded (experimental: direct position writes are overwritten by formation control)"

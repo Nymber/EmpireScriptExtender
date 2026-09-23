@@ -38,7 +38,7 @@
 #   ruby rigid_model.rb roundtrip <file>
 #   ruby rigid_model.rb corpus              # gate every .rigid_model in every pack
 
-require_relative "../../../empire_paths"
+require_relative "../../empire_paths"
 
 module RigidModel
   MAGIC = "\x78\x56\x34\x12".b

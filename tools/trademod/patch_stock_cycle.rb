@@ -28,7 +28,7 @@
 # Usage
 #   ruby patch_stock_cycle.rb <government_screens.lua> [--out F] [--apply]
 
-require_relative "../../../empire_paths"
+require_relative "../../empire_paths"
 
 def opt(n, d)
   i = ARGV.index("--#{n}")

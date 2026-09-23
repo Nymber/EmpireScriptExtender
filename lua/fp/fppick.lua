@@ -1,15 +1,13 @@
--- Liveness. Verified against ground truth: counting entity+0x348==1 across the
--- player's army gave exactly 8, matching the sum of unit+0x178 (current
--- strength) when only one 8-man artillery unit remained alive.
---   entity+0x348 == 1   -> this man is alive
---   unit+0x178         -> unit's CURRENT strength (0 = wiped/routed away)
---   unit+0x18C         -> unit's MAX strength (do not use for survivors)
--- Corpses stay lying on the field and keep normal-looking state in +0x34/+0x38
--- and +0xF0, so those are NOT liveness - they fooled an earlier attempt.
+-- Liveness. Per-man liveness is still unknown. The earlier entity+0x348 idea
+-- matched one dying-army case, then failed in a full battle, so do not use it
+-- as proof that one man is alive. The only solid gate here is the owning unit's
+-- current strength at unit+0x178. Corpses can still pass that gate, so FPPICK
+-- also aims through the camera ray and prefers the nearest reasonable target.
 function FPALIVE(i)
   local aa,P = FPAA,FPP
   local e = P(aa(FPD, (i or FPI)*4)); if not e then return false end
-  return P(aa(e, 0x348)) == "00000001"
+  local u = P(aa(e, 0x1EC)); if not u or u == "00000000" then return false end
+  return (tonumber(ESE_ReadInt(aa(u, 0x178))) or 0) > 0
 end
 function FPUNITALIVE(i)
   local aa,P = FPAA,FPP
@@ -32,13 +30,23 @@ function FPPICK(apply)
   local fz=tonumber(ESE_ReadFloat(aa(FPCAM,0x68)))
   if not ex or not fx then return "no camera" end
   local best,bang,bd,bu = nil,1e9,0,nil
+  local pick_any_army = FPPICKENEMY == true
   for i=0,FPCNT-1 do
     local e=P(aa(FPD,i*4))
     if e then
       local x=tonumber(ESE_ReadFloat(aa(e,0x48)))
       local y=tonumber(ESE_ReadFloat(aa(e,0x4C)))
       local z=tonumber(ESE_ReadFloat(aa(e,0x50)))
-      local liveok = (P(aa(e,0x348)) == "00000001") or FPPICKDEAD
+      local un = 0
+      local same_army = true
+      local u = P(aa(e,0x1EC))
+      if u and u ~= "00000000" then
+        un = tonumber(ESE_ReadInt(aa(u,0x178))) or 0
+        if FPARMY and not pick_any_army then same_army = (P(aa(u,0x160)) == FPARMY) end
+      else
+        same_army = false
+      end
+      local liveok = (((un > 0) or FPPICKDEAD) and same_army)
       if liveok and x and y and z and x==x and math.abs(x)<2000 then
         local dx,dy,dz = x-ex, (y+0.9)-ey, z-ez     -- aim at chest, not feet
         local d=math.sqrt(dx*dx+dy*dy+dz*dz)
@@ -49,15 +57,56 @@ function FPPICK(apply)
             -- prefer the CLOSEST man along a near-centre ray, not merely the
             -- most centred one: a distant soldier can line up behind a near one
             local score=ang + d*0.0004
-            if score<bang then bang=score best=i bd=d bu=P(aa(e,0x1EC)) end
+            if score<bang then bang=score best=i bd=d bu=u end
           end
         end
       end
     end
   end
   if not best then return "nothing in front of the camera" end
+  FPPICK_MAN = best
+  FPPICK_UNIT = bu
   if apply then FPI=best for k=1,20 do FPSTEP() end end
-  return string.format("nearest LIVING man to crosshair: %d  dist=%.1f m  unit=%s%s",
+  return string.format("nearest friendly unit-strength-valid man to crosshair: %d  dist=%.1f m  unit=%s%s",
     best, bd, tostring(bu), apply and "  -> HOOKED" or "")
 end
+
+-- FPREHOOKFRIEND(): recover from enemy/corpse hooks by picking the nearest
+-- strength-valid man whose owning unit belongs to the claimed player army.
+-- This ignores the crosshair and is intended for test setup/recovery.
+function FPREHOOKFRIEND(apply)
+  local aa,P = FPAA,FPP
+  if not FPARMY then return "no FPARMY; run FPCMP(); FPCLAIMARMY() from the player side first" end
+  local ex,ey,ez = 0,0,0
+  if FPCAM then
+    ex=tonumber(ESE_ReadFloat(aa(FPCAM,0x08))) or 0
+    ey=tonumber(ESE_ReadFloat(aa(FPCAM,0x0C))) or 0
+    ez=tonumber(ESE_ReadFloat(aa(FPCAM,0x10))) or 0
+  end
+  local best,bd,bu = nil,1e30,nil
+  for i=0,FPCNT-1 do
+    local e=P(aa(FPD,i*4))
+    if e then
+      local u=P(aa(e,0x1EC))
+      if u and u ~= "00000000" and P(aa(u,0x160)) == FPARMY then
+        local un=tonumber(ESE_ReadInt(aa(u,0x178))) or 0
+        local x=tonumber(ESE_ReadFloat(aa(e,0x48)))
+        local y=tonumber(ESE_ReadFloat(aa(e,0x4C)))
+        local z=tonumber(ESE_ReadFloat(aa(e,0x50)))
+        if un > 0 and x and y and z and x==x and math.abs(x)<2000 then
+          local dx,dy,dz=x-ex,y-ey,z-ez
+          local d=dx*dx+dy*dy+dz*dz
+          if d < bd then best=i bd=d bu=u end
+        end
+      end
+    end
+  end
+  if not best then return "no strength-valid friendly man found" end
+  FPPICK_MAN = best
+  FPPICK_UNIT = bu
+  if apply then FPI=best for k=1,20 do FPSTEP() end end
+  return string.format("nearest friendly man: %d dist=%.1f m unit=%s%s", best, math.sqrt(bd), tostring(bu), apply and " -> HOOKED" or "")
+end
 return "FPPICK loaded"
+
+

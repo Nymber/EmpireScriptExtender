@@ -32,7 +32,7 @@
 #   ruby patch_market_labels.rb <government_screens.lua> [--manifest F]
 #                               [--loc F] [--config F] [--apply]
 
-require_relative "../../../empire_paths"
+require_relative "../../empire_paths"
 
 path = ARGV[0]
 apply = ARGV.include?("--apply")
@@ -171,7 +171,7 @@ dbkey_lines = ui.keys.sort.map { |dbkey| %{  ["#{ui[dbkey]}"] = "#{dbkey}",} }
 
 # The path uses LONG BRACKETS, not a quoted string. A Windows path inside
 # "..." has its backslashes read as escapes, and Lua 5.1 silently DROPS
-# unknown ones rather than erroring - so a quoted "D:\\steam\\..." compiles cleanly and
+# unknown ones rather than erroring - so a quoted absolute Windows path compiles cleanly and
 # then evaluates to "D:steamsteamapps...". The file never opens and the stock
 # display stays empty with nothing in any log.
 #

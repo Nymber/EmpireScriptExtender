@@ -43,7 +43,10 @@ draining work for either.
 Keeping only the *last* args is useless for the job these tracers exist for —
 mapping an opcode table needs the **sequence**. Each slot keeps a 64-entry ring;
 `ESE_TraceLog` returns records oldest-first and advances a drain cursor, so each
-call is reported exactly once. If the ring wrapped before you drained it, the
+call is reported exactly once. Every line retains the original four stack words
+first, then appends `ECX`, `EAX`, `EDX`, and `EBX`. This makes `thiscall`
+objects observable without breaking consumers of the original columns. If the
+ring wrapped before you drained it, the
 reply starts with `[lost N]` rather than silently skipping — a gap would corrupt
 any sequence built from it.
 
@@ -65,11 +68,13 @@ handler serves all eight slots:
 
 ```
 pushfd / pushad
+mov edx,esp             ; -> pushad register image
 lea eax,[esp+0x24]      ; -> {retaddr, arg1, arg2, ...}
+push edx                ; arg3 (saved registers)
 push <slot>             ; arg2
 push eax                ; arg1
 call trace_handler
-add esp,8
+add esp,12
 popad / popfd
 <stolen 5 bytes>
 push <site+5> / ret
@@ -118,9 +123,9 @@ default 5 for any of them.**
 | function | static | steal | prologue | why it matters |
 |---|---|---|---|---|
 | `FUN_005B3E00` | `5B3E00` | **7** | `MOVZX EAX,[ECX+0x3b3]` (7) | **the selection order dispatcher** — every unit order funnels through `(opcode, amount)`. Tracing it logs every order the player issues, with its opcode |
-| `BCQ_FIRE_PROJECTILE` | `5D0560` | **6** | `SUB ESP,0xac` (6) | fires one projectile; shows whether the command path is used in single-player |
+| `BCQ_FIRE_PROJECTILE` | `5D0560` | **6** | `SUB ESP,0xac` (6) | cinematic/queued projectile constructor; useful as a comparison path, not yet the possessed soldier trigger |
 | `BCQ_ENTITY_ORDER_MOVE` | `5D02F0` | **8** | `SUB ESP,0x54`(3) `PUSH ESI`(1) `MOV ESI,[ESP+0x5c]`(4) | **per-entity** move order — the engine has per-soldier commands even though Lua does not expose them |
-| `FUN_00718930` | `718930` | **6** | `SUB ESP,0xa0` (6) | the pending-shot object: one man, one round, with the drill delay |
+| `FUN_00718930` | `718930` | **6** | `SUB ESP,0xa0` (6) | ammo-state virtual update: one man, one round, with the drill delay; `ECX` is the object to correlate back to the possessed entity |
 | `FUN_007192A0` | `7192A0` | **7** | `SUB ESP,0xc`(3) `MOV EDX,[ESP+0x10]`(4) | terrain height at (x,z); useful to confirm call frequency |
 | `FUN_00639230` | `639230` | **6** | `PUSH ESI`(1) `PUSH ECX`(1) `MOV ESI,ECX`(2) `MOV EDX,ESP`(2) | camera controller move-to (`ctl->vt[0x128]`) |
 | `FUN_010485D0` | `10485D0` | **5** | `PUSH ECX`(1) `PUSH ESI`(1) `PUSH EDI`(1) `MOV EDI,ECX`(2) | binds `animation_matrix_stack` — shows when bone params rebind. The only one where 5 is genuinely correct |

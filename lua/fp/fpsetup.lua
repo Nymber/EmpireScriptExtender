@@ -101,6 +101,50 @@ FPHOTKEY = FPHOTKEY or "0D"
 FPHOTPREV = false
 FPPICKKEY = FPPICKKEY or "0C"
 FPPICKPREV = false
+-- Keep all presentation-only state behind one switch. ESE_View owns the
+-- backbuffer crosshair and balances the Win32 cursor counter; look1/look0 owns
+-- relative mouse recentering. Older ESE builds simply skip the new native.
+function FPVIEW(on)
+  if ESE_View then ESE_View(on and "on" or "off") end
+  if ESE_Input then ESE_Input(on and "look1" or "look0") end
+end
+-- Entry guard shared by the hotkey and crosshair picker.  The army pointer is
+-- learned only from a unit the player deliberately claimed with FPCLAIMARMY;
+-- no heuristic is allowed to turn an enemy into an eligible target.
+function FPCANENTER()
+  local aa,P=FPAA,FPP
+  if not FPARMY or FPARMY == "00000000" then
+    return false,"player army is not claimed"
+  end
+  if not FPFRESH() then
+    local ok,why=FPSYNC()
+    if not ok then return false,"battle state unavailable: "..tostring(why) end
+  end
+  local e=P(aa(FPD,FPI*4))
+  if not e or e == "00000000" then return false,"hooked entity is gone" end
+  local u=P(aa(e,0x1EC))
+  if not u or u == "00000000" then return false,"hooked entity has no unit" end
+  local army=P(aa(u,0x160))
+  if army ~= FPARMY then return false,"hooked entity is not on the player army" end
+  local strength=tonumber(ESE_ReadInt(aa(u,0x178))) or 0
+  if strength <= 0 then return false,"hooked unit has zero strength" end
+  return true,string.format("friendly entity %d unit=%s strength=%d",FPI,tostring(u),strength)
+end
+function FPTRYENTER()
+  local ok,why=FPCANENTER()
+  if not ok then
+    FPOFF=true
+    FPCTLON=false
+    FPVIEW(false)
+    if ESE_Log then ESE_Log("[fp] entry refused: "..tostring(why)) end
+    return false,why
+  end
+  FPBEGIN()
+  FPOFF=false
+  FPVIEW(true)
+  if ESE_Log then ESE_Log("[fp] entered: "..tostring(why)) end
+  return true,why
+end
 -- Start a cinematic move: remember where the camera IS, then FPSTEP eases
 -- from there to the soldier's eye instead of cutting. Called when entering
 -- first person and when hooking a new man, so switching soldiers glides too.
@@ -121,19 +165,21 @@ function FPHOT()
   local d = (ESE_Input(FPHOTKEY) == "1")
   if d and not FPHOTPREV then
     if FPOFF then
-      -- coming back: the battle may have been rebuilt while we were away
-      if not FPP(FPAA(FPD, FPI*4)) then FPSYNC() end
-      FPBEGIN()
-      FPOFF = false
+      FPTRYENTER()
     else
       FPOFF = true
+      FPCTLON = false
+      FPVIEW(false)
     end
   end
   FPHOTPREV = d
   -- "-" (DIK 0x0C) hooks whichever soldier is under the crosshair.
   -- Camera only, so it stays safe with controls off.
   local p = (ESE_Input(FPPICKKEY) == "1")
-  if p and not FPPICKPREV and FPPICK then FPBEGIN() FPPICK(true) FPOFF = false end
+  if p and not FPPICKPREV and FPPICK then
+    FPPICK(true)
+    FPTRYENTER()
+  end
   FPPICKPREV = p
 end
 
@@ -143,6 +189,7 @@ function FPSTEP()
   -- Do not write it, and do not adopt the new one on the same frame.
   if not FPFRESH() then
     FPOFF = true
+    FPVIEW(false)
     FPSYNC()
     return
   end
@@ -150,8 +197,21 @@ function FPSTEP()
   local u=P(aa(FPD,FPI*4))
   if not u then
     FPOFF = true
+    FPVIEW(false)
     FPCTLON = false
     FPCAM, FPD, FPDATA, FPMGR = nil, nil, nil, nil
+    return
+  end
+  local unit=P(aa(u,0x1EC))
+  local army=unit and P(aa(unit,0x160)) or nil
+  local strength=unit and (tonumber(ESE_ReadInt(aa(unit,0x178))) or 0) or 0
+  if not FPARMY or army ~= FPARMY or strength <= 0 then
+    FPOFF=true
+    FPVIEW(false)
+    FPCTLON=false
+    if ESE_Log then
+      ESE_Log(string.format("[fp] disengaged: entity=%d army=%s strength=%d",FPI,tostring(army),strength))
+    end
     return
   end
   FPSTALE=0
@@ -211,6 +271,7 @@ function FPSTEP()
 end
 local ok,why = FPSYNC()
 if not ok then return "setup FAILED: "..tostring(why) end
+FPVIEW(false)
 -- Do not call FPSTEP here. FPOFF starts true, and a call before the player
 -- presses "=" would still write the camera if that flag were ever cleared.
 return string.format("setup ok (sync #%d): cam=%s D=%s n=%d | following %d eye=+%.1f y=%.2f  controls=OFF",

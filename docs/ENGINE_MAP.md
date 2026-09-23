@@ -96,6 +96,9 @@ FUN_00D54B10   the resources_table accessor      (37 call sites)
           "UnUsEd" table makes a lookup always return 14 and four unchecked
           stores then hit the return address.
 00A54682  trade UI null-deref when a commodity has no unit.
+00A04B96  trade-detail record dereference. EAX=0 was observed in a log that
+          also reported the required commodity config missing. A later startup
+          wired the config entries; opening Trade afterward remains unverified.
 014490E4  the SIX hardcoded demand drivers — a seventh cannot be added.
 ```
 
@@ -147,7 +150,9 @@ rewind_scripted_advice, suspend_contextual_advice.
   │                                                                        │
   │  apply_tradeinfo_extras()                                              │
   │    clones the 181-byte block at 00B1E4BC once per line of              │
-  │    ese_commodities.txt into a code cave, splices at 00B1E9A0.          │
+  │    the installed ese_commodities.txt into a code cave, splices at      │
+  │    00B1E9A0. Its maintained source is config/ese_commodities.txt;      │
+  │    empire.ps1 sync installs it beside Empire.exe.                     │
   │    WHY: the UI's prices are eight inline blocks, not a loop.           │
   │    GATE: a ui_name with no matching component breaks the whole tab.    │
   │                                                                        │

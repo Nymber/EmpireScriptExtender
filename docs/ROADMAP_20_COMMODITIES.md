@@ -125,12 +125,18 @@ One tool reads it and does every data step:
 4. set demand per entry (`set_commodity_demand.rb` already parameterised)
 5. emit the DB table files
 6. emit `.loc` entries
-7. emit `ese_commodities.txt`
+7. emit `config/ese_commodities.txt`, then use `empire.ps1 sync` to install the
+   validated runtime copy beside `Empire.exe`
 
 `extend_commodity_arrays.rb` and `set_commodity_demand.rb` already detect widths
 and resolve indices from `commodities_order`, so they need extending, not
 rewriting. The genuinely new piece is **DB row emission**, which today is hand
 authored.
+
+The config is part of the executable data contract, not an optional helper.
+Its commodity keys must match the generated manifest and its `raw_resources`
+value must match the startpos/resource model. `empire.ps1 doctor` checks this
+before launch; a pack/config mismatch can crash the native Trade detail builder.
 
 **Cost driver to respect:** each `esf2xml` → edit → `xml2esf` cycle is ~10
 minutes on the 65MB startpos. The manifest exists so 12 commodities cost *one*
@@ -197,6 +203,7 @@ Run after every batch, not just at the end:
 | arrays widened | region counts == commodity count |
 | return address intact | `param_2[28]` holds a code address |
 | UI count | `.\ese.ps1 -UI "…TradeInfo()…"` → N prices |
+| runtime config | `.\empire.ps1 doctor` → config synchronized and manifest matched |
 | no regression | `.\rumtoggle.ps1 -State vanilla` |
 
 Add in **batches with a test between** — 9 → 12 → 16 → 20. The risk is

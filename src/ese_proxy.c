@@ -844,6 +844,12 @@ typedef struct {
      * calls, not a snapshot. logw only ever increases; logr is the drain
      * cursor, so ESE_TraceLog returns each call exactly once. */
     DWORD log[TRACE_LOG][4];
+    /* Register snapshot from the same call as log[].  Stack-only tracing
+     * cannot identify __thiscall objects because `this` arrives in ECX.  Keep
+     * the original four leading stack columns in ESE_TraceLog so existing
+     * analysis scripts remain compatible, then append these registers. */
+    DWORD reglog[TRACE_LOG][4];       /* ECX, EAX, EDX, EBX */
+    DWORD lastreg[4];
     volatile LONG logw;
     LONG logr;
     /* vtable-trace variant: no bytes are stolen, so there is no
@@ -858,17 +864,26 @@ typedef struct {
 } trace_slot;
 static trace_slot g_trace[TRACE_MAX];
 
-static void __cdecl trace_handler(DWORD* stk, int slot) {
+static void __cdecl trace_handler(DWORD* stk, int slot, DWORD* saved) {
     if (slot < 0 || slot >= TRACE_MAX) return;
     trace_slot* t = &g_trace[slot];
     InterlockedIncrement(&t->hits);
     int i;
     for (i = 0; i < t->nargs && i < 6; i++) t->args[i] = stk[1 + i];
+    /* pushad's image at its final ESP is EDI,ESI,EBP,pre-pushad ESP,
+     * EBX,EDX,ECX,EAX.  The trampoline passes that base before adding its own
+     * handler arguments. */
+    t->lastreg[0] = saved[6];
+    t->lastreg[1] = saved[7];
+    t->lastreg[2] = saved[5];
+    t->lastreg[3] = saved[4];
     /* This runs on the GAME thread inside the hooked function, so it must stay
      * trivial: no allocation, no locks, no Lua. Just stamp the ring. */
     LONG w = InterlockedIncrement(&t->logw) - 1;
     DWORD* rec = t->log[w & (TRACE_LOG - 1)];
+    DWORD* rr = t->reglog[w & (TRACE_LOG - 1)];
     for (i = 0; i < 4; i++) rec[i] = (i < t->nargs) ? stk[1 + i] : 0;
+    for (i = 0; i < 4; i++) rr[i] = t->lastreg[i];
 }
 
 static void* make_trace_tramp(unsigned char* site, int slot, int stealLen) {
@@ -878,12 +893,14 @@ static void* make_trace_tramp(unsigned char* site, int slot, int stealLen) {
     int i = 0;
     t[i++] = 0x9C;                                                  /* pushfd */
     t[i++] = 0x60;                                                  /* pushad */
+    t[i++] = 0x8B; t[i++] = 0xD4;                                   /* mov edx,esp (saved regs) */
     t[i++] = 0x8D; t[i++] = 0x44; t[i++] = 0x24; t[i++] = 0x24;     /* lea eax,[esp+0x24] */
+    t[i++] = 0x52;                                                  /* push edx   (arg3) */
     t[i++] = 0x68; *(int*)(t + i) = slot; i += 4;                   /* push slot  (arg2) */
     t[i++] = 0x50;                                                  /* push eax   (arg1) */
     t[i++] = 0xB8; *(void**)(t + i) = (void*)trace_handler; i += 4;
     t[i++] = 0xFF; t[i++] = 0xD0;                                   /* call eax */
-    t[i++] = 0x83; t[i++] = 0xC4; t[i++] = 0x08;                    /* add esp,8 */
+    t[i++] = 0x83; t[i++] = 0xC4; t[i++] = 0x0C;                    /* add esp,12 */
     t[i++] = 0x61;                                                  /* popad */
     t[i++] = 0x9D;                                                  /* popfd */
     memcpy(t + i, site, stealLen); i += stealLen;
@@ -911,10 +928,12 @@ static int __cdecl ese_trace(lua_State* L) {
         if (slot < 0) { push_str(L, "not traced"); return 1; }
         trace_slot* t = &g_trace[slot];
         char b[256];
-        _snprintf(b, sizeof(b) - 1, "%08lX hits=%ld args=%08lX %08lX %08lX %08lX",
+        _snprintf(b, sizeof(b) - 1, "%08lX hits=%ld args=%08lX %08lX %08lX %08lX ecx=%08lX eax=%08lX edx=%08lX ebx=%08lX",
                   (unsigned long)t->statica, (long)t->hits,
                   (unsigned long)t->args[0], (unsigned long)t->args[1],
-                  (unsigned long)t->args[2], (unsigned long)t->args[3]);
+                  (unsigned long)t->args[2], (unsigned long)t->args[3],
+                  (unsigned long)t->lastreg[0], (unsigned long)t->lastreg[1],
+                  (unsigned long)t->lastreg[2], (unsigned long)t->lastreg[3]);
         b[255] = 0;
         push_str(L, b);
         return 1;
@@ -1106,6 +1125,7 @@ static int __cdecl ese_impact(lua_State* L);
 static int __cdecl ese_fps(lua_State* L);
 static int __cdecl ese_mouse(lua_State* L);
 static int __cdecl ese_input(lua_State* L);
+static int __cdecl ese_view(lua_State* L);
 static int __cdecl ese_caps(lua_State* L);
 static int __cdecl ese_writeint(lua_State* L);
 static int __cdecl ese_writebytes(lua_State* L);
@@ -1122,6 +1142,7 @@ static const struct { const char* name; lua_CFunction fn; } kNatives[] = {
     { "ESE_FPS",       ese_fps       },
     { "ESE_Mouse",     ese_mouse     },
     { "ESE_Input",     ese_input     },
+    { "ESE_View",      ese_view      },
     { "ESE_Caps",      ese_caps      },
     { "ESE_WriteInt",   ese_writeint   },
     { "ESE_WriteBytes", ese_writebytes },
@@ -1198,7 +1219,7 @@ static int safe_rd(DWORD addr, DWORD* out);
  * stepping begins on the very next instruction.
  */
 #define TRACE_RING   512
-#define TRACE_MAX    400000        /* hard cap so a miss cannot hang the game */
+#define STEP_TRACE_MAX 400000      /* hard cap so a miss cannot hang the game */
 #define TF_BIT       0x100
 
 static volatile LONG  g_trace_on  = 0;
@@ -1619,7 +1640,7 @@ static LONG CALLBACK ese_veh(EXCEPTION_POINTERS* ep) {
      * CONTINUE_EXECUTION resumes the very next instruction. */
     if (code == EXCEPTION_SINGLE_STEP && g_trace_on) {
         g_ring[g_ring_i++ % TRACE_RING] = ep->ContextRecord->Eip;
-        if (++g_steps < TRACE_MAX) ep->ContextRecord->EFlags |= TF_BIT;
+        if (++g_steps < STEP_TRACE_MAX) ep->ContextRecord->EFlags |= TF_BIT;
         else { g_trace_on = 0; trace_dump("step cap reached"); }
         return EXCEPTION_CONTINUE_EXECUTION;
     }
@@ -1748,8 +1769,28 @@ static int state_readable(lua_State* L) {
                          PAGE_EXECUTE_WRITECOPY)) != 0;
 }
 
+/* Set by the 00580493 fetch hook when BattleUI.CameraZoomTo is a function. */
+static lua_State* g_battle_pend = NULL;
+static DWORD g_battle_obj = 0;
+
+/* Live while the battle object still points at L and the battle manager exists. */
+static int battle_state_live(lua_State* L) {
+    DWORD slot = 0, cur = 0, root = 0, mgr = 0;
+    if (!L || !g_battle_obj) return 0;
+    if (!safe_rd(g_battle_obj + 4, &slot) || !slot) return 0;
+    if (!safe_rd(slot, &cur) || cur != (DWORD)L) return 0;
+    if (!safe_rd(0x0137D488 + g_delta, &root) || !root) return 0;
+    if (!safe_rd(root + 0x31C, &mgr) || !mgr) return 0;
+    return state_readable(L);
+}
+
 static void tick_run(void) {
     if (!g_tick_on || !g_battleL || !g_tick_src[0]) return;
+    if (g_battle_obj && !battle_state_live(g_battleL)) {
+        ese_log("[tick] battle state %p no longer held by battle object - dropped", g_battleL);
+        g_battleL = NULL;
+        return;
+    }
     if (!state_readable(g_battleL)) {
         ese_log("[tick] battle state %p unreadable - dropped, tick left armed", g_battleL);
         g_battleL = NULL;
@@ -1800,7 +1841,23 @@ static void tick_run(void) {
  * request, evaluates it in the campaign state, and stores the result. */
 static void native_cmd(const char* p);
 
+static void battle_bind_pump(void) {
+    static volatile LONG busy = 0;
+    lua_State* L = g_battle_pend;
+    if (!L || L == g_battleL) return;
+    if (!battle_state_live(L)) return;
+    if (InterlockedCompareExchange(&busy, 1, 0) != 0) return;
+    g_battle_pend = NULL;
+    g_battleL = L;
+    ese_log("[ese] BATTLE state bound via BattleUI.CameraZoomTo: %p (object %08lX)",
+            (void*)L, (unsigned long)g_battle_obj);
+    register_natives(L);
+    run_autoexec_file(L, "ese_battle_autoexec.lua");
+    InterlockedExchange(&busy, 0);
+}
+
 static void pump(void) {
+    battle_bind_pump();
     tick_run();
     static volatile LONG reentry = 0;
     /* Do NOT gate on g_campL. A custom battle launched from the main menu has
@@ -1943,6 +2000,23 @@ static int is_real_battle_state(lua_State* L) {
     L_.settop(L, top);
     InterlockedExchange(&busy, 0);
     return ok;
+}
+
+/* Lua type ids: global BattleUI, BattleUI.CameraZoomTo, BattleUI.Current_Selection_Halt. -1 = BattleUI not a table.
+ * 005B3770 does createtable + luaI_openlib(DAT_0137d028 list) + setfield "BattleUI". */
+static void battle_iface_types(lua_State* L, int* ui, int* zoom, int* halt) {
+    int top = L_.gettop(L);
+    *zoom = -1; *halt = -1;
+    L_.getfield(L, LUA_GLOBALSINDEX, "BattleUI");
+    *ui = L_.type(L, -1);
+    if (*ui == LUA_TTABLE) {
+        L_.getfield(L, -1, "CameraZoomTo");
+        *zoom = L_.type(L, -1);
+        L_.settop(L, top + 1);
+        L_.getfield(L, -1, "Current_Selection_Halt");
+        *halt = L_.type(L, -1);
+    }
+    L_.settop(L, top);
 }
 
 static const char* kBattleUniqueNames[] = {
@@ -2818,6 +2892,39 @@ static LONG               g_di_mpolls = 0;
 static volatile LONG      g_look_on = 0;   /* mouselook: recentre the cursor each read */
 static int                g_lastmx = 0, g_lastmy = 0, g_lastvalid = 0;
 
+/* First-person presentation state. The Lua rig owns the mode switch; native
+ * code owns the two things Lua cannot do reliably: drawing after Empire's HUD
+ * and balancing Win32's cursor display counter. */
+static volatile LONG      g_fp_view = 0;
+static LONG               g_cursor_hide_steps = 0;
+static volatile LONG      g_crosshair_attempts = 0;
+static volatile LONG      g_crosshair_vp_hr = 0;
+static volatile LONG      g_crosshair_rt_hr = 0;
+static volatile LONG      g_crosshair_rim_hr = 0;
+static volatile LONG      g_crosshair_dot_hr = 0;
+static volatile LONG      g_crosshair_cx = 0, g_crosshair_cy = 0;
+static void d3d_rehook_present(void);
+
+static void fp_cursor_hide(void) {
+    if (g_cursor_hide_steps) return;
+    /* ShowCursor is a counter, not a boolean. Remember every decrement so the
+     * exact pre-FP state can be restored instead of guessing that zero was it. */
+    for (int i = 0; i < 32; i++) {
+        int n = ShowCursor(FALSE);
+        g_cursor_hide_steps++;
+        if (n < 0) break;
+    }
+    g_lastvalid = 0;
+}
+
+static void fp_cursor_restore(void) {
+    while (g_cursor_hide_steps > 0) {
+        ShowCursor(TRUE);
+        g_cursor_hide_steps--;
+    }
+    g_lastvalid = 0;
+}
+
 static HRESULT __stdcall hk_getdevstate(void* dev, DWORD cb, void* data) {
     HRESULT hr = o_getdevstate(dev, cb, data);
     /* A 256-byte state buffer is the keyboard format; mouse state is a much
@@ -2891,6 +2998,41 @@ static int __cdecl ese_input(lua_State* L) {
     return 1;
 }
 
+/* ESE_View("on"|"off"|"status")
+ *
+ * One switch keeps the native overlay, cursor visibility and Lua camera mode
+ * coherent. It deliberately does not decide whether the hooked man is valid;
+ * the Lua side performs that ownership/liveness gate before entering FP. */
+static int __cdecl ese_view(lua_State* L) {
+    const char* cmd = L_.tolstring(L, 1, NULL);
+    if (cmd && (strcmp(cmd, "on") == 0 || strcmp(cmd, "1") == 0)) {
+        InterlockedExchange(&g_fp_view, 1);
+        fp_cursor_hide();
+        /* A battle load resets D3D9 and may replace the additional swapchain.
+         * Reacquire its Present slot at the moment FP needs frame callbacks. */
+        d3d_rehook_present();
+    } else if (cmd && (strcmp(cmd, "off") == 0 || strcmp(cmd, "0") == 0)) {
+        InterlockedExchange(&g_fp_view, 0);
+        fp_cursor_restore();
+    } else if (cmd && strcmp(cmd, "status") != 0) {
+        push_str(L, "ESE_View(\"on\"|\"off\"|\"status\")");
+        return 1;
+    }
+    char b[224];
+    _snprintf(b, sizeof(b)-1,
+              "view=%s crosshair=%s cursorHideSteps=%ld draws=%ld vp=%08lX rt=%08lX clear=%08lX/%08lX center=%ld,%ld",
+              g_fp_view ? "on" : "off", g_fp_view ? "on" : "off",
+              (long)g_cursor_hide_steps, (long)g_crosshair_attempts,
+              (unsigned long)g_crosshair_vp_hr,
+              (unsigned long)g_crosshair_rt_hr,
+              (unsigned long)g_crosshair_rim_hr,
+              (unsigned long)g_crosshair_dot_hr,
+              (long)g_crosshair_cx, (long)g_crosshair_cy);
+    b[223] = 0;
+    push_str(L, b);
+    return 1;
+}
+
 static HRESULT __stdcall hk_createdevice_di(void* self, const void* guid,
                                             void** out, void* aggr) {
     HRESULT hr = o_createdevice_di(self, guid, out, aggr);
@@ -2919,6 +3061,7 @@ static HRESULT __stdcall hk_createdevice_di(void* self, const void* guid,
 /* Declared here rather than beside CreateDevice: the frame pump below needs
  * it and runs earlier in the file. */
 static HWND g_hwnd = NULL;
+static void* g_d3ddev = NULL;
 
 typedef struct { UINT msg; WPARAM wp; int x, y; } inj_ev;
 #define INJ_MAX 64
@@ -2943,10 +3086,98 @@ static void inj_pump(void) {
 
 static fn_present o_sc_present = NULL;
 
+/* A crosshair dot through IDirect3DDevice9::Clear needs no shaders, buffers,
+ * textures or render-state changes. Two tiny rectangles produce a black rim
+ * and white centre at the actual viewport centre, including non-native game
+ * resolutions and letterboxed modes.
+ *
+ * IDirect3DDevice9 vtable: Clear=43, GetViewport=48. */
+typedef struct {
+    DWORD X, Y, Width, Height;
+    float MinZ, MaxZ;
+} ese_d3dviewport9;
+typedef struct { LONG x1, y1, x2, y2; } ese_d3drect;
+
+static void fp_draw_crosshair(void* dev) {
+    if (!dev || !g_fp_view) return;
+    typedef long (__stdcall *fn_clear)(void*, DWORD, const void*, DWORD, DWORD, float, DWORD);
+    typedef long (__stdcall *fn_getviewport)(void*, void*);
+    typedef long (__stdcall *fn_setviewport)(void*, const void*);
+    typedef long (__stdcall *fn_getbackbuffer)(void*, UINT, UINT, UINT, void**);
+    typedef long (__stdcall *fn_getrendertarget)(void*, DWORD, void**);
+    typedef long (__stdcall *fn_setrendertarget)(void*, DWORD, void*);
+    typedef unsigned long (__stdcall *fn_rel)(void*);
+    void** vt = *(void***)dev;
+    fn_clear clear = (fn_clear)vt[43];
+    fn_getviewport getviewport = (fn_getviewport)vt[48];
+    fn_setviewport setviewport = (fn_setviewport)vt[47];
+    fn_getbackbuffer getbackbuffer = (fn_getbackbuffer)vt[18];
+    fn_getrendertarget getrendertarget = (fn_getrendertarget)vt[38];
+    fn_setrendertarget setrendertarget = (fn_setrendertarget)vt[37];
+    if (!clear || !getviewport || !setviewport || !getbackbuffer ||
+        !getrendertarget || !setrendertarget) return;
+    InterlockedIncrement(&g_crosshair_attempts);
+    ese_d3dviewport9 oldvp, vp;
+    long vphr = getviewport(dev, &oldvp);
+    InterlockedExchange(&g_crosshair_vp_hr, vphr);
+    if (vphr < 0) return;
+
+    /* At Present, Empire still has its post-processing surface bound. Clear on
+     * that surface succeeds but is invisible because it has already been copied
+     * to the swapchain. Temporarily bind the real backbuffer, stamp the dot,
+     * then restore both target and viewport exactly. */
+    void* oldrt = NULL;
+    void* backbuffer = NULL;
+    long oldhr = getrendertarget(dev, 0, &oldrt);
+    long bbhr = getbackbuffer(dev, 0, 0, 0 /* D3DBACKBUFFER_TYPE_MONO */, &backbuffer);
+    if (oldhr < 0 || bbhr < 0 || !oldrt || !backbuffer) {
+        if (oldrt) ((fn_rel)(*(void***)oldrt)[2])(oldrt);
+        if (backbuffer) ((fn_rel)(*(void***)backbuffer)[2])(backbuffer);
+        InterlockedExchange(&g_crosshair_rt_hr, oldhr < 0 ? oldhr : bbhr);
+        return;
+    }
+    long rthr = setrendertarget(dev, 0, backbuffer);
+    InterlockedExchange(&g_crosshair_rt_hr, rthr);
+    if (rthr < 0) {
+        ((fn_rel)(*(void***)backbuffer)[2])(backbuffer);
+        ((fn_rel)(*(void***)oldrt)[2])(oldrt);
+        return;
+    }
+    vphr = getviewport(dev, &vp);
+    InterlockedExchange(&g_crosshair_vp_hr, vphr);
+    if (vphr < 0 || vp.Width < 8 || vp.Height < 8) {
+        setrendertarget(dev, 0, oldrt);
+        setviewport(dev, &oldvp);
+        ((fn_rel)(*(void***)backbuffer)[2])(backbuffer);
+        ((fn_rel)(*(void***)oldrt)[2])(oldrt);
+        return;
+    }
+    LONG cx = (LONG)vp.X + (LONG)vp.Width / 2;
+    LONG cy = (LONG)vp.Y + (LONG)vp.Height / 2;
+    InterlockedExchange(&g_crosshair_cx, cx);
+    InterlockedExchange(&g_crosshair_cy, cy);
+    ese_d3drect rim = { cx-3, cy-3, cx+4, cy+4 };
+    ese_d3drect dot = { cx-1, cy-1, cx+2, cy+2 };
+    long rimhr = clear(dev, 1, &rim, 1 /* D3DCLEAR_TARGET */, 0xFF000000u, 1.0f, 0);
+    long dothr = clear(dev, 1, &dot, 1 /* D3DCLEAR_TARGET */, 0xFFFFFFFFu, 1.0f, 0);
+    InterlockedExchange(&g_crosshair_rim_hr, rimhr);
+    InterlockedExchange(&g_crosshair_dot_hr, dothr);
+    setrendertarget(dev, 0, oldrt);
+    setviewport(dev, &oldvp);
+    ((fn_rel)(*(void***)backbuffer)[2])(backbuffer);
+    ((fn_rel)(*(void***)oldrt)[2])(oldrt);
+}
+
 /* Shared by both present paths: whichever one Empire actually uses drives the
  * frame counter and the paced input queue. */
 static void on_frame(void) {
     inj_pump();
+    if (g_fp_view) {
+        /* Empire may answer WM_SETCURSOR after the transition. Keep the active
+         * cursor null without touching ShowCursor's balanced counter again. */
+        if (!g_hwnd || GetForegroundWindow() == g_hwnd) SetCursor(NULL);
+        fp_draw_crosshair(g_d3ddev);
+    }
     if (!g_fps_probe) return;
     LARGE_INTEGER now;
     QueryPerformanceCounter(&now);
@@ -2970,26 +3201,33 @@ static long __stdcall hk_sc_present(void* sc, const void* a, const void* b, void
 }
 
 static long __stdcall hk_present(void* dev, const void* a, const void* b, void* c, const void* d) {
-    inj_pump();
-    if (g_fps_probe) {
-        LARGE_INTEGER now;
-        QueryPerformanceCounter(&now);
-        g_frames++;
-        if (g_fps_qpc == 0) { g_fps_qpc = now.QuadPart; }
-        else {
-            LONG64 dt = now.QuadPart - g_fps_qpc;
-            if (g_qpf && dt >= g_qpf) {                 /* once per second */
-                double fps = (double)g_frames * (double)g_qpf / (double)dt;
-                g_fps_last = fps;
-                if (g_fps_min == 0.0 || fps < g_fps_min) g_fps_min = fps;
-                if (fps > g_fps_max) g_fps_max = fps;
-                ese_log("[fps] %.1f  (min %.1f  max %.1f)", fps, g_fps_min, g_fps_max);
-                g_frames = 0;
-                g_fps_qpc = now.QuadPart;
-            }
-        }
-    }
+    /* Empire normally presents through its swapchain, but keep the device path
+     * behavior identical for drivers/configurations that use this method. */
+    on_frame();
     return o_present(dev, a, b, c, d);
+}
+
+static void d3d_rehook_present(void) {
+    if (!g_d3ddev) return;
+    void** dvt = *(void***)g_d3ddev;
+    if (dvt[17] != (void*)hk_present) {
+        void* prev = patch_vtable(g_d3ddev, 17, (void*)hk_present);
+        if (prev && prev != (void*)hk_present) o_present = (fn_present)prev;
+        ese_log("[d3d9] device Present rehooked (orig %p)", prev);
+    }
+
+    typedef long (__stdcall *fn_getsc)(void*, UINT, void**);
+    typedef unsigned long (__stdcall *fn_rel)(void*);
+    fn_getsc getsc = (fn_getsc)dvt[14];
+    void* sc = NULL;
+    if (!getsc || getsc(g_d3ddev, 0, &sc) < 0 || !sc) return;
+    void** svt = *(void***)sc;
+    if (svt[3] != (void*)hk_sc_present) {
+        void* prev = patch_vtable(sc, 3, (void*)hk_sc_present);
+        if (prev && prev != (void*)hk_sc_present) o_sc_present = (fn_present)prev;
+        ese_log("[d3d9] swapchain %p Present rehooked (orig %p)", sc, prev);
+    }
+    ((fn_rel)(*(void***)sc)[2])(sc);
 }
 
 /* The REAL register budget. vs_3_0 guarantees 256 float4 vertex constants,
@@ -2997,8 +3235,6 @@ static long __stdcall hk_present(void* dev, const void* a, const void* b, void* 
  * bones-vs-instances budget in weighted.fx. Measure it rather than assume.
  * D3DCAPS9: VertexShaderVersion at +196, MaxVertexShaderConst at +200,
  * PixelShaderVersion at +204. GetDeviceCaps is IDirect3DDevice9 vtable 7. */
-static void* g_d3ddev = NULL;
-
 static int __cdecl ese_caps(lua_State* L) {
     if (!g_d3ddev) { push_str(L, "no D3D9 device yet"); return 1; }
     typedef long (__stdcall *fn_getcaps)(void*, void*);
@@ -3236,7 +3472,8 @@ static int __cdecl ese_mouse(lua_State* L) {
 
 /* ESE_TraceLog(addr [,max]) - drain the ring for a traced site.
  *
- * Returns one record per line: "a0 a1 a2 a3", most recent LAST, and advances
+ * Returns one record per line: "a0 a1 a2 a3 | ecx=... eax=... edx=... ebx=...",
+ * most recent LAST, and advances
  * the drain cursor so each call is reported exactly once. If the ring wrapped
  * before a drain the oldest entries are gone and the reply says how many were
  * lost - silently skipping them would corrupt any opcode sequence built from
@@ -3273,9 +3510,13 @@ static int __cdecl ese_tracelog(lua_State* L) {
     for (i = 0; i < (int)avail; i++) {
         LONG idx = t->logr + i;
         DWORD* r = t->log[idx & (TRACE_LOG - 1)];
-        int wr = _snprintf(b + used, sizeof(b) - used - 1, "%08lX %08lX %08lX %08lX\n",
+        DWORD* rr = t->reglog[idx & (TRACE_LOG - 1)];
+        int wr = _snprintf(b + used, sizeof(b) - used - 1,
+                           "%08lX %08lX %08lX %08lX | ecx=%08lX eax=%08lX edx=%08lX ebx=%08lX\n",
                            (unsigned long)r[0], (unsigned long)r[1],
-                           (unsigned long)r[2], (unsigned long)r[3]);
+                           (unsigned long)r[2], (unsigned long)r[3],
+                           (unsigned long)rr[0], (unsigned long)rr[1],
+                           (unsigned long)rr[2], (unsigned long)rr[3]);
         if (wr <= 0 || used + wr >= (int)sizeof(b) - 64) break;
         used += wr;
     }
@@ -3307,12 +3548,14 @@ static void* make_vt_thunk(int slot, void* orig) {
     int i = 0;
     t[i++] = 0x9C;                                                  /* pushfd */
     t[i++] = 0x60;                                                  /* pushad */
+    t[i++] = 0x8B; t[i++] = 0xD4;                                   /* mov edx,esp (saved regs) */
     t[i++] = 0x8D; t[i++] = 0x44; t[i++] = 0x24; t[i++] = 0x24;     /* lea eax,[esp+0x24] */
+    t[i++] = 0x52;                                                  /* push edx  */
     t[i++] = 0x68; *(int*)(t + i) = slot; i += 4;                   /* push slot */
     t[i++] = 0x50;                                                  /* push eax  */
     t[i++] = 0xB8; *(void**)(t + i) = (void*)trace_handler; i += 4;
     t[i++] = 0xFF; t[i++] = 0xD0;                                   /* call eax */
-    t[i++] = 0x83; t[i++] = 0xC4; t[i++] = 0x08;                    /* add esp,8 */
+    t[i++] = 0x83; t[i++] = 0xC4; t[i++] = 0x0C;                    /* add esp,12 */
     t[i++] = 0x61;                                                  /* popad  */
     t[i++] = 0x9D;                                                  /* popfd  */
     t[i++] = 0xB8; *(void**)(t + i) = orig; i += 4;                 /* mov eax,orig */
@@ -3762,13 +4005,126 @@ static void note_battle_lookup(DWORD* stk) {
 static const unsigned char kPcallProlog[PCALL_STEAL] = {
     0x8B, 0x44, 0x24, 0x10, 0x83, 0xEC, 0x08
 };
-static LONG g_pcall_note = 0;
+/* A live battle produced 48 distinct pcall states, all nargs=0 nresults=-1,
+ * then the cap hid anything later. Those are component states created while
+ * the manager already exists. Do not log a state on its first sighting.
+ * Check CameraZoomTo only when the same pointer is seen again, so a state
+ * freed during construction is never touched. Log only a hit. Do not bind. */
+#define PCALL_SEEN_MAX 256
+static void* g_pcall_seen[PCALL_SEEN_MAX];
+static int   g_pcall_seen_n = 0;
+static int   g_pcall_hits = 0;
+
+/* Ghidra: FUN_00580470 is the only battle-side caller of the state getter
+ * 00F77880, and it has exactly one caller (0057e2f0). The getter returns
+ * *(obj+4), creating it on first touch. CameraZoomTo is not a global, so
+ * getfield and pcall never saw this state.
+ *
+ * The site is a relative CALL. Copying that E8 into a trampoline executes it
+ * from the wrong address (fault 04787400, empty page). This trampoline calls
+ * the getter at its absolute address instead, then logs ESI (the object, set
+ * by MOV ECX,ESI just before the call) and EAX (the return). It does not
+ * return to the stolen call. Log only. Do not bind and do not call Lua. */
+#define A_battle_state_fetch 0x00580493
+#define A_battle_state_getter 0x00F77880
+#define BATTLE_FETCH_STEAL 5
+static const unsigned char kBattleFetchProlog[BATTLE_FETCH_STEAL] = {
+    0xE8, 0xE8, 0x73, 0x9F, 0x00
+};
+static int g_battle_fetch_n = 0;
+
+static void __cdecl on_battle_state_fetch(DWORD obj, DWORD state, DWORD unused) {
+    DWORD slot = 0;
+    lua_State* L = (lua_State*)state;
+    const char* kind = "unreadable";
+    int ui = -1, zoom = -1, halt = -1;
+    (void)unused;
+    if (obj) safe_rd(obj + 4, &slot);
+    if (state_readable(L)) {
+        kind = is_real_battle_state(L) ? "CameraZoomTo=function" : "CameraZoomTo=nil";
+        battle_iface_types(L, &ui, &zoom, &halt);
+        if (ui == LUA_TTABLE && zoom == LUA_TFUNCTION) {
+            /* Bind later from pump(): the battle manager may not exist yet mid-construction. */
+            g_battle_obj = obj;
+            g_battle_pend = L;
+        }
+    }
+    if (g_battle_fetch_n >= 8) return;
+    g_battle_fetch_n++;
+    ese_log("[ese] battle iface L=%p BattleUI=%d .CameraZoomTo=%d .Current_Selection_Halt=%d%s",
+            (void*)L, ui, zoom, halt, g_battle_pend == L ? " (bind pending)" : "");
+    ese_log("[ese] battle object %08lX state %08lX slot %08lX %s",
+            (unsigned long)obj, (unsigned long)state, (unsigned long)slot, kind);
+}
+
+/* FUN_005b3770 registers BattleUI into its cdecl arg L. Hooked at ADD ESP,8 after POP ESI: stack is {local, local, ret, L}. */
+#define A_battle_cb_ret 0x005B3808
+#define BATTLE_CB_STEAL 6
+static const unsigned char kBattleCbProlog[BATTLE_CB_STEAL] = {
+    0x83, 0xC4, 0x08, 0xC3, 0xCC, 0xCC
+};
+static int g_battle_cb_n = 0;
+
+static void __cdecl on_battle_cb_ret(DWORD* stk) {
+    lua_State* L = (lua_State*)stk[3];
+    if (g_battle_cb_n >= 4) return;
+    g_battle_cb_n++;
+    ese_log("[ese] battle callback state %p (registered, not bound)", (void*)L);
+}
+
+/* Replaces the CALL at 00580493. Layout:
+ *   push esi / call getter / push eax,eax,esi / call log / add esp,12 /
+ *   pop eax / popfd / popad / push <site+5> / ret
+ * The handler runs after the getter, so EAX is the return. ESI is the object.
+ * safe_rd of obj+4 is the wrapper slot the getter dereferences. */
+static void* make_fetch_tramp(unsigned char* site, void* handler) {
+    unsigned char* t = (unsigned char*)VirtualAlloc(NULL, 96,
+                            MEM_COMMIT|MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+    if (!t) return NULL;
+    DWORD getter = A_battle_state_getter + g_delta;
+    int i = 0;
+    t[i++] = 0x9C;                               /* pushfd */
+    t[i++] = 0x60;                               /* pushad */
+    t[i++] = 0x56;                               /* push esi (object) */
+    t[i++] = 0x89; t[i++] = 0xF1;                /* mov ecx,esi (fastcall this) */
+    t[i++] = 0xB8; *(DWORD*)(t+i) = getter; i += 4;
+    t[i++] = 0xFF; t[i++] = 0xD0;                /* call getter */
+    t[i++] = 0x6A; t[i++] = 0x00;                /* push 0 (unused slot) */
+    t[i++] = 0x50;                               /* push eax (state) */
+    t[i++] = 0x56;                               /* push esi (object) */
+    t[i++] = 0xB8; *(void**)(t+i) = handler; i += 4;
+    t[i++] = 0xFF; t[i++] = 0xD0;                /* call handler */
+    t[i++] = 0x83; t[i++] = 0xC4; t[i++] = 0x0C; /* add esp,12 */
+    t[i++] = 0x58;                               /* pop eax (saved esi) */
+    t[i++] = 0x61;                               /* popad */
+    t[i++] = 0x9D;                               /* popfd */
+    t[i++] = 0x68; *(void**)(t+i) = (void*)(site + BATTLE_FETCH_STEAL); i += 4;
+    t[i++] = 0xC3;
+    return t;
+}
 
 static void __cdecl on_pcall_note(DWORD* stk) {
-    LONG n = InterlockedIncrement(&g_pcall_note);
-    if (n > 24) return;
-    ese_log("[ese] pcall #%ld L=%p nargs=%ld nresults=%ld",
-            (long)n, (void*)stk[1], (long)(int)stk[2], (long)(int)stk[3]);
+    lua_State* L = (lua_State*)stk[1];
+    int seen = 0, sloti = -1;
+    if (!L || g_pcall_hits >= 4) return;
+    for (int i = 0; i < g_pcall_seen_n; i++) {
+        if (g_pcall_seen[i] == (void*)L) { seen = 1; sloti = i; break; }
+    }
+    if (!seen) {
+        if (g_pcall_seen_n < PCALL_SEEN_MAX)
+            g_pcall_seen[g_pcall_seen_n++] = (void*)L;
+        return;
+    }
+    DWORD slot = 0, mgr = 0;
+    if (!safe_rd(0x0137D488 + g_delta, &slot) || !slot) return;
+    if (!safe_rd(slot + 0x31C, &mgr) || !mgr) return;
+    /* Drop it before the Lua call so a miss is not rechecked every pcall. */
+    g_pcall_seen[sloti] = g_pcall_seen[--g_pcall_seen_n];
+    if (!state_readable(L)) return;
+    if (!is_real_battle_state(L)) return;
+    g_pcall_hits++;
+    ese_log("[ese] battle state candidate L=%p CameraZoomTo=function mgr=%08lX (not bound)",
+            (void*)L, (unsigned long)mgr);
 }
 
 static void __cdecl on_getfield(DWORD* stk) {
@@ -3824,8 +4180,19 @@ static DWORD WINAPI pipe_thread(LPVOID unused) {
             g_res[0] = 0;
             g_done   = 0;
 
-                        int wantsUI = (g_req[0]=='@' && g_req[1]=='u' && g_req[2]=='i');
-            if ((wantsUI && !g_uiL) || (!wantsUI && !g_campL)) {
+            int wantsUI = (g_req[0]=='@' && g_req[1]=='u' && g_req[2]=='i');
+            int wantsNative = (g_req[0]=='@' && g_req[1]=='n' &&
+                               g_req[2]=='a' && g_req[3]=='t');
+            int wantsBattle = (g_req[0]=='@' && g_req[1]=='b' &&
+                               g_req[2]=='a' && g_req[3]=='t' &&
+                               g_req[4]=='t' && g_req[5]=='l' && g_req[6]=='e');
+            if (wantsNative) {
+                /* These commands inspect or change only ESE/Windows state; no
+                 * Lua API is called, so service them here even when Lua is idle. */
+                const char* p = g_req + 4;
+                while (*p == ' ') p++;
+                native_cmd(p);
+            } else if ((wantsUI && !g_uiL) || (!wantsUI && !wantsBattle && !g_campL)) {
                 _snprintf(g_res, RES_MAX-1, wantsUI
                     ? "no UI state acquired yet"
                     : "campaign state not found yet - load a campaign first");
@@ -3880,6 +4247,26 @@ static DWORD WINAPI init_thread(LPVOID unused) {
     install_hook(A_lua_setfield, (void*)on_setfield);
     install_hook(A_lua_getfield, (void*)on_getfield);
     install_hook_ex(A_lua_pcall_site, (void*)on_pcall_note, kPcallProlog, PCALL_STEAL);
+    {
+        unsigned char* site = (unsigned char*)(A_battle_state_fetch + g_delta);
+        if (memcmp(site, kBattleFetchProlog, BATTLE_FETCH_STEAL) != 0) {
+            ese_log("[ese] REFUSING battle fetch hook %p: prologue mismatch (%02X %02X %02X %02X %02X)",
+                    site, site[0], site[1], site[2], site[3], site[4]);
+        } else {
+            void* tramp = make_fetch_tramp(site, (void*)on_battle_state_fetch);
+            DWORD old;
+            if (tramp && VirtualProtect(site, BATTLE_FETCH_STEAL, PAGE_EXECUTE_READWRITE, &old)) {
+                site[0] = 0xE9;
+                *(DWORD*)(site+1) = (DWORD)tramp - ((DWORD)site + 5);
+                VirtualProtect(site, BATTLE_FETCH_STEAL, old, &old);
+                FlushInstructionCache(GetCurrentProcess(), site, BATTLE_FETCH_STEAL);
+                ese_log("[ese] hooked battle fetch %p -> tramp %p (absolute getter)", site, tramp);
+            } else {
+                ese_log("[ese] battle fetch hook install failed");
+            }
+        }
+    }
+    install_hook_ex(A_battle_cb_ret, (void*)on_battle_cb_ret, kBattleCbProlog, BATTLE_CB_STEAL);
     install_hook_ex(A_price_engine, (void*)on_price_engine, kPriceProlog, 6);
     install_hook_ex(A_iter_loop,    (void*)on_iter_loop,    kIterProlog,  6);
     install_hook_ex(A_accum,        (void*)on_accum,        kAccumProlog, 5);

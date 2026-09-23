@@ -178,13 +178,38 @@ replacement for the game.
 ## Where it stands (2026-09-22)
 
 Phases 0-2 are done. The battle state is bound, and `ese_battle_autoexec.lua`
-loads `lua/fp/mod.lua` when `fp` is listed in `ese_mods.lua`. The tick is armed
-at 16 ms: `FPHOT`, `FPMOVE`, `FPSTEP`, `FPCTL`.
+loads the shared runtime. The enabled `fp` manifest then loads `lua/fp/mod.lua`.
+The shared 16 ms dispatcher calls the `fp.main` handler: `FPHOT`, `FPMOVE`,
+`FPSTEP`, `FPCTL`.
 
 The camera does not take over on load. `FPOFF` starts true, so the RTS camera
 stays until `=` (DIK `0x0D`). `-` (DIK `0x0C`) hooks the living man nearest the
 crosshair. Orders stay behind `FPCTLON` and left alt. Personal movement stays
 behind `FPDRIVE`. Both are left false by the loader.
+
+## Current live result (2026-09-23)
+
+Fullscreen battle entry is automated and verified. In a live battle, the FP rig
+loads and `FPSTEP=function`. `FPCMP()` identifies the nearest player-side unit
+under the camera, and `FPCLAIMARMY()` records `FPARMY` from `unit+0x160` so
+`FPFRIENDLY()` can gate control and direct movement against enemy units.
+
+The camera follower works from a friendly man: setting `FPI=FPCMP_MAN`,
+claiming `FPARMY`, then clearing `FPOFF` puts the camera at the man's eye and
+the tick keeps it there. Mounted state is derived from
+`entityY - FPGROUND(x,z)`.
+
+Direct soldier movement is **not solved**. A direct `ESE_WriteFloat` to
+`entity+0x48` is readable immediately, but the formation/controller pass restores
+the original position about one second later. A synthetic W-key pulse with
+`FPDRIVE=true` incremented `FPMOVED`, proving input and the tick fired, but the
+entity position stayed at the formation-owned coordinates afterward. Treat
+`FPDRIVE` as a probe until the engine-owned movement path or per-entity BCQ path
+is found.
+
+Current selection is still independent from camera possession. A
+`Current_Selection_Move_Forwards` probe did not move the hooked man, which means
+the selected unit and `FPI` were not the same unit in that test.
 
 ## Key files
 
@@ -194,3 +219,89 @@ behind `FPDRIVE`. Both are left false by the loader.
 - `ESE/ese_proxy.c` — where a battle-state binding would go
 - `SKILL.md` (empire-trade-mod) — "NEVER probe a condition's signature by
   calling it", which applies verbatim to `SquadInfoByPointer`
+
+### Current selection gate finding (2026-09-23)
+
+`Current_Selection_Move_Forwards` reaches the real order router only if the
+transient battle selection gate at `DAT_0137D488+0x3C0` is non-zero. In the
+current automated battle test, `FPSELSTATE()` reports a clean friendly hook
+(`FPI=1812`, unit strength `66`, `unitArmy == FPARMY`) but:
+
+- `gate3C0 = 00 00 00 00`
+- `ctx3D4 = 0`
+- tracing `00606DB0` while calling `FPFN.fwd()` records `0` hits
+- `WDSNAP/WDDIFF` records `0.00 m` movement for the hooked man
+
+So the blocker is not the camera hook or player-team filter. The blocker is
+arming or discovering the engine's current-selection context. Do **not** force
+`+0x3C0` by write: the paired context pointer can be zero, which would make the
+router call through a null selection manager. The next useful work is to find
+what UI/button path sets `+0x3C0` and `+0x3D4`, or bypass selection entirely via
+the per-entity BCQ path.
+
+New helper: `FPSELSTATE()` in `lua/fp/fpselect.lua` prints the gate, context,
+current hooked entity, unit, army, friendliness, and strength in one line.
+
+`FPPICK()` now defaults to player-side unit-strength-valid targets only after
+`FPARMY` is claimed. `FPPICKENEMY=true` intentionally restores enemy picking for
+research. `FPREHOOKFRIEND(true)` recovers from enemy/corpse hooks by attaching
+to the nearest strength-valid friendly man regardless of crosshair direction.
+
+## Finish checklist
+
+- [x] Automated 10 minute screen-check heartbeat created for unattended testing.
+- [x] Friendly hook recovery exists: `FPREHOOKFRIEND(true)`.
+- [x] Selection gate diagnostic exists: `FPSELSTATE()`.
+- [x] Player-side pick condition added: `FPPICK()` defaults to claimed army only.
+- [x] First-person entry and continued possession require the claimed player army and positive owning-unit strength (`FPCANENTER`/`FPTRYENTER`).
+- [ ] Add exact per-man fallen/dead and routed-state checks after those fields are identified; unit strength is not proof that one particular entity is standing.
+- [x] Crosshair dot drawn in first person.
+- [x] Mouse cursor hidden in first person and restored outside first person.
+- [ ] Shooting: left click causes the possessed man or his engine-owned command path to fire.
+- [ ] Melee: melee input reaches the possessed man or selected valid friendly unit path.
+- [ ] Proper 3D control: movement/turning uses engine-owned movement, not raw position writes that snap back.
+- [ ] Mark verified live after each test pass in this file.
+
+### Live verification: crosshair and cursor (2026-09-23)
+
+- `ESE_View("on")` reacquires the active post-reset swapchain and draws into
+  backbuffer zero during Present. Verified at viewport centre `960,540` in
+  fullscreen `1920x1080`; 2,540 consecutive calls reported successful viewport,
+  render-target and clear results (`00000000`).
+- The visible result is a three-pixel white dot with a black rim. A centre crop
+  confirmed the dot appears only while first person is active.
+- `ESE_View("off")` removed the dot on the following frame and returned the
+  balanced Win32 cursor-hide count from 32 decrements to zero. The Lua toggle,
+  stale-manager path and invalid-entity path all call the same restoration.
+- Battle automation was hardened during this pass: every click is now sent
+  directly to Empire's window, and the default animated-screen settle is eight
+  seconds. The five-Escape recovery remains the preflight from an unknown UI.
+
+### Activation guard implementation (2026-09-23)
+
+- `=` and crosshair picking now enter through `FPTRYENTER()` rather than setting
+  `FPOFF=false` directly.
+- `FPCANENTER()` re-resolves the battle state, requires a claimed `FPARMY`, a
+  live entity-array entry, an owning unit, `unit+0x160 == FPARMY`, and positive
+  `unit+0x178` strength.
+- The per-frame follower repeats the army and strength checks. Failure disables
+  first person and individual controls and restores the native view/cursor
+  state. This deliberately does not claim to identify an individual corpse or
+  a routed man; both still need traced engine fields.
+
+### Shot-path slice (2026-09-23)
+
+- Static caller/decompiler slicing separated `BCQ_FIRE_PROJECTILE` (`005D0560`)
+  from the soldier path. The BCQ function reads a projectile-table index and
+  position for a cinematic/queued projectile command.
+- The engine-owned musket path is the ammo-state interface at vtable
+  `0122F74C`: start/update/reset thunks lead to `007178A0`, `00718930`, and
+  `00718420`. The update waits for the weapon delay, asks the weapon object for
+  launch data, constructs the projectile, records the shot, and marks `+0x74`
+  fired.
+- The generic tracer now records `ECX`, `EAX`, `EDX`, and `EBX` beside its four
+  existing stack words. This is needed to map `00718930`'s `ECX` ammo-state
+  object back to the possessed entity before any call is attempted.
+- Fixed a pre-existing `TRACE_MAX` macro collision found by the clean build:
+  the eight-slot call tracer and 400,000-step instruction tracer now have
+  separate limits, preventing out-of-bounds slot scans.

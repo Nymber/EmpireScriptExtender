@@ -20,14 +20,6 @@ local function clog(s)
   if type(ESE_Log) == 'function' then ESE_Log('[chain] ' .. tostring(s)) end
 end
 
--- Same guard the loader uses. A wrong-arity condition is an access violation,
--- which pcall does not catch; ESE_Protect arms the vectored exception handler.
-local function safe(label, fn)
-  if type(ESE.safe) == 'function' then return ESE.safe(label, fn) end
-  local ok, err = pcall(fn)
-  if not ok and ESE.faults then ESE.faults[#ESE.faults+1] = label .. ': ' .. tostring(err) end
-end
-
 ESE.chain = nil
 do
   local f, ferr = loadfile(base .. 'chain_sim.lua')
@@ -58,23 +50,15 @@ end
 
 ESE.chain_accum = {}
 ESE.chain_regions = 0
-if ESE.chain and type(events) == 'table' and type(events.RegionTurnStart) == 'table' then
-  events.RegionTurnStart[#events.RegionTurnStart+1] = function(context)
-    safe('chain-region', function()
-      -- Count only regions that were actually accumulated. RegionTurnStart
-      -- fires for every region in the world, and accumulate_region skips the
-      -- ones that are not ours. It returns a number when it counted.
-      local _, info = ESE.chain.accumulate_region(context, ESE.chain_accum)
-      if type(info) == 'number' then
-        ESE.chain_regions = ESE.chain_regions + 1
-      end
-    end)
-  end
+if ESE.chain and type(ESE.on_event) == 'function' then
+  ESE.on_event('RegionTurnStart', 'production-chains.accumulate', function(context)
+    local _, info = ESE.chain.accumulate_region(context, ESE.chain_accum)
+    if type(info) == 'number' then ESE.chain_regions = ESE.chain_regions + 1 end
+  end, 100)
   clog('production accumulator on RegionTurnStart')
 end
-if ESE.chain and type(events) == 'table' and type(events.FactionTurnStart) == 'table' then
-  events.FactionTurnStart[#events.FactionTurnStart+1] = function(context)
-    safe('chain-tick', function()
+if ESE.chain and type(ESE.on_event) == 'function' then
+  ESE.on_event('FactionTurnStart', 'production-chains.convert', function(context)
       if not conditions.FactionIsHuman(LocalFaction, context) then return end
       local M = ESE.chain
       -- Gathered by the RegionTurnStart handlers above, which run before the
@@ -102,7 +86,6 @@ if ESE.chain and type(events) == 'table' and type(events.FactionTurnStart) == 't
         clog(M.format_report(tostring(LocalFaction), res))
       end
       ESE.chain_last = res
-    end)
-  end
+  end, 100)
   clog('conversion on FactionTurnStart')
 end

@@ -24,9 +24,10 @@ in one state and not another, and the failure is silent.
 A campaign must be loaded before the campaign state exists at all; a battle
 must be in progress before the battle state exists.
 
-Campaign mods do not edit `ese_autoexec.lua`. They are folders under
-`EmpireScriptExtender/lua/` named in `ese_mods.lua`; `lua/README.md` is the
-short version. The functions this file does not list — `ESE_Log`, `ESE_Protect`,
+Mods do not edit either autoexec loader. They are folders under
+`EmpireScriptExtender/lua/` with a manifest and an activation record in
+`ese_mods.lua`; `lua/README.md` is the short version. The functions this file
+does not list — `ESE_Log`, `ESE_Protect`,
 `ESE_Call`, `ESE_Trace` and the rest — are registered from the `kNatives[]`
 table in `ESE/ese_proxy.c`, and the two detours underneath them are
 `A_lua_getfield` / `A_lua_setfield` in the same file.

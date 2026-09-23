@@ -165,23 +165,18 @@ Internal paths must be **lowercase with backslashes** or they will not override.
 
 ## 3.2 Script mod — Lua, no native code
 
-Do not edit `ese_autoexec.lua`. It is the loader. A campaign mod is a folder
-under `EmpireScriptExtender/lua/` containing `mod.lua`, named in `ese_mods.lua`.
-Adding a mod is a new folder plus one line in that list; removing one is
-deleting both. The worked example, and the short version of this, is
-`lua/README.md`.
+Do not edit either autoexec loader. A Lua mod is a folder under
+`EmpireScriptExtender/lua/` containing `manifest.lua` and `mod.lua`, plus an
+activation record in `ese_mods.lua`. Use `empire.ps1 enable <id>` or `disable
+<id>` and reload the owning Lua state. The short guide is `lua/README.md`; the
+full lifecycle is `docs/MOD_SYSTEM.md`.
 
-`ese_autoexec.lua` (game root) and `ese_battle_autoexec.lua` (game root) are the
-only two files ESE runs itself. The first loads every folder in `ese_mods.lua`.
-The second sets `ESE.battle` and loads `fp/mod.lua` if that folder is listed.
-`fp/mod.lua` returns immediately when `ESE.battle` is unset, so the campaign
-pass of the same list does not install the rig. The part scripts stay in
-`lua/fp/`; `tools/game/build_autoexec.rb` only copies the thin loader, it no
-longer concatenates them. `empire.ps1 sync` (also run by `launch`) is what
-puts that tree into the install: it creates `EmpireScriptExtender\lua` and
-`EmpireScriptExtender\tools` and copies the autoexec pair, every folder named
-in `ese_mods.lua`, `lua/ui`, and the `game`, `pack`, `ui`, and `trademod`
-tool folders.
+`ese_autoexec.lua` and `ese_battle_autoexec.lua` in the game root are the two
+native entry points. Both load `ese_core.lua`; the core validates manifests,
+orders dependencies, skips incompatible states, and isolates failed entries.
+`empire.ps1 sync` (also run by `install` and `launch`) copies the complete Lua
+runtime, every supported tool category, path resolvers, and documentation into
+the live mirror.
 
 The campaign API is real and large (`docs/LUA_API.md`); the battle state
 exposes 208 natives. The functions ESE adds on top of both — `ESE_Log`,
@@ -191,10 +186,10 @@ in `ESE/ese_proxy.c`. The two detours that make any of this possible are
 table-lookup functions, if a mod has to go below the scripting API, are
 catalogued in `docs/HOOK_TARGETS.md`.
 
-Append to `events`, do not replace. A top-level `return` ends the chunk, so a
-script that is concatenated into another file (the battle rig is) must be
-wrapped in `(function() ... end)()`. A `mod.lua` is loaded on its own, so a
-`return` there only ends that mod.
+Register campaign callbacks with `ESE.on_event` and frame work with
+`ESE.on_tick`. The shared runtime owns the engine event bridges and native tick;
+mods should not replace or append those directly. A top-level `return` ends its
+independently loaded file.
 
 ## 3.3 Live memory mod — read/write the object graph
 
@@ -208,9 +203,10 @@ local A    = FPP(FPAA(M, 8))
 local D    = FPP(FPAA(FPP(FPAA(A, 0xB0)), 0x90))   -- entity array
 ```
 
-Per-frame work goes in `ESE_Tick` (source capped at **2048 bytes**, so derive
-addresses once in a setup pass). `ESE_Call` **cannot** be used inside the tick —
-it shares a guard and returns "guard busy". Use `ESE_WrapFn` instead.
+Per-frame mod work goes through `ESE.on_tick`; the core owns the one native
+`ESE_Tick` source string. Derive addresses once in setup. `ESE_Call` **cannot**
+be used from a tick handler because it shares the native guard and returns
+"guard busy". Use `ESE_WrapFn` instead.
 
 ## 3.4 Native mod — hooks and patches (last resort)
 
@@ -282,7 +278,11 @@ no prologue needs decoding.
 
 ## 4.5 Process limitations, stated plainly
 
-- This is **not a git repository**. A bulk edit was applied to 33 files with no
-  backup this session. `git init` would make the next one reversible.
+- **The kit IS a git repository now** (`EmpireScriptExtender/`, 132 tracked
+  files). That claim used to read "this is not a git repository" and is no longer
+  true - a tracked file is recoverable with `git restore`. What is still outside
+  version control: `staged/` and `tools/_scratch/` (gitignored by design), `bin/`,
+  and the parent folder's third-party tools. `cleanup.ps1` therefore sends its
+  targets to the Recycle Bin rather than deleting them.
 - Several results depend on **one machine's GPU and one install**. `ESE_Caps`
   reporting 256 is this card; another may differ (it cannot be lower).

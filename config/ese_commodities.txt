@@ -1,0 +1,21 @@
+# Runtime companion for the 23-commodity production-chain pack.
+# <db_key> <ui_name>; ui_name must match a world-market component.
+res_rum               rum
+res_iron              iron
+res_timber            timber
+res_corn              grain
+res_coal              coal
+res_saltpetre         saltpetre
+res_lead              lead
+res_steel             steel
+res_gunpowder         gunpowder
+res_ammunition        ammunition
+res_muskets           muskets
+res_cannon            cannon
+res_textiles          textiles
+res_uniforms          uniforms
+res_naval_supplies    navstores
+
+# Number of resources_tables rows whose unit is empty. Empire hardcodes 12;
+# ESE patches the TradeInfo scan to this shipped-data value.
+raw_resources 9

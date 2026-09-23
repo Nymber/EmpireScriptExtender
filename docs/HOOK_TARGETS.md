@@ -20,18 +20,15 @@ That makes the whole data layer enumerable without guesswork.
 
 ## How to resolve any of them (repeatable)
 
-1. Scan `Empire.exe` for `In table %S...::record_index` and capture the record
-   type inside each match (`scratchpad\find_table_strings.ps1`).
+1. Search `Empire.exe` for `In table %S...::record_index` in Ghidra and capture
+   the record type inside each match. `tools/engine/ghidra.ps1` is the supported
+   headless entry point for follow-up xrefs and decompilation.
 2. Convert the match's file offset to a static address via the PE section table
    (`SizeOfOptionalHeader` at `peOff+20`, section table at `peOff+24+optSize`;
    static = `0x00400000 + VAddr + (fileOff - RawPtr)`).
 3. Feed those addresses to `GhidraToolkit.java` in **`callers`** mode to get the
    referencing functions.
 
-Note: `GhidraToolkit`'s `xrefs` mode does **not** work for these - it matches
-defined strings by *exact full equality*, and these error strings are hundreds
-of characters long and mostly undefined bytes in `.rdata`. Use the address
-route above instead.
 
 ## Resolved accessor strings (static addresses)
 

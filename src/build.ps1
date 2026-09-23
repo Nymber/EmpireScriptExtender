@@ -19,7 +19,7 @@ param([switch]$Deploy)
 
 # Resolve the install location. $PSScriptRoot is EMPTY inside param(),
 # so this has to happen in the body, not as a parameter default.
-if (-not $gameDir) { $gameDir = (& (Join-Path $PSScriptRoot '..\..\empire_paths.ps1') -Quiet) }
+if (-not $gameDir) { $gameDir = (& (Join-Path $PSScriptRoot '..\empire_paths.ps1') -Quiet) }
 
 $ErrorActionPreference = "Stop"
 $here    = Split-Path -Parent $MyInvocation.MyCommand.Path

@@ -24,7 +24,7 @@
 #   ruby gen_unit_requirements.rb --units <units.csv> --stats <stats.csv>
 #                                 [--lua F] [--csv F]
 
-require_relative "../../../empire_paths"
+require_relative "../../empire_paths"
 
 def opt(n, d = nil)
   i = ARGV.index("--#{n}")

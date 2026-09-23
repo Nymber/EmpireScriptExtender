@@ -27,7 +27,7 @@ param(
     # Evaluate in the BATTLE lua_State, where Empire's 208-function battle API
     # lives (CameraZoomTo, Current_Selection_*, EnableShortcutHandler, ...).
     # That state is created per battle, so this only works while in one.
-    # See docs/battle_lua_api.csv.
+    # See docs/LUA_API.md PART 3.
     [switch]$Battle,
     # ESE's own commands, no Lua state required. Works at the main menu, in a
     # custom battle, anywhere the DLL is loaded.

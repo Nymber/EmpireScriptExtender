@@ -11,17 +11,58 @@ building on the wrong side of it wastes weeks.
 
 ---
 
-## STATUS — 2026-09-20
+## STATUS — 2026-09-23
 
 | phase | state |
 |---|---|
-| 0 — prove the restriction levers | **DISPROVEN.** `add_restricted_unit_record` does not exist |
 | 1 — the goods exist | **DONE.** 23 commodities, startpos widened, all visible + scrollable |
 | 2 — the buildings | **DONE.** 46 building levels, per-culture art, descriptions, slot-gated |
 | 3 — the chain simulation | **code done, selftest passes; first real production run pending** |
-| 4 — consequences | **redesigned** — no restriction API exists, so it is a treasury penalty |
+| 4 — consequences | it is a treasury penalty |
 | 5 — the AI | not started |
-| + Stock Controls UI | **DONE** |
+| + Stock Controls UI | **persistent toggle layout deployed; live click behavior and Trade-tab round trip still unverified** |
+
+### Trade-tab crash and tab visibility correction (2026-09-23)
+
+The fault at static `0x00A04B96` is inside the native trade-detail builder and
+reads through a null `TRADE_DETAIL_RECORD`. The log records this fault before
+the corrected startup later reports all 15 extra commodities wired into
+`TradeInfo`. This supports a missing-config explanation for the earlier fault,
+but the log does not prove the Trade tab was opened after the corrected
+startup. Treat the fix as awaiting that live retest. The config drives ESE's
+cloned `TradeInfo` blocks and the `raw_resources` count patch; it is required
+runtime data. Its maintained source is `config/ese_commodities.txt`, which is
+installed, synchronized, diagnosed, and released with ESE.
+
+That corrected startup later logs a different fault at static `0x004DAE5D`,
+inside a short-string copy routine. It is a separate fault address and has not
+been tied to the Trade tab or the Stock Controls layout. Record it separately
+if it reproduces; do not count it as evidence for or against the trade fix.
+
+Retest attempt on 2026-09-23: ESE logged the config, wired 15 `TradeInfo`
+entries, and patched `raw_resources` from 12 to 9. Windows then recorded an
+`Empire.exe` heap-corruption exit (`0xC0000374`) at 15:33. Relaunching that same
+installed build initialized ESE again, but the process exited before a game
+window was available; no Trade-tab round trip occurred. The commodity fix is
+therefore not yet runtime-verified.
+
+The no-hide layout was deployed as an isolated UI change. The earlier 15:39
+launch initialized ESE's config and D3D/DirectInput hooks, then exited before a
+game window appeared; Windows logged no new crash event for that attempt.
+
+The runtime hide button was retired because it hid the only control capable of
+reopening Stock Controls and called UI wrappers without validating lookups. It
+was replaced with a persistent header toggle built into the government-screen
+layout. The toggle clones the Stock Controls tab artwork, removes the cloned
+storage grid, and places the control under the panel root outside `tab_group`.
+Its handler checks component lookups, returns to Trade before hiding the tab,
+and can show the tab again.
+
+The toggle layout passed structural checks and was packed with the existing
+government-screen script. `zz_stocktab.pack` was deployed after Empire was
+closed; the deployed SHA-256 matched the built pack. This confirms installation,
+not runtime behavior. The toggle clicks and Trade-tab round trip still need a
+live campaign check.
 
 ### What changed in the plan, and why
 
@@ -62,10 +103,9 @@ commanded — that is a property of the engine, not a shortcut.
   buildings; the mechanism works.
 - Production reads zero because **no chain building has been built yet** —
   that is the correct answer, not a defect.
-- The campaign does not load this tree. `empire.ps1 launch` copies the
-  `production chains` folder (it is listed in `ese_mods.lua`) into the
-  install's `EmpireScriptExtender\lua` before the game starts. A campaign
-  already open does not see that copy until it is loaded again.
+- `empire.ps1 sync`, `install`, and `launch` copy the complete Lua runtime into
+  the install. The enabled `production-chains` manifest loads only in a newly
+  created campaign state; a campaign already open keeps its existing state.
 
 **Region filtering was wrong and is fixed.** `RegionTurnStart` fires for every
 region in the world (136 between our turns) and the accumulator only resets on
@@ -110,7 +150,7 @@ call it correctly; the documented parameter is just `amount`, while we pass
 it is, the economic consequence of holding stock is unproven — and it is what
 Phase 4 rests on.
 
-### Stock Controls UI — done, not in the original plan
+### Stock Controls UI — persistent toggle deployed, live retest pending
 
 A fifth government-screen tab: full-panel 2x12 grid of all 23 commodities, each
 row `icon · name · stock · typed target · checkbox`. The target field is
@@ -120,11 +160,22 @@ the checkbox is the vanilla automanage checkbox. Targets live in
 state each turn — one writer per file, because `flush()` rewrites
 `chain_stock.lua` wholesale and would otherwise erase them.
 
+The deployed government-screen layout includes a separate header toggle,
+outside `tab_group`, so the control remains available while the tab is hidden.
+The handler calls `ShowTrade` before hiding Stock Controls, and guards the
+panel and tab lookups. The former `button_hide_stock` action is retired because
+it hid its own route back into the panel. The new pack is deployed, but its
+show/hide behavior has not yet been exercised in a live campaign.
+
 ### Next single step
 
-End one turn with the confirmed signature live and read the chain report. Either
-production is non-zero and Phase 3 is real, or it is still zero and the
-accumulator — not the signature — is at fault.
+Launch the deployed build into a campaign. Open the government screen and
+verify the header toggle appears. Click it once to return to Trade and hide
+Stock Controls; click it again and verify Stock Controls can be selected.
+Then open Trade and Stock Controls in both directions, watching for
+`0x00A04B96`. Record any `0x004DAE5D` occurrence separately. Startup logging
+of the 15 extra commodities and `raw_resources=9` confirms configuration was
+loaded, but does not substitute for this UI interaction check.
 
 ---
 

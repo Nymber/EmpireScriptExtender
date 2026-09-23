@@ -643,7 +643,7 @@ stale `corn`/`grain` tables that shipped silently).
 ## Key files
 
 - `tools/mesh/decode_vwm.rb` — the incremental decoder
-- `scratchpad/mesh/walk.rb`, `parts.rb`, `vsize.rb` — layout proofs
+- `tools/mesh/validate_vwm.rb` and `vwm_json.rb` — maintained layout validation
 - `etwng/etwconv/lib/rigid_mesh.rb` — the solved sibling format
 - `etwng/anim/anim2json_etw` — skeleton recovery
 - `SKILL.md` → "UNIT ART — what the engine allows, and where the real blocker is"

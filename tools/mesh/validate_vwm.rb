@@ -29,7 +29,7 @@
 # Usage
 #   ruby validate_vwm.rb [--game DIR] [--limit N] [--verbose]
 
-require_relative "../../../empire_paths"
+require_relative "../../empire_paths"
 
 def opt(n, d)
   i = ARGV.index("--#{n}")

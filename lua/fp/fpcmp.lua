@@ -79,4 +79,23 @@ function FPCMP()
     "cam %.0f %.0f %.0f  nearest unit %s  men=%d str=%d  centre %.0f %.0f  closest man %d at %.0fm (feet %.0f, camera is %.0fm above)",
     cx, cy, cz, g.u, g.n, st, g.ax, g.az, g.i, g.d, g.y, cy - g.y)
 end
+
+-- Record the player army object from a known-friendly unit. At deployment, the
+-- default camera starts over the player's line, so `FPCMP(); FPCLAIMARMY()` is
+-- the current safest way to seed the team gate before enabling FPCTL/FPDRIVE.
+-- This helper is explicit on purpose: automatic claiming from an arbitrary
+-- camera position would make enemy control possible after a free-camera move.
+function FPCLAIMARMY(unit)
+  local aa, P = FPAA, FPP
+  local u = unit or FPCMP_UNIT
+  if not u then
+    FPCMP()
+    u = FPCMP_UNIT
+  end
+  if not u then return "no candidate unit; point the camera over a friendly unit and run FPCMP()" end
+  local army = P(aa(u, 0x160))
+  if not army or army == "00000000" then return "candidate unit has no army pointer" end
+  FPARMY = army
+  return "FPARMY=" .. tostring(FPARMY) .. " from unit " .. tostring(u)
+end
 return "FPCMP loaded"

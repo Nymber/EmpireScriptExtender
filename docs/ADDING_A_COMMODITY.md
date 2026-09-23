@@ -233,7 +233,12 @@ that 181-byte block once per line in `ese_commodities.txt`:
 res_rum   rum
 ```
 
-Restart the game; no rebuild needed. Confirm in `ese_log.txt`:
+The maintained source is `config/ese_commodities.txt` in the ESE development
+tree. Run `empire.ps1 sync` (or install ESE) to copy it beside `Empire.exe`.
+Do not maintain the game-root copy by hand; the doctor compares the two files
+and verifies that their keys match the production-chain manifest.
+
+Restart the game; no DLL rebuild is needed. Confirm in `ese_log.txt`:
 
 ```
 [ti] ese_commodities.txt: 1 extra commodity
@@ -245,6 +250,13 @@ Restart the game; no rebuild needed. Confirm in `ese_log.txt`:
 > inside a loop that runs *before* the Supply and Exports sections - so a typo
 > does not hide one commodity, it breaks the entire Trade tab. To disable one,
 > comment out its line and restart.
+
+> **The game-root file is required runtime data when an extended commodity
+> pack is active.** If it is missing, ESE cannot clone the additional
+> `TradeInfo` blocks or apply the matching raw-resource count. A log captured
+> without the file contains a null `TRADE_DETAIL_RECORD` dereference at static
+> `0x00A04B96`; a later startup confirms the config loaded, but still needs an
+> in game Trade-tab round trip to verify the fix.
 
 Done in memory rather than as an on-disk exe patch because the cloned block
 contains three absolute addresses that the loader rebases through the relocation
@@ -262,6 +274,7 @@ address can just be written correctly.
 | arrays widened | accumulator dump → region counts match the new width |
 | return address intact | `param_2[28]` holds a code address, not garbage |
 | UI receives it | `.\ese.ps1 -UI "…CampaignUI.TradeInfo()…"` → N prices |
+| runtime contract | `.\empire.ps1 doctor` → `Trade UI config` and `Trade config data` pass |
 | no regression | `.\rumtoggle.ps1 -State vanilla` and compare |
 
 ## Tools

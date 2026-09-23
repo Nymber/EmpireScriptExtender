@@ -5,9 +5,10 @@
 # to be a layout component. button_diplomacy is already in this file, so this
 # is a sibling clone, not a foreign-template clone (those crash).
 #
-# The click runs OnSelect in THIS component's state. It cannot see the
-# government panel, so it writes chain_tab.lua ("1" = show the stock tab).
-# The government panel reads that file on its own pulse and on Initialise.
+# The click runs OnSelect in THIS component's state. It cannot call a
+# function that was defined somewhere else, so the toggle lives in the
+# button. This is the version that was packed and tested: it opens and
+# closes dialogue_box. A stock-tab flag is a different button, not this one.
 #
 # Usage
 #   ruby add_spawn_button.rb <layout.xml> <out.xml>
@@ -24,12 +25,14 @@ NAME  = "ese_ui_spawn"
 X = 282
 Y = 151
 
-# Writes the shared flag the government panel reads. This state cannot see
-# the stock tab, so it does not call SetVisible or OpenPanel.
 SCRIPT = <<~'LUA'
 function OnSelect()
-	local f = io.open([[D:\steam\steamapps\common\Empire Total War\EmpireScriptExtender\lua\chain_tab.lua]], "wb")
-	if f then f:write("1") f:close() end
+	local pm = require('Utilities').Require('panelmanager')
+	if pm.IsPanelOpen('dialogue_box') then
+		pm.ClosePanel('dialogue_box')
+	else
+		pm.OpenPanel('dialogue_box', false, 'Initialise', 'UI kit')
+	end
 end
 LUA
 
@@ -40,7 +43,7 @@ raise "no button_diplomacy to clone" unless UILayout.find_named(doc, "button_dip
 btn = UILayout.clone_named(doc, "button_diplomacy", NAME, SHIFT)
 UILayout.set_xy!(btn, X, Y)
 
-btn.xpath("./unicode")[0].content = "Show Stock Controls"
+btn.xpath("./unicode")[0].content = "UI kit"
 btn.xpath("./unicode")[1].content = ""
 
 scr = btn.xpath("./s").find { |s| s.text.include?("function ") }

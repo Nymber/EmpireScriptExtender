@@ -252,8 +252,9 @@ $eseLines += @(
     "# resources_tables rows whose unit is (none).",
     "raw_resources $rawCount"
 )
-$esePath = Join-Path $GameDir 'ese_commodities.txt'
+$esePath = Join-Path $PSScriptRoot '..\..\config\ese_commodities.txt'
 WriteLines $esePath $eseLines
 Write-Host ("ese_commodities.txt -> {0} ({1} commodities, raw_resources {2})" -f $esePath, $com.Count, $rawCount)
+Write-Host 'run empire.ps1 sync before launching the game'
 Write-Host ("prices -> {0} ({1} goods)" -f (Resolve-Path (Join-Path $PSScriptRoot '..\..\lua\production chains\chain_prices.lua')), ($priceLua.Count - 4))
 Write-Host ("`nrecipes -> {0}" -f (Resolve-Path (Join-Path $Staged '..\chain_recipes.lua')))

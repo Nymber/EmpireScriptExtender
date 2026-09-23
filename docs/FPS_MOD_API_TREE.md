@@ -210,10 +210,10 @@ projectile). **Any function calling BOTH is a launch site.**
 | `ESE_Scan("8B 41 ?? 85")` | pattern search -> static addresses |
 | `ESE_Caps()` | `MaxVertexShaderConst=256` (measured — no driver headroom) |
 
-`ese_battle_autoexec.lua` (game root) runs on every battle-state acquisition
-and loads `lua/fp/mod.lua` if `fp` is listed in `ese_mods.lua`. Each part is
-`loadfile`d and `pcall`ed on its own, so a top-level `return` leaves that part
-rather than the chunk. Do not strip those returns: several are multi-line.
+`ese_battle_autoexec.lua` (game root) runs on every battle-state acquisition,
+loads `ese_core.lua`, and asks the manifest loader for battle-compatible mods.
+The first-person entry loads each part independently, so a top-level `return`
+leaves that part. Do not strip those returns: several are multi-line.
 
 ---
 
@@ -229,9 +229,28 @@ rather than the chunk. Do not strip those returns: several are multi-line.
   instancing is a medium or large job.
 - **[?] Reading the current selection.** `FUN_0056BED0` turned out to be a Lua
   ARG reader for `EMPIREBATTLE::UNIT`, not a selection getter.
-- **[?] Driving a man's animation.** Position writes move a man but there is no
-  walk cycle — the renderer is being moved, not the animation state.
+- **[?] Directly driving one man.** A position write to `entity+0x48` is visible
+  on the immediate read, but the formation/controller pass restores the old
+  coordinates about one second later in an active battle. `FPDRIVE=true` sees
+  synthetic W input and increments its movement counter, but the final entity
+  position still snaps back. The useful target is now the engine-owned movement
+  path, likely per-entity BCQ or the formation controller, not raw vec3 writes.
+- **[?] Driving a man's animation.** Still unknown. The current direct-write
+  path is not durable enough to evaluate animation state.
 
 See [[project_empire_camera_6dof]], [[project_empire_terrain_height]],
 [[project_empire_entity_position_vec3]], [[project_empire_firing_a_shot]],
 [[project_empire_bone_ceiling]], [[project_empire_ese_tracing]].
+
+### Selection gate and diagnostics [V]
+
+`Current_Selection_Move_Forwards` (`005F6E40`) stores order code `0x0c` and calls
+`005B3E50`. `005B3E50` only calls the real order router `005B3E00` when
+`DAT_0137D488+0x3C0` is non-zero. In the live automated battle, a friendly,
+strength-valid hooked man still had `gate3C0=0` and `ctx3D4=0`, so calling the
+wrapped `Current_Selection_*` functions returned but submitted no order.
+
+Use `FPSELSTATE()` before movement tests. A meaningful selected-unit order test
+needs `gate3C0 != 0` and a valid context pointer. If those are zero, pursue the
+UI selection arming path or the per-entity BCQ path instead of repeating
+`Current_Selection_*` calls.

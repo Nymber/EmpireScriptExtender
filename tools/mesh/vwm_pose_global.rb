@@ -47,7 +47,7 @@ require "json"
 require_relative "vwm"
 require_relative "vwm_pose"
 
-require_relative "../../../empire_paths"
+require_relative "../../empire_paths"
 
 def opt(n, d)
   i = ARGV.index("--#{n}")

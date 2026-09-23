@@ -33,7 +33,7 @@ $ErrorActionPreference = 'Stop'
 
 $prefs  = Join-Path $env:APPDATA "The Creative Assembly\Empire\scripts\preferences.empire_script.txt"
 $backup = "$prefs.bak_prelaunch"
-$gameDir = (& (Join-Path $PSScriptRoot '..\..\empire_paths.ps1') -Quiet)
+$gameDir = (& (Join-Path $PSScriptRoot '..\empire_paths.ps1') -Quiet)
 
 if ($List) {
     Write-Host "Bundled test battles worth using (all in testdata.pack):"

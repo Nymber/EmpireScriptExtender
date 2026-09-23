@@ -31,7 +31,7 @@
 require_relative "rigid_model"
 require_relative "subdiv_prop_lib"
 
-require_relative "../../../empire_paths"
+require_relative "../../empire_paths"
 
 GAME = EMPIRE.game
 

@@ -29,7 +29,7 @@
 
 require "nokogiri"
 
-require_relative "../../../empire_paths"
+require_relative "../../empire_paths"
 
 file  = ARGV[0]
 table = ARGV[1]

@@ -1,5 +1,4 @@
 # Built by src/build.ps1. A release ships the DLL separately, not from git.
-bin/
 src/dinput8.dll
 src/dinput8.pdb
 src/ese_proxy.lib

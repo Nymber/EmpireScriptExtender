@@ -31,7 +31,7 @@
 #   ruby vwm.rb roundtrip [--limit N]    # repack every mesh, require identical
 #   ruby vwm.rb info <file>              # summarise one mesh
 
-require_relative "../../../empire_paths"
+require_relative "../../empire_paths"
 
 module VWM
   MAGIC = "\x78\x56\x34\x12".b

@@ -32,7 +32,7 @@
 #     object-space check is the stricter of the two.
 require "fileutils"
 require "digest"
-require_relative "../../../empire_paths"
+require_relative "../../empire_paths"
 
 TOOLS = __dir__
 
