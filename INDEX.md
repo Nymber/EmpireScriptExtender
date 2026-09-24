@@ -116,6 +116,12 @@ from ESE's `KitDir`.
 | `docs/BEHAVIOR_TO_CODE.md` | Trace schema, dependency slicing, causal experiments, models |
 | `docs/MEMORY_TOOLS_AND_SYNC_RULE.md` | Tool inventory and authoritative/live sync rule |
 
+### Future mod ideas
+
+| Document | Use |
+|---|---|
+| `docs/MOD_IDEAS.md` | Community ideas parked behind small engine-feasibility experiments |
+
 ## Evidence labels
 
 Engine documentation uses these meanings:

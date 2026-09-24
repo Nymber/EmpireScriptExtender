@@ -13,6 +13,8 @@ tools/ui/_probe/
 tools/_scratch/
 src/_*.ps1
 
+#New
+/docs/MOD_IDEAS.md
 # Local backups and logs.
 *.bak
 *.bak_*

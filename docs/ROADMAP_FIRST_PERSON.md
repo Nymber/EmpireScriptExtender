@@ -189,6 +189,21 @@ behind `FPDRIVE`. Both are left false by the loader.
 
 ## Current live result (2026-09-23)
 
+### Battle-start crash recovery (2026-09-23)
+
+The first battle-start attempts after the ESE loader update repeatedly faulted
+at Empire static address `0x004DAE5D`, in Lua's UTF-16 string-copy path, while
+the campaign autoexec was running. Logs showed native registration and
+`events` discovery immediately before the fault, with no verified battle state
+yet. This located the failure in the ESE-to-Lua startup path rather than in the
+first-person camera tick.
+
+The native hook handlers now suppress ESE observer/pump work while ESE registers
+natives and runs an autoexec chunk. Their detours still call through to Lua's
+original functions. Source and documentation are updated; a rebuilt runtime
+must pass an actual battle-start check before this recovery is considered
+verified stable.
+
 Fullscreen battle entry is automated and verified. In a live battle, the FP rig
 loads and `FPSTEP=function`. `FPCMP()` identifies the nearest player-side unit
 under the camera, and `FPCLAIMARMY()` records `FPARMY` from `unit+0x160` so

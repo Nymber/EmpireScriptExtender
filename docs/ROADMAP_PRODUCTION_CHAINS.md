@@ -20,7 +20,7 @@ building on the wrong side of it wastes weeks.
 | 3 — the chain simulation | **code done, selftest passes; first real production run pending** |
 | 4 — consequences | it is a treasury penalty |
 | 5 — the AI | not started |
-| + Stock Controls UI | **persistent toggle layout deployed; live click behavior and Trade-tab round trip still unverified** |
+| + Stock Controls UI | **toggle is visible in campaign; hide/show behavior and Trade-tab round trip still need verification** |
 
 ### Trade-tab crash and tab visibility correction (2026-09-23)
 
@@ -60,9 +60,9 @@ and can show the tab again.
 
 The toggle layout passed structural checks and was packed with the existing
 government-screen script. `zz_stocktab.pack` was deployed after Empire was
-closed; the deployed SHA-256 matched the built pack. This confirms installation,
-not runtime behavior. The toggle clicks and Trade-tab round trip still need a
-live campaign check.
+closed; the deployed SHA-256 matched the built pack. The user confirmed the
+toggle is visible in the campaign. Its hide/show clicks and the Trade-tab round
+trip still need a live check.
 
 ### What changed in the plan, and why
 
@@ -117,7 +117,7 @@ counter only increments when a region is actually accumulated.
 `governors_residence` returns 0 in a region that plainly has them, which reads
 as "the condition is broken" and is not.
 
-### Next step: build one, and watch it produce
+### Production test after UI validation: build one and watch it produce
 
 Slot requirements (`building_chain_to_slots`):
 
@@ -150,7 +150,7 @@ call it correctly; the documented parameter is just `amount`, while we pass
 it is, the economic consequence of holding stock is unproven — and it is what
 Phase 4 rests on.
 
-### Stock Controls UI — persistent toggle deployed, live retest pending
+### Stock Controls UI — toggle visible, interaction retest pending
 
 A fifth government-screen tab: full-panel 2x12 grid of all 23 commodities, each
 row `icon · name · stock · typed target · checkbox`. The target field is
@@ -164,18 +164,22 @@ The deployed government-screen layout includes a separate header toggle,
 outside `tab_group`, so the control remains available while the tab is hidden.
 The handler calls `ShowTrade` before hiding Stock Controls, and guards the
 panel and tab lookups. The former `button_hide_stock` action is retired because
-it hid its own route back into the panel. The new pack is deployed, but its
-show/hide behavior has not yet been exercised in a live campaign.
+it hid its own route back into the panel. The user confirmed the new button is
+visible in campaign; its interaction behavior remains to be checked.
 
-### Next single step
+### UI validation roadmap
 
-Launch the deployed build into a campaign. Open the government screen and
-verify the header toggle appears. Click it once to return to Trade and hide
-Stock Controls; click it again and verify Stock Controls can be selected.
-Then open Trade and Stock Controls in both directions, watching for
-`0x00A04B96`. Record any `0x004DAE5D` occurrence separately. Startup logging
-of the 15 extra commodities and `raw_resources=9` confirms configuration was
-loaded, but does not substitute for this UI interaction check.
+| step | check | completion evidence |
+|---|---|---|
+| 0 — control loads | **DONE:** toggle is visible in the government screen | user observation |
+| 1 — hide | click the toggle; Stock Controls hides and the panel returns to Trade | visible panel state; no UI error |
+| 2 — reopen | click the persistent toggle again; Stock Controls is selectable | visible panel state |
+| 3 — tab round trip | open Trade, Stock Controls, and Trade again | no crash; inspect `ese_log.txt` for `0x00A04B96`; record `0x004DAE5D` separately |
+| 4 — target persistence | edit one stock target, leave and reopen the panel, then advance one turn | target survives; campaign reads it without UI-state errors |
+
+Run steps 1–3 before a production test so any failure remains attributable to
+the UI pack. Startup logging of 15 extra commodities and `raw_resources=9`
+confirms configuration loaded, but does not substitute for interaction checks.
 
 ---
 

@@ -27,10 +27,7 @@ public static class EmpireBattleUi {
     [StructLayout(LayoutKind.Sequential)] public struct RECT { public int Left, Top, Right, Bottom; }
     [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr hwnd, out RECT rect);
     [DllImport("user32.dll")] public static extern bool GetClientRect(IntPtr hwnd, out RECT rect);
-    [DllImport("user32.dll")] public static extern bool ClientToScreen(IntPtr hwnd, ref POINT point);
     [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hwnd);
-    [DllImport("user32.dll")] public static extern bool SetCursorPos(int x, int y);
-    [DllImport("user32.dll")] public static extern void mouse_event(uint flags, uint dx, uint dy, uint data, UIntPtr extra);
     [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern bool PostMessage(IntPtr hwnd, uint msg, UIntPtr wParam, IntPtr lParam);
     [StructLayout(LayoutKind.Sequential)] public struct POINT { public int X, Y; public POINT(int x,int y) { X=x; Y=y; } }
 }
@@ -68,15 +65,11 @@ function Invoke-GameClick([double]$xRef, [double]$yRef, [string]$label) {
     $pt.X = [int][math]::Round(($xRef - 8) * $width / 1912.0)
     $pt.Y = [int][math]::Round(($yRef - 32) * $height / 1048.0)
     $clientX, $clientY = $pt.X, $pt.Y
-    if (-not [EmpireBattleUi]::ClientToScreen($hwnd, [ref]$pt)) { throw 'Could not map game click to screen coordinates.' }
-    $x, $y = $pt.X, $pt.Y
-    # Long waits, loading transitions, and the invoking terminal can all take
-    # focus back. mouse_event targets the foreground window, so reacquire the
-    # game immediately before every click rather than only once at startup.
+    # Send client-coordinate mouse messages directly to Empire. This avoids a
+    # screen-coordinate conversion that fails for the game's borderless
+    # fullscreen window; PostMessage still targets the intended game HWND.
     [void][EmpireBattleUi]::SetForegroundWindow($hwnd)
     Start-Sleep -Milliseconds 250
-    [void][EmpireBattleUi]::SetCursorPos($x, $y)
-    Start-Sleep -Milliseconds 100
     $lp = [IntPtr](($clientY -shl 16) -bor ($clientX -band 0xFFFF))
     [void][EmpireBattleUi]::PostMessage($hwnd, 0x0200, [UIntPtr]::Zero, $lp) # WM_MOUSEMOVE
     [void][EmpireBattleUi]::PostMessage($hwnd, 0x0201, [UIntPtr]1, $lp)     # WM_LBUTTONDOWN

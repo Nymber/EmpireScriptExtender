@@ -89,6 +89,15 @@ Useful live values:
 - The ui manifest records UI ownership, but ESE does not yet have a general
   UI-state mod autoexec. UI assets continue through their existing panel paths.
 
+## Native Lua hook re-entry
+
+The native ESE hooks observe Lua field access and protected calls. While ESE
+itself registers natives or executes an autoexec file, those same Lua API calls
+must not trigger the hook-side pumps or state discovery again. The native
+runtime suppresses observer work for the duration of those ESE-owned Lua API
+batches, while the detours still pass through to the original Lua functions.
+This prevents recursive Lua entry during registration and autoexec execution.
+
 ## Adding a mod
 
 Create the folder, manifest, and entry in the toolkit tree; add one registry
